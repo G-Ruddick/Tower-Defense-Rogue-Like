@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cyayd05uiowdu"]
+
+[ext_resource type="Script" uid="uid://djdtjw3pjvgx6" path="res://Scripts/GameManager.cs" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Map Elements/MapCreation.cs" id="1_iukft"]
+
+[node name="Game" type="Node2D" unique_id=2073804386]
+
+[node name="GameManager" type="Node" parent="." unique_id=1592454453]
+script = ExtResource("1_gl6un")
+
+[node name="MapCreator" type="Node" parent="." unique_id=1015966873]
+script = ExtResource("1_iukft")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=175693011]
