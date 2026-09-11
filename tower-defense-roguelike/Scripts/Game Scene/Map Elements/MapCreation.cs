@@ -29,7 +29,7 @@ public partial class MapCreation : Node {
 	}
 
 	// Creating Map array
-	private void createMap() {
+	public void createMap() {
 		bool validMap = false;
 		int[] currentTile = new int[2];
 		int[] nextTile = new int[2];

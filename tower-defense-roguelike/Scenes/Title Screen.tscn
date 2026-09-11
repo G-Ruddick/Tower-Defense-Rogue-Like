@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://2j8pd8qy40n"]
+
+[ext_resource type="Script" uid="uid://buk4ahlqd4m8s" path="res://Scripts/Title Screen/SceneManager.cs" id="1_po227"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="2_qyra1"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="3_lyuk6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
+atlas = ExtResource("3_lyuk6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
+atlas = ExtResource("3_lyuk6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
+atlas = ExtResource("3_lyuk6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xdkfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2sej"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6pqua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhp2p"]
+
+[node name="TitleScreen" type="Node2D" unique_id=586948953]
+
+[node name="SceneManager" type="Node" parent="." unique_id=1139588254 node_paths=PackedStringArray("settingsButton", "playButton", "quitButton")]
+script = ExtResource("1_po227")
+settingsButton = NodePath("../UI/Settings Button")
+playButton = NodePath("../UI/Play Button")
+quitButton = NodePath("../UI/Quit Button")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=981062384]
+anchor_mode = 0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1502953611]
+
+[node name="Title" type="Label" parent="UI" unique_id=362102511]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -563.0
+offset_top = 28.0
+offset_right = 579.0
+offset_bottom = 125.708336
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 70
+text = "GAME TITLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("2_qyra1")]
+position = Vector2(1068, 70.00001)
+rotation = 1.5707964
+scale = Vector2(5.3200016, 5.3200016)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+scale = Vector2(0.40387118, 1)
+sprite_frames = SubResource("SpriteFrames_xdkfq")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
+offset_left = -28.195496
+offset_top = -12.030083
+offset_right = 27.804504
+offset_bottom = 11.969917
+scale = Vector2(1.0035818, 1)
+theme_override_font_sizes/font_size = 9
+text = "|||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
+scale = Vector2(1.1308471, 1.2)
+
+[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_x2sej")
+
+[node name="Quit Button" parent="UI" unique_id=1611576700 instance=ExtResource("2_qyra1")]
+position = Vector2(1046, 595)
+scale = Vector2(3.358055, 3.358055)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Quit Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_6pqua")
+animation = &"Mouse Inside"
+
+[node name="Button Text" parent="UI/Quit Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Quit Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="UI/Quit Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_hhp2p")
+
+[node name="Play Button" parent="UI" unique_id=1694775071 instance=ExtResource("2_qyra1")]
+position = Vector2(246.00002, 533)
+scale = Vector2(8.052582, 8.052582)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Play Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_6pqua")
+animation = &"Mouse Inside"
+
+[node name="Button Text" parent="UI/Play Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Play Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="UI/Play Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_hhp2p")
+
+[editable path="UI/Settings Button"]
+[editable path="UI/Quit Button"]
+[editable path="UI/Play Button"]

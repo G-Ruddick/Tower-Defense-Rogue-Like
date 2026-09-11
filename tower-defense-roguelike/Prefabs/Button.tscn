@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b1yysw0f8xy0k"]
+
+[ext_resource type="Script" uid="uid://dqss0x5osse44" path="res://Scripts/Title Screen/ButtonTemplate.cs" id="1_ocxsf"]
+
+[node name="ButtonTemplate" type="Node2D" unique_id=590249941 node_paths=PackedStringArray("buttonSprite", "buttonArea", "areaShape", "textBox")]
+script = ExtResource("1_ocxsf")
+buttonSprite = NodePath("Button Sprite")
+buttonArea = NodePath("Button Area")
+areaShape = NodePath("Button Area/Area Shape")
+textBox = NodePath("Button Text")
+
+[node name="Button Sprite" type="AnimatedSprite2D" parent="." unique_id=947915153]
+
+[node name="Button Text" type="Label" parent="." unique_id=1737478061]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button Area" type="Area2D" parent="." unique_id=116881939]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Area Shape" type="CollisionShape2D" parent="Button Area" unique_id=465698970]

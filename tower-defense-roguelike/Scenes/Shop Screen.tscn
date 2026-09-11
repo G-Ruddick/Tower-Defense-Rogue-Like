@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://dg5drqj4u714f"]
+
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="1_jffka"]
+[ext_resource type="Script" uid="uid://cc2uuaon3di8m" path="res://Scripts/Game Scene/Shop.cs" id="1_xwubi"]
+[ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="2_w0vvm"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="2_xwubi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
+atlas = ExtResource("2_xwubi")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
+atlas = ExtResource("2_xwubi")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
+atlas = ExtResource("2_xwubi")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w0vvm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vlva"]
+
+[node name="ShopScreen" type="Control" unique_id=410452383 node_paths=PackedStringArray("leaveButton", "mapButton", "rerollButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_xwubi")
+leaveButton = NodePath("Leave Shop Button")
+mapButton = NodePath("View Map Button")
+rerollButton = NodePath("Reroll Shop Button")
+
+[node name="Backboard4" type="Sprite2D" parent="." unique_id=1192749386]
+modulate = Color(0, 1.0819027, 1.3220654, 1)
+position = Vector2(574, 418.00003)
+scale = Vector2(19.44, 32.62685)
+texture = ExtResource("2_w0vvm")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Backboard" type="Sprite2D" parent="." unique_id=301312601]
+position = Vector2(599.8, 313.2)
+scale = Vector2(10.4, 9.2)
+texture = ExtResource("2_w0vvm")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Backboard2" type="Sprite2D" parent="." unique_id=239199317]
+position = Vector2(599.8, 553.4)
+scale = Vector2(10.4, 9.2)
+texture = ExtResource("2_w0vvm")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Backboard3" type="Sprite2D" parent="." unique_id=1016529843]
+position = Vector2(1046.0001, 400)
+scale = Vector2(3.0399985, 14.6799965)
+texture = ExtResource("2_w0vvm")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Leave Shop Button" parent="." unique_id=590249941 instance=ExtResource("1_jffka")]
+position = Vector2(1047, 595)
+scale = Vector2(3.375, 3.375)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Leave Shop Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_w0vvm")
+animation = &"Disabled"
+
+[node name="Button Text" parent="Leave Shop Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Leave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Leave Shop Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Leave Shop Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3vlva")
+
+[node name="View Map Button" parent="." unique_id=39449858 instance=ExtResource("1_jffka")]
+position = Vector2(119, 277)
+scale = Vector2(3.115, 3.115)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="View Map Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_w0vvm")
+animation = &"Disabled"
+
+[node name="Button Text" parent="View Map Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Map"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="View Map Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="View Map Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3vlva")
+
+[node name="Reroll Shop Button" parent="." unique_id=1234429503 instance=ExtResource("1_jffka")]
+position = Vector2(124, 182)
+scale = Vector2(3.375, 3.375)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Reroll Shop Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_w0vvm")
+animation = &"Disabled"
+
+[node name="Button Text" parent="Reroll Shop Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Reroll"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Reroll Shop Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Reroll Shop Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3vlva")
+
+[node name="Shop Screen Label" type="Label" parent="." unique_id=248055292]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_top = 562.0
+offset_right = 150.0
+offset_bottom = 631.7917
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 50
+text = "Shop Screen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="Leave Shop Button"]
+[editable path="View Map Button"]
+[editable path="Reroll Shop Button"]

@@ -1,0 +1,371 @@
+[gd_scene format=3 uid="uid://2cc27dn5ybgw"]
+
+[ext_resource type="Script" uid="uid://c4j2ecnd71ivo" path="res://Scripts/Title Screen/SettingsMenu.cs" id="1_ajseo"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="1_mwx4l"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="2_pfkyh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
+atlas = ExtResource("2_pfkyh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
+atlas = ExtResource("2_pfkyh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
+atlas = ExtResource("2_pfkyh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h1vrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_st2lo"]
+
+[node name="SettingsMenu" type="CanvasLayer" unique_id=42179175 node_paths=PackedStringArray("mainMenu", "soundMenu", "gameplayMenu", "quitButton", "leaveGameButton", "returnButton", "soundSettingsButton", "gamePlaySettingsButton", "masterVolumeSlider", "musicVolumeSlider", "sfxVolumeSlider", "voicesVolumeSlider", "brightnessSlider", "gameSpeedSlider")]
+layer = 10000
+script = ExtResource("1_ajseo")
+mainMenu = NodePath("Main Menu")
+soundMenu = NodePath("Sound Settings")
+gameplayMenu = NodePath("Gameplay Settings")
+quitButton = NodePath("Main Menu/Quit Button")
+leaveGameButton = NodePath("Main Menu/Leave Game Button")
+returnButton = NodePath("Return To Game Button")
+soundSettingsButton = NodePath("Main Menu/Sound Settings Button")
+gamePlaySettingsButton = NodePath("Main Menu/GamePlay Settungs Button")
+masterVolumeSlider = NodePath("Sound Settings/Master Volume Slider")
+musicVolumeSlider = NodePath("Sound Settings/Music Volume Slider")
+sfxVolumeSlider = NodePath("Sound Settings/Sfx Volume Slider")
+voicesVolumeSlider = NodePath("Sound Settings/Voices Volume Slider")
+brightnessSlider = NodePath("Gameplay Settings/Brightness Slider")
+gameSpeedSlider = NodePath("Gameplay Settings/Game Speed Slider")
+
+[node name="Return To Game Button" parent="." unique_id=590249941 instance=ExtResource("1_mwx4l")]
+position = Vector2(174.00002, 85.00006)
+scale = Vector2(5.3200016, 5.3200016)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Return To Game Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_h1vrk")
+animation = &"Default"
+
+[node name="Button Text" parent="Return To Game Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button Area" parent="Return To Game Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Return To Game Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_st2lo")
+
+[node name="Main Menu" type="Node2D" parent="." unique_id=866542660]
+
+[node name="Title" type="Label" parent="Main Menu" unique_id=1063068519]
+offset_left = 354.0
+offset_top = 15.0
+offset_right = 814.0
+offset_bottom = 104.333336
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Leave Game Button" parent="Main Menu" unique_id=421950271 instance=ExtResource("1_mwx4l")]
+position = Vector2(978.00006, 563)
+scale = Vector2(5.3200016, 5.3200016)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Main Menu/Leave Game Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_h1vrk")
+animation = &"Mouse Inside"
+frame_progress = 0.57224566
+
+[node name="Button Text" parent="Main Menu/Leave Game Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Leave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Main Menu/Leave Game Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Main Menu/Leave Game Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_st2lo")
+
+[node name="Quit Button" parent="Main Menu" unique_id=459038363 instance=ExtResource("1_mwx4l")]
+position = Vector2(978.00006, 563)
+scale = Vector2(5.3200016, 5.3200016)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Main Menu/Quit Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_h1vrk")
+animation = &"Default"
+frame_progress = 0.69849
+
+[node name="Button Text" parent="Main Menu/Quit Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Main Menu/Quit Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Main Menu/Quit Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_st2lo")
+
+[node name="Sound Settings Button" parent="Main Menu" unique_id=1685914308 instance=ExtResource("1_mwx4l")]
+position = Vector2(579, 216)
+scale = Vector2(7.6400013, 7.6400013)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Main Menu/Sound Settings Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_h1vrk")
+animation = &"Disabled"
+
+[node name="Button Text" parent="Main Menu/Sound Settings Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 7
+text = "Sound Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Main Menu/Sound Settings Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Main Menu/Sound Settings Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_st2lo")
+
+[node name="GamePlay Settungs Button" parent="Main Menu" unique_id=1481059286 instance=ExtResource("1_mwx4l")]
+position = Vector2(579, 438.99997)
+scale = Vector2(7.6400013, 7.6400013)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Main Menu/GamePlay Settungs Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_h1vrk")
+animation = &"Disabled"
+frame_progress = 0.30492765
+
+[node name="Button Text" parent="Main Menu/GamePlay Settungs Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 6
+text = "Gameplay Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Main Menu/GamePlay Settungs Button" index="2" unique_id=116881939]
+scale = Vector2(2.8000195, 1.2)
+
+[node name="Area Shape" parent="Main Menu/GamePlay Settungs Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_st2lo")
+
+[node name="Sound Settings" type="Node2D" parent="." unique_id=252867527]
+visible = false
+
+[node name="Title" type="Label" parent="Sound Settings" unique_id=256580621]
+offset_left = 354.0
+offset_top = 15.0
+offset_right = 814.0
+offset_bottom = 104.333336
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 64
+text = "Sound Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1257065003]
+offset_left = 304.00003
+offset_top = 194.0
+offset_right = 754.0
+offset_bottom = 210.0
+scale = Vector2(1.83, 1.83)
+value = 100.0
+
+[node name="Label" type="Label" parent="Sound Settings/Master Volume Slider" unique_id=118182721]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Master"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Music Volume Slider" type="HSlider" parent="Sound Settings" unique_id=883729898]
+offset_left = 304.00003
+offset_top = 324.0
+offset_right = 754.0
+offset_bottom = 340.0
+scale = Vector2(1.83, 1.83)
+value = 100.0
+
+[node name="Label" type="Label" parent="Sound Settings/Music Volume Slider" unique_id=1224736083]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Music"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Sfx Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1416382771]
+offset_left = 304.00003
+offset_top = 454.0
+offset_right = 754.0
+offset_bottom = 470.0
+scale = Vector2(1.83, 1.83)
+value = 100.0
+
+[node name="Label" type="Label" parent="Sound Settings/Sfx Volume Slider" unique_id=523859308]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Sound Effects"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Voices Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1182039475]
+offset_left = 304.00003
+offset_top = 593.0
+offset_right = 754.0
+offset_bottom = 609.0
+scale = Vector2(1.83, 1.83)
+value = 100.0
+
+[node name="Label" type="Label" parent="Sound Settings/Voices Volume Slider" unique_id=99444702]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Character Voices"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Gameplay Settings" type="Node2D" parent="." unique_id=99870061]
+visible = false
+
+[node name="Title" type="Label" parent="Gameplay Settings" unique_id=1035845361]
+offset_left = 354.0
+offset_top = 15.0
+offset_right = 930.0
+offset_bottom = 104.333336
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 64
+text = "Gameplay Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Brightness Slider" type="HSlider" parent="Gameplay Settings" unique_id=1380417044]
+offset_left = 304.00003
+offset_top = 194.0
+offset_right = 754.0
+offset_bottom = 210.0
+scale = Vector2(1.83, 1.83)
+value = 100.0
+
+[node name="Label" type="Label" parent="Gameplay Settings/Brightness Slider" unique_id=1324846196]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Brightness"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Game Speed Slider" type="HSlider" parent="Gameplay Settings" unique_id=1415202362]
+offset_left = 304.00003
+offset_top = 324.0
+offset_right = 754.0
+offset_bottom = 340.0
+scale = Vector2(1.83, 1.83)
+min_value = 0.5
+max_value = 4.0
+step = 0.5
+value = 1.0
+
+[node name="Label" type="Label" parent="Gameplay Settings/Game Speed Slider" unique_id=1108108680]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -52.459015
+offset_right = 450.0
+offset_bottom = -7.792347
+pivot_offset_ratio = Vector2(1, 0)
+theme_override_font_sizes/font_size = 32
+text = "Game Speed"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[editable path="Return To Game Button"]
+[editable path="Main Menu/Leave Game Button"]
+[editable path="Main Menu/Quit Button"]
+[editable path="Main Menu/Sound Settings Button"]
+[editable path="Main Menu/GamePlay Settungs Button"]

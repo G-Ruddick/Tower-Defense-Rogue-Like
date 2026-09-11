@@ -1,14 +1,246 @@
 [gd_scene format=3 uid="uid://cyayd05uiowdu"]
 
 [ext_resource type="Script" uid="uid://djdtjw3pjvgx6" path="res://Scripts/GameManager.cs" id="1_gl6un"]
-[ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Map Elements/MapCreation.cs" id="1_iukft"]
+[ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Game Scene/Map Elements/MapCreation.cs" id="1_iukft"]
+[ext_resource type="Script" uid="uid://doo3b6sp30qop" path="res://Scripts/Game Scene/PlayerManager.cs" id="2_b2bpf"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_kldst"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_b2bpf"]
+[ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
+[ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
 
-[node name="Game" type="Node2D" unique_id=2073804386]
+[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
+atlas = ExtResource("4_b2bpf")
+region = Rect2(0, 0, 64, 64)
 
-[node name="GameManager" type="Node" parent="." unique_id=1592454453]
+[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
+atlas = ExtResource("4_b2bpf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
+atlas = ExtResource("4_b2bpf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7lihs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgofq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
+
+[node name="Game" type="Node3D" unique_id=1162375626]
+
+[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("shopScreen", "playerManager", "mapCreator", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
 script = ExtResource("1_gl6un")
+shopScreen = NodePath("../UI/ShopScreen")
+playerManager = NodePath("../Player Manager")
+mapCreator = NodePath("../MapCreator")
+playerHealthLabel = NodePath("../UI/Player Stats/Health")
+playerMoneyLabel = NodePath("../UI/Player Stats/Gold")
+waveNumberLabel = NodePath("../UI/Player Stats/Round")
+settingsButton = NodePath("../UI/Settings Button")
+nextWaveButton = NodePath("../UI/Next Wave Button")
+
+[node name="Player Manager" type="Node" parent="." unique_id=520578689]
+script = ExtResource("2_b2bpf")
 
 [node name="MapCreator" type="Node" parent="." unique_id=1015966873]
 script = ExtResource("1_iukft")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=175693011]
+[node name="UI" type="CanvasLayer" parent="." unique_id=326357734]
+
+[node name="ShopScreen" parent="UI" unique_id=472434983 instance=ExtResource("6_7lihs")]
+visible = false
+
+[node name="Player Stats" type="Node2D" parent="UI" unique_id=201160717]
+
+[node name="Backboard" type="Sprite2D" parent="UI/Player Stats" unique_id=2014873934]
+position = Vector2(127, 60)
+scale = Vector2(5, 3.2799993)
+texture = ExtResource("7_fgofq")
+region_enabled = true
+region_rect = Rect2(0, 32, 48, 32)
+
+[node name="Health" type="Label" parent="UI/Player Stats" unique_id=1340879312]
+offset_left = 15.0
+offset_top = 11.0
+offset_right = 99.0
+offset_bottom = 47.291668
+theme_override_font_sizes/font_size = 26
+text = "Health"
+
+[node name="Gold" type="Label" parent="UI/Player Stats" unique_id=313544983]
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 75.0
+offset_bottom = 88.29167
+theme_override_font_sizes/font_size = 26
+text = "Gold"
+
+[node name="Round" type="Label" parent="UI/Player Stats" unique_id=954464956]
+offset_left = 172.0
+offset_top = 11.0
+offset_right = 241.0
+offset_bottom = 86.583336
+theme_override_font_sizes/font_size = 22
+text = "Wave
+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Towers" type="Node2D" parent="UI" unique_id=539282058]
+
+[node name="Backboard" type="Sprite2D" parent="UI/Towers" unique_id=953144540]
+position = Vector2(584.00006, 102)
+scale = Vector2(8.4400015, 5.9200006)
+texture = ExtResource("7_fgofq")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
+[node name="Header" type="Label" parent="UI/Towers" unique_id=1988017925]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 535.0
+offset_top = 8.0
+offset_right = 640.0
+offset_bottom = 49.875
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_font_sizes/font_size = 30
+text = "Towers"
+horizontal_alignment = 1
+
+[node name="Abilities" type="Node2D" parent="UI" unique_id=529500699]
+
+[node name="Backboard" type="Sprite2D" parent="UI/Abilities" unique_id=575405481]
+position = Vector2(124.00001, 565.00006)
+rotation = -3.1415925
+scale = Vector2(5, 5.0117283)
+texture = ExtResource("7_fgofq")
+region_enabled = true
+region_rect = Rect2(0, 32, 48, 32)
+
+[node name="Header" type="Label" parent="UI/Abilities" unique_id=970566332]
+offset_left = 6.0
+offset_top = 523.0
+offset_right = 107.0
+offset_bottom = 559.2917
+theme_override_font_sizes/font_size = 26
+text = "Abilities"
+
+[node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
+position = Vector2(1110, 40.999992)
+rotation = 1.5707964
+scale = Vector2(3.105, 3.105)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+scale = Vector2(0.40387118, 1)
+sprite_frames = SubResource("SpriteFrames_7lihs")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
+offset_left = -28.195496
+offset_top = -12.030083
+offset_right = 27.804504
+offset_bottom = 11.969917
+scale = Vector2(1.0035818, 1)
+theme_override_font_sizes/font_size = 9
+text = "|||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
+scale = Vector2(1.1308471, 1.2)
+
+[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_fgofq")
+
+[node name="Next Wave Button" parent="UI" unique_id=555688118 instance=ExtResource("3_kldst")]
+position = Vector2(1083, 575)
+scale = Vector2(5.3200016, 5.3200016)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Next Wave Button" index="0" unique_id=947915153]
+scale = Vector2(0.39581537, 1)
+sprite_frames = SubResource("SpriteFrames_fgofq")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Next Wave Button" index="1" unique_id=1737478061]
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 6
+text = "Next 
+wave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Next Wave Button" index="2" unique_id=116881939]
+scale = Vector2(1.1082907, 1.2)
+
+[node name="Area Shape" parent="UI/Next Wave Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_2irst")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
+projection = 1
+
+[editable path="UI/Settings Button"]
+[editable path="UI/Next Wave Button"]
