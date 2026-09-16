@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tower Defense Roguelike"
-run/main_scene="uid://2j8pd8qy40n"
+run/main_scene="uid://cyayd05uiowdu"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -53,6 +53,7 @@ sensors/emulate_touch_from_mouse=false
 [layer_names]
 
 2d_physics/layer_1="Mouse"
+3d_physics/layer_3="Ground"
 
 [physics]
 
@@ -60,5 +61,5 @@ sensors/emulate_touch_from_mouse=false
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_filter=3
 rendering_device/driver.windows="d3d12"

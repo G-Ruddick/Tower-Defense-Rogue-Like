@@ -1,14 +1,9 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public partial class MapCreation : Node {
-	// singleton
-	public static MapCreation instance {
-		get; 
-		private set;
-	}
-
 	// types of times
 	public enum TileTypes {Void, North, East, South, West};
 
@@ -16,20 +11,27 @@ public partial class MapCreation : Node {
 	public int mapHeight;
 	public int mapLength;
 
+	// map level type
+	public string levelType;
+
 	private TileTypes[,] mapGrid;
 	private int[] startTile = new int[2];
 	private int[] endTile = new int[2];
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		instance = this;
-
+		// temporary values
 		mapHeight = 16;
 		mapLength = 20;
+		levelType = "res://Prefabs/Grasslands Tiles/";
+		
+		CreateMap();
+		PrintMap();
+		InstantiateMap();
 	}
 
 	// Creating Map array
-	public void createMap() {
+	public void CreateMap() {
 		bool validMap = false;
 		int[] currentTile = new int[2];
 		int[] nextTile = new int[2];
@@ -41,12 +43,12 @@ public partial class MapCreation : Node {
 
 			// setting starting tile for enemy spawning
 			if (((int)GD.Randi() % 2) == 0) {
-				startTile[0] = 1 + (int)(GD.Randi() % (mapHeight - 1));
-				startTile[1] = ((int)(GD.Randi() % 2) == 0) ? 0 : (mapLength - 1);
+				startTile[0] = (int)(GD.Randi() % (mapHeight - 1));
+				startTile[1] = (int)(GD.Randi() % 2) == 0 ? 0 : (mapLength - 1);
 			}
 			else {
-				startTile[0] = ((int)(GD.Randi() % 2) == 0) ? 0 : (mapHeight - 1);
-				startTile[1] = 1 + (int)(GD.Randi() % (mapLength - 1));
+				startTile[0] = (int)(GD.Randi() % 2) == 0 ? 0 : (mapHeight - 1);
+				startTile[1] = (int)(GD.Randi() % (mapLength - 1));
 			}
 
 			currentTile[0] = startTile[0];
@@ -75,7 +77,6 @@ public partial class MapCreation : Node {
 			TileTypes direction = TileTypes.Void;
 
 			while (!endReached) {
-
 				List<string> directionOptions = ["North", "East", "South", "West"];
 				
 				bool validDirection = false;
@@ -95,7 +96,7 @@ public partial class MapCreation : Node {
 
 				while (!validDirection) {
 					// checking for no more available directions
-					if (directionOptions.Count == 0) {
+					if (!directionOptions.Any()) {
 						break;
 					}
 
@@ -128,13 +129,16 @@ public partial class MapCreation : Node {
 						nextTile[1]--;
 					}
 
+					// checking to see if tile is occupied
 					if (mapGrid[nextTile[0], nextTile[1]] != 0) {
 						directionOptions.Remove(direction.ToString());
 					}
-
 					else {
 						validDirection = true;
 					}
+				}
+				if (!validDirection) {
+					break;
 				}
 
 				mapGrid[currentTile[0], currentTile[1]] = direction;
@@ -152,7 +156,45 @@ public partial class MapCreation : Node {
 		}
 	}
 
-	public void printMap() {
+	public void InstantiateMap() {
+		for (int row = 0; row < mapHeight; row++) {
+			for (int column = 0; column < mapLength; column++) {
+				PackedScene tile = GD.Load<PackedScene>("res://Prefabs/Grasslands Tiles/GrassTile.tscn");
+				Node3D grassTile = (Node3D)tile.Instantiate();
+				grassTile.Name = "Grass Tile" + row + " " + column;
+				AddChild(grassTile);
+				grassTile.Position = new Vector3(column, 0, row) * 0.32f;
+
+				if (mapGrid[row, column] != TileTypes.Void) {
+					// creating new path object
+					PackedScene path = GD.Load<PackedScene>("res://Prefabs/Grasslands Tiles/PathTileStrait.tscn");
+					Node3D pathTile = (Node3D)path.Instantiate();
+					pathTile.Name = "Path" + mapGrid[row, column].ToString() + " " + row + " " + column;
+					AddChild(pathTile);
+					pathTile.Position = new Vector3(column, 0, row) * 0.32f;
+
+					// setting rotation
+					if (mapGrid[row, column] == TileTypes.North) {
+						pathTile.RotationDegrees = new Vector3(0f, 180f, 0f);
+					}
+
+					else if (mapGrid[row, column] == TileTypes.South) {
+						pathTile.RotationDegrees = new Vector3(0f, 0f, 0f);
+					}
+
+					else if (mapGrid[row, column] == TileTypes.West) {
+						pathTile.RotationDegrees = new Vector3(0f, -90f, 0f);
+					}
+
+					else if (mapGrid[row, column] == TileTypes.East) {
+						pathTile.RotationDegrees = new Vector3(0f, 90f, 0f);
+					}
+				}
+			}
+		}
+	}
+
+	public void PrintMap() {
 		for (int y = 0; y < mapHeight; y++)
 		{
 			string row = "";
@@ -164,7 +206,18 @@ public partial class MapCreation : Node {
 				}
 
 				else {
-					row += (int)mapGrid[y, x] + " ";
+					if (mapGrid[y, x] == TileTypes.North) {
+						row += "^ ";
+					}
+					else if (mapGrid[y, x] == TileTypes.South) {
+						row += "v ";
+					}
+					else if (mapGrid[y, x] == TileTypes.East) {
+						row += "> ";
+					}
+					else if (mapGrid[y, x] == TileTypes.West) {
+						row += "< ";
+					}
 				}
 			}
 

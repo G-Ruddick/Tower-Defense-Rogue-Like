@@ -6,7 +6,6 @@ public partial class GameManager: Node {
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
 	[Export] private PlayerManager playerManager;
-	[Export] public MapCreation mapCreator;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
