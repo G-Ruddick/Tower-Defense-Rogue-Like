@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://da3a4is7vynjc"]
+
+[ext_resource type="Script" uid="uid://bkjlr4dqo2j4h" path="res://Scripts/Game Scene/Towers/TowerIcon.cs" id="1_dbmcp"]
+[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="2_ccmsd"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_dlare"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_do7tc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dv6u4"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("4_do7tc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("4_do7tc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vngns"]
+size = Vector2(56, 24)
+
+[node name="Archer Tower Icon" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "SellButton", "Cost")]
+scale = Vector2(3, 3)
+script = ExtResource("1_dbmcp")
+enabled = true
+clickable = true
+towerName = "Archer Tower"
+icon = NodePath("ArcherTower")
+button = NodePath("Clickable Area")
+clickableArea = NodePath("Clickable Area/CollisionShape2D")
+SellButton = NodePath("Sell Button")
+Cost = NodePath("Cost")
+
+[node name="ArcherTower" type="Sprite2D" parent="." unique_id=1133058594]
+texture = ExtResource("2_ccmsd")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Clickable Area" type="Area2D" parent="." unique_id=1547096196]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable Area" unique_id=1899067625]
+shape = SubResource("RectangleShape2D_dv6u4")
+
+[node name="Name" type="Label" parent="." unique_id=671419792]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = -7.229167
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "Archer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="." unique_id=2000965247]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = 7.3333335
+offset_right = 16.0
+offset_bottom = 17.104166
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.94, 0.70437336, 0.0564, 1)
+theme_override_colors/font_outline_color = Color(0.99967045, 0.92553276, 0.7813341, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 7
+text = "50"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Sell Button" parent="." unique_id=590249941 instance=ExtResource("3_dlare")]
+position = Vector2(0, 20.000002)
+scale = Vector2(0.29, 0.29)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Sell Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+sprite_frames = SubResource("SpriteFrames_fgofq")
+
+[node name="Button Text" parent="Sell Button" index="1" unique_id=1737478061]
+offset_left = -26.0
+offset_top = -11.333334
+offset_right = 26.0
+offset_bottom = 11.666666
+text = "Sell"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area Shape" parent="Sell Button/Button Area" parent_id_path=PackedInt32Array(590249941, 116881939) index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_vngns")
+
+[editable path="Sell Button"]

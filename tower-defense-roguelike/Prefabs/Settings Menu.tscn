@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4j2ecnd71ivo" path="res://Scripts/Title Screen/SettingsMenu.cs" id="1_ajseo"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="1_mwx4l"]
+[ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="2_4f7rx"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="2_pfkyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
@@ -62,6 +63,14 @@ sfxVolumeSlider = NodePath("Sound Settings/Sfx Volume Slider")
 voicesVolumeSlider = NodePath("Sound Settings/Voices Volume Slider")
 brightnessSlider = NodePath("Gameplay Settings/Brightness Slider")
 gameSpeedSlider = NodePath("Gameplay Settings/Game Speed Slider")
+
+[node name="Backboard" type="Sprite2D" parent="." unique_id=718840094]
+modulate = Color(1, 0.91733336, 0.84000003, 1)
+position = Vector2(577.5, 325.99997)
+scale = Vector2(25.604168, 29.039999)
+texture = ExtResource("2_4f7rx")
+region_enabled = true
+region_rect = Rect2(0, 32, 48, 25)
 
 [node name="Return To Game Button" parent="." unique_id=590249941 instance=ExtResource("1_mwx4l")]
 position = Vector2(174.00002, 85.00006)
