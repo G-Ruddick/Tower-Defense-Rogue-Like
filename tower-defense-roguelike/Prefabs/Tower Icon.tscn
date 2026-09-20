@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://da3a4is7vynjc"]
+
+[ext_resource type="Texture2D" uid="uid://jxnvpupnrwik" path="res://Textures/Archer Tower.png" id="1_ugjmj"]
+
+[node name="TowerIcon" type="Node2D" unique_id=2069920983]
+
+[node name="ArcherTower" type="Sprite2D" parent="." unique_id=1133058594]
+texture = ExtResource("1_ugjmj")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)

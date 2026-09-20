@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cw2gt22gjbjal"]
+
+[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_cxj2j"]
+[ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_07xen"]
+[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
+height = 0.64
+radius = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oifrw"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(8, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu15y"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oifrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu15y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sacsp"]
+size = Vector3(0.32, 0.64, 0.32)
+
+[node name="ArcherTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("towerSprite", "towerRadius")]
+script = ExtResource("1_cxj2j")
+towerName = "Archer Tower"
+towerCost = 50
+towerSprite = NodePath("TowerSprite")
+towerRadius = NodePath("TowerSize")
+
+[node name="Attack Tower Class" type="Node" parent="." unique_id=740678734]
+script = ExtResource("2_07xen")
+
+[node name="Attack Range" type="Area3D" parent="Attack Tower Class" unique_id=782235652]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Tower Class/Attack Range" unique_id=673916723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332, 0)
+shape = SubResource("CylinderShape3D_sacsp")
+
+[node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("3_b5oln")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 64)
+
+[node name="Archer" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1960342473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.099999994, 0)
+texture_filter = 0
+render_priority = 2
+sprite_frames = SubResource("SpriteFrames_sacsp")
+
+[node name="Archer2" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1252883703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03075448, 0.099999994, 0)
+texture_filter = 0
+render_priority = 2
+sprite_frames = SubResource("SpriteFrames_sacsp")
+
+[node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerSize" unique_id=2036799115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0)
+shape = SubResource("BoxShape3D_sacsp")
