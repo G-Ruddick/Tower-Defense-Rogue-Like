@@ -72,6 +72,7 @@ sensors/emulate_touch_from_mouse=false
 3d_physics/layer_2="Towers"
 3d_physics/layer_3="Ground"
 3d_physics/layer_4="Enemy"
+3d_physics/layer_5="End Tile"
 
 [physics]
 

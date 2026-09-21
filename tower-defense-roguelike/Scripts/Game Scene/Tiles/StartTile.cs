@@ -17,8 +17,9 @@ public partial class StartTile : Node3D {
 
 	public void SpawnEnemies() {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Enemies/Goblin.tscn");
-		Node3D enemy = (Node3D)prefab.Instantiate();
+		EnemyClass enemy = (EnemyClass)prefab.Instantiate();
 		GetNode("../../Enemies").AddChild(enemy);
-		enemy.Position = this.Position;
+		enemy.Position = this.Position + new Vector3(0, 0.01f, 0);
+		enemy.walkLocation = enemy.Position;
 	}
 }

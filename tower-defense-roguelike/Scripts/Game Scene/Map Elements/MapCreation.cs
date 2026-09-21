@@ -161,16 +161,25 @@ public partial class MapCreation : Node {
 		PackedScene tile = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/GrassTile.tscn");
 		PackedScene path = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/PathTileStrait.tscn");
 		PackedScene spawn = GD.Load<PackedScene>("res://Prefabs/Tiles/StartTile.tscn");
+		PackedScene despawn = GD.Load<PackedScene>("res://Prefabs/Tiles/EndTile.tscn");
 		
 		for (int row = 0; row < mapHeight; row++) {
 			for (int column = 0; column < mapLength; column++) {
+				// Spawn and Despawn Tiles
 				if (startTile[0] == row && startTile[1] == column) {
 					Node3D spawnPoint = (Node3D)spawn.Instantiate();
 					spawnPoint.Name = "Start Tile";
 					AddChild(spawnPoint);
 					spawnPoint.Position = new Vector3(column, 0, row) * 0.32f;
 				}
+				if (endTile[0] == row && endTile[1] == column) {
+					Node3D despawnPoint = (Node3D)despawn.Instantiate();
+					despawnPoint.Name = "Despawn Tile";
+					AddChild(despawnPoint);
+					despawnPoint.Position = new Vector3(column, 0, row) * 0.32f;
+				}
 
+				// Grass and pth tile
 				Node3D grassTile = (Node3D)tile.Instantiate();
 				grassTile.Name = "Grass Tile" + row + " " + column;
 				AddChild(grassTile);
