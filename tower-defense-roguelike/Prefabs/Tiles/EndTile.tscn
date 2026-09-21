@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://g14u16prah2h"]
+
+[ext_resource type="Script" uid="uid://didvaamvmro4r" path="res://Scripts/Game Scene/Tiles/EndTile.cs" id="1_tp21s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tl7g3"]
+size = Vector3(0.32, 0.16, 0.32)
+
+[node name="EndTile" type="Node3D" unique_id=135346494 node_paths=PackedStringArray("despawnArea")]
+script = ExtResource("1_tp21s")
+despawnArea = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=574202022]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=222221806]
+shape = SubResource("BoxShape3D_tl7g3")

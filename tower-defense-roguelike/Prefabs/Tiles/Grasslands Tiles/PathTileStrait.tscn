@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dkot480e235ky" path="res://Textures/Tiles.png" id="1_a1cre"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a1cre"]
-size = Vector3(0.32, 0.01, 0.64)
+size = Vector3(0.32, 0.030878905, 0.32)
 
 [node name="Path Tile Straight" type="Node3D" unique_id=135346494]
 
@@ -31,6 +31,6 @@ collision_mask = 4
 priority = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PathArea" unique_id=163091060]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002, 0.16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.008439453, 0)
 shape = SubResource("BoxShape3D_a1cre")
 debug_color = Color(0, 0.6355478, 0.4196722, 0.41960785)

@@ -1,55 +1,67 @@
 using Godot;
 using System;
 
-public partial class EnemyClass : Node {
-	// enemy name
-	protected string enemyName;
+public partial class EnemyClass : Node3D {
+	[ExportCategory("Attributes")]
+	[Export] private string enemyName;
+	[Export] private float health;
+	[Export] public float speed;
+	[Export] public float attackPower;
+	[Export] private int gold;
+	[Export] public int lifeSteal;
+	[Export] public Vector3 walkLocation;
+
+
+	[ExportCategory("Components")]
+	[Export] private Sprite3D enemySprite;
+	[Export] public Area3D enemyRangeArea;
+	[Export] public Area3D enemyHitbox;
+	[Export] private RayCast3D groundLook;
+
+	public override void _Ready() {
+		groundLook.ForceRaycastUpdate();
+	}
+
+	public override void _Process(double delta) {
+		this.Position = this.Position.MoveToward(walkLocation, speed / 10 * (float)delta);
+
+		if (this.Position == walkLocation && groundLook.IsColliding()) {
+			Node3D path = (groundLook.GetCollider() as Area3D).GetParent() as Node3D;
+			
+			if (path.Rotation.Y == 0) {
+				walkLocation.Z += 0.32f;
+			}
+			else if (path.Rotation.Y == Mathf.DegToRad(180)) {
+				walkLocation.Z -= 0.32f;
+			}
+			else if (path.Rotation.Y == Mathf.DegToRad(90)) {
+				walkLocation.X += 0.32f;
+			}
+			else if (path.Rotation.Y == Mathf.DegToRad(-90)) {
+				walkLocation.X -= 0.32f;
+			}
+		}
+	}
+
 	public string GetEnemyName() {
 		return enemyName;
 	}
 	
-	// enemy health
-	protected float enemyHealth;
 	public float GetHealth() {
-		return enemyHealth;
+		return health;
 	}
-	// healing enemy
-	public void Heal(float HP) {
-		enemyHealth += HP;
-	}
-	// taking damage
 	public void TakeDamage(float damage) {
-		enemyHealth -= damage;
+		health -= damage;
 	}
 	// enemy death
 	public void Die() {
-		// playergold += enemyGold * (float)GD.RandRange(.5f, 1.25f);
+		PlayerManager.instance.ChangeMoney((int)(gold * (float)GD.RandRange(.5f, 1.25f)));
 		this.QueueFree();
 	}
 
-	// enemy movement speed
-	protected float enemySpeed;
-	public float GetSpeed() {
-		return enemySpeed;
+	public void LifeSteal() {
+		PlayerManager.instance.ChangeLives(-lifeSteal);
+		GD.Print("Despawning enemy");
+		this.QueueFree();
 	}
-
-	// ammount of gold enemy drops on death
-	protected int enemyGold;
-	public int GetGold() {
-		return enemyGold;
-	}
-
-	// ammount of damage enemy does to things
-	protected float enemyAttackPower;
-	public float GetAttackPower() {
-		return enemyAttackPower;
-	}
-
-	// enemy attack range
-	protected float enemyRange;
-	[Export] protected Area2D enemyRangeArea;
-
-
-	[Export] protected Area2D enemyHitbox;
-	[Export] protected AnimatedSprite2D enemySprite;
 }
