@@ -138,6 +138,7 @@ public partial class MapCreation : Node {
 					}
 				}
 				if (!validDirection) {
+					endReached = false;
 					break;
 				}
 
@@ -150,7 +151,7 @@ public partial class MapCreation : Node {
 			}
 			
 			// checking for valid map
-			if ((pathLength > mapHeight * mapLength / 12) && (pathLength < mapHeight * mapLength / 3)) {
+			if (endReached && (pathLength > mapHeight * mapLength / 12) && (pathLength < mapHeight * mapLength / 3)) {
 				validMap = true;
 			}
 		}
