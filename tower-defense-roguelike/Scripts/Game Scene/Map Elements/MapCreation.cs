@@ -158,9 +158,19 @@ public partial class MapCreation : Node {
 	}
 
 	public void InstantiateMap() {
+		PackedScene tile = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/GrassTile.tscn");
+		PackedScene path = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/PathTileStrait.tscn");
+		PackedScene spawn = GD.Load<PackedScene>("res://Prefabs/Tiles/StartTile.tscn");
+		
 		for (int row = 0; row < mapHeight; row++) {
 			for (int column = 0; column < mapLength; column++) {
-				PackedScene tile = GD.Load<PackedScene>("res://Prefabs/Grasslands Tiles/GrassTile.tscn");
+				if (startTile[0] == row && startTile[1] == column) {
+					Node3D spawnPoint = (Node3D)spawn.Instantiate();
+					spawnPoint.Name = "Start Tile";
+					AddChild(spawnPoint);
+					spawnPoint.Position = new Vector3(column, 0, row) * 0.32f;
+				}
+
 				Node3D grassTile = (Node3D)tile.Instantiate();
 				grassTile.Name = "Grass Tile" + row + " " + column;
 				AddChild(grassTile);
@@ -168,7 +178,6 @@ public partial class MapCreation : Node {
 
 				if (mapGrid[row, column] != TileTypes.Void) {
 					// creating new path object
-					PackedScene path = GD.Load<PackedScene>("res://Prefabs/Grasslands Tiles/PathTileStrait.tscn");
 					Node3D pathTile = (Node3D)path.Instantiate();
 					pathTile.Name = "Path" + mapGrid[row, column].ToString() + " " + row + " " + column;
 					AddChild(pathTile);

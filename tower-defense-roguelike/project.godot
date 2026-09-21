@@ -71,6 +71,7 @@ sensors/emulate_touch_from_mouse=false
 2d_physics/layer_1="Mouse"
 3d_physics/layer_2="Towers"
 3d_physics/layer_3="Ground"
+3d_physics/layer_4="Enemy"
 
 [physics]
 

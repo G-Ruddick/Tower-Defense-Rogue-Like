@@ -1,55 +1,33 @@
 using Godot;
 using System;
 
-public partial class EnemyClass : Node {
-	// enemy name
-	protected string enemyName;
+public partial class EnemyClass : Node3D {
+	[ExportCategory("Attributes")]
+	[Export] private string enemyName;
+	[Export] private float health;
+	[Export] public float speed;
+	[Export] public float attackPower;
+	[Export] private int gold;
+	[Export] private int lifeSteal;
+
+	[ExportCategory("Components")]
+	[Export] private Sprite3D enemySprite;
+	[Export] public Area3D enemyRangeArea;
+	[Export] public Area3D enemyHitbox;
+
 	public string GetEnemyName() {
 		return enemyName;
 	}
 	
-	// enemy health
-	protected float enemyHealth;
 	public float GetHealth() {
-		return enemyHealth;
+		return health;
 	}
-	// healing enemy
-	public void Heal(float HP) {
-		enemyHealth += HP;
-	}
-	// taking damage
 	public void TakeDamage(float damage) {
-		enemyHealth -= damage;
+		health -= damage;
 	}
 	// enemy death
 	public void Die() {
-		// playergold += enemyGold * (float)GD.RandRange(.5f, 1.25f);
+		PlayerManager.instance.ChangeMoney((int)(gold * (float)GD.RandRange(.5f, 1.25f)));
 		this.QueueFree();
 	}
-
-	// enemy movement speed
-	protected float enemySpeed;
-	public float GetSpeed() {
-		return enemySpeed;
-	}
-
-	// ammount of gold enemy drops on death
-	protected int enemyGold;
-	public int GetGold() {
-		return enemyGold;
-	}
-
-	// ammount of damage enemy does to things
-	protected float enemyAttackPower;
-	public float GetAttackPower() {
-		return enemyAttackPower;
-	}
-
-	// enemy attack range
-	protected float enemyRange;
-	[Export] protected Area2D enemyRangeArea;
-
-
-	[Export] protected Area2D enemyHitbox;
-	[Export] protected AnimatedSprite2D enemySprite;
 }
