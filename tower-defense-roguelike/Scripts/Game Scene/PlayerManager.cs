@@ -21,9 +21,8 @@ public partial class PlayerManager : Node {
 	public override void _Ready() {
 		instance = this;
 
-		// temporary value assignment
-		money = 100;
-		lives = 20;
+		SetLives(20);
+		SetMoney(200);
 		maxNumberOfTowers = 5;
 
 		towers.Add("Archer Tower");
@@ -91,6 +90,24 @@ public partial class PlayerManager : Node {
 			}
 
 			newIcon.Position = position;
+		}
+	}
+
+	public TowerIcon GetActiveTower() {
+		foreach(TowerIcon tower in playerTowersNode.GetChildren()) {
+			if (tower.GetPlaceable()) {
+				return tower;
+			}
+		}
+
+		return null;
+	}
+
+	public void OnMonneyChange() {
+		foreach(TowerIcon tower in playerTowersNode.GetChildren()) {
+			if (money < tower.price) {
+				tower.DisableIcon();
+			}
 		}
 	}
 }

@@ -2,10 +2,11 @@ using Godot;
 
 public partial class GameManager: Node {
 	private int waveNumber;
+	private bool movingScreen;
 
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
-	[Export] private PlayerManager playerManager;
+	[Export] private Camera3D camera;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
@@ -24,17 +25,14 @@ public partial class GameManager: Node {
 
 	public override void _Ready() {
 		gameManager = this;	
-
-		// TEMPORARY VALUES
-		playerManager.SetLives(20);
-		playerManager.SetMoney(200);
 		waveNumber = 1;
+		movingScreen = false;
 	}
 
 	public override void _Process(double delta) {
 		// updating labels to the game state
-		playerHealthLabel.Text = "Life: " + playerManager.GetLives();
-		playerMoneyLabel.Text = "Gold: " + playerManager.GetMoney();
+		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
+		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
 		waveNumberLabel.Text = "Wave\n" + waveNumber;
 	}
 
@@ -47,7 +45,6 @@ public partial class GameManager: Node {
 			if (SettingsMenu.settingsMenu.returnButton.GetClickability()) {
 				DisableUI();
 			}
-
 			if (nextWaveButton.GetClickability()) {
 				nextWaveButton.Visible = false;
 				Shop.shop.shopOpen = true;
@@ -55,6 +52,59 @@ public partial class GameManager: Node {
 
 				waveNumber++;
 			}
+
+			// map interactions
+			if (GetViewport().GuiGetHoveredControl() == null) {
+				// getting mouse screen position;
+				var mousePosition = GetViewport().GetMousePosition();
+				var origin = camera.ProjectRayOrigin(mousePosition);
+				var end = origin + camera.ProjectRayNormal(mousePosition) * 1000f;
+				var query = PhysicsRayQueryParameters3D.Create(origin, end);
+				query.CollisionMask = (1 << 1) | (1 << 2);
+				query.CollideWithAreas = true;
+				
+				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
+				if (result.Count > 0) {
+					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
+					GD.Print(gameAsset.Name);
+					GD.Print(gameAsset.Position);
+
+					if (gameAsset.Name.ToString().Contains("Grass")) {
+						// placing tower
+						TowerIcon tower = PlayerManager.instance.GetActiveTower();
+						if (tower != null) {
+							if (!TowerClass.BuyTower(gameAsset.Position, tower.GetTowerName())) {
+								tower.DisableIcon();
+							}
+						}
+					}
+
+					else if (gameAsset.Name.ToString().Contains("Tower")) {
+						((TowerClass)gameAsset).UIToggle();
+					}
+				}
+			}
+		}
+
+		// moving the screen
+		if (@event.IsActionPressed("Move")) {
+			movingScreen = true;
+		}
+		if (@event.IsActionReleased("Move")) {
+			movingScreen = false;
+		}
+		if (@event is InputEventMouseMotion mouseMotion && movingScreen) {
+			Vector3 position = new Vector3(-mouseMotion.Relative.X, 0, -mouseMotion.Relative.Y) / 200 + camera.GlobalPosition;
+			camera.GlobalPosition = position;
+			// GD.Print("Moving screen");
+		}
+
+		// zoom
+		if (@event.IsActionPressed("Scroll Down")) {
+			camera.Size += 0.1f;
+		}
+		if (@event.IsActionPressed("Scroll Up")) {
+			camera.Size -= 0.1f;
 		}
 	}
 

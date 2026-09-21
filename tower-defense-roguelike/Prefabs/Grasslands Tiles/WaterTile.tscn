@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dkot480e235ky" path="res://Textures/Tiles.png" id="1_ghni0"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tglgg"]
+size = Vector3(0.32, 0.01, 0.32)
+
 [node name="Water Tile" type="Node3D" unique_id=135346494]
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=160414072]
@@ -10,3 +13,11 @@ texture_filter = 0
 texture = ExtResource("1_ghni0")
 region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1943047178]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2001300014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+shape = SubResource("BoxShape3D_tglgg")

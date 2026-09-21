@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ButtonTemplate : Node2D {
+public partial class ButtonTemplate : Control {
 	[ExportCategory("Animations")]
 	[Export] private string mouseInsideAnimation;
 	[Export] private string inactiveAnimation;

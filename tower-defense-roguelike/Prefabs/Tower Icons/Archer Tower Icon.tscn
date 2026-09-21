@@ -96,7 +96,10 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Sell Button" parent="." unique_id=590249941 instance=ExtResource("3_dlare")]
-position = Vector2(0, 20.000002)
+offset_left = -8.0
+offset_top = 16.666664
+offset_right = 47.172
+offset_bottom = 40.148666
 scale = Vector2(0.29, 0.29)
 mouseInsideAnimation = "Selected"
 inactiveAnimation = "Selected"
@@ -104,18 +107,20 @@ defaultAnimation = "default"
 
 [node name="Button Sprite" parent="Sell Button" index="0" unique_id=947915153]
 modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
 sprite_frames = SubResource("SpriteFrames_fgofq")
 
 [node name="Button Text" parent="Sell Button" index="1" unique_id=1737478061]
-offset_left = -26.0
-offset_top = -11.333334
-offset_right = 26.0
-offset_bottom = 11.666666
+offset_left = 1.1494253
+offset_right = 53.149426
 text = "Sell"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Area Shape" parent="Sell Button/Button Area" parent_id_path=PackedInt32Array(590249941, 116881939) index="0" unique_id=465698970]
+[node name="Button Area" parent="Sell Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+
+[node name="Area Shape" parent="Sell Button/Button Area" index="0" unique_id=465698970]
 position = Vector2(0, 2.3841858e-07)
 shape = SubResource("RectangleShape2D_vngns")
 

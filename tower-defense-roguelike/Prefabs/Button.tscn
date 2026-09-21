@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dqss0x5osse44" path="res://Scripts/Title Screen/ButtonTemplate.cs" id="1_ocxsf"]
 
-[node name="ButtonTemplate" type="Node2D" unique_id=590249941 node_paths=PackedStringArray("buttonSprite", "buttonArea", "areaShape", "textBox")]
+[node name="ButtonTemplate" type="Control" unique_id=580980688 node_paths=PackedStringArray("buttonSprite", "buttonArea", "areaShape", "textBox")]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_ocxsf")
 buttonSprite = NodePath("Button Sprite")
 buttonArea = NodePath("Button Area")
@@ -12,6 +15,7 @@ textBox = NodePath("Button Text")
 [node name="Button Sprite" type="AnimatedSprite2D" parent="." unique_id=947915153]
 
 [node name="Button Text" type="Label" parent="." unique_id=1737478061]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 

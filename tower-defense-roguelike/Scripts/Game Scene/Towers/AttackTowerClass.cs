@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class AttackTowerClass : Node {
+public partial class AttackTowerClass : Node3D {
 	[ExportCategory("Variables")]
 	[Export] public float Damage;
 	[Export] public float reloadTime;

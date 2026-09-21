@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class GenerativeTowerClass : Node {
+public partial class GenerativeTowerClass : Node3D {
 	[ExportCategory("Variables")]
 	[Export] public float generateTime;
 

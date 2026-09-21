@@ -2,10 +2,11 @@ using Godot;
 
 public partial class TowerIcon : Node2D {
 	[ExportCategory("Variables")]
-	[Export] public bool enabled;
-	[Export] public bool clickable;
-	[Export] public bool placeable;
+	[Export] private bool enabled;
+	[Export] private bool clickable;
+	[Export] private bool placeable;
 	[Export] private string towerName;
+	[Export] public int price;
 	
 	[ExportCategory("Components")]
 	[Export] private Sprite2D icon;
@@ -26,8 +27,12 @@ public partial class TowerIcon : Node2D {
 
 		enabled = true;
 		clickable = false;
-		placeable = true;
+		placeable = false;
 		SellButton.Visible = false;
+
+		// getting tower price
+		price = TowerStats.TowerDictionary[towerName].buyPrice;
+		Cost.Text = TowerStats.TowerDictionary[towerName].usePrice.ToString();
 
 		button.MouseEntered += () => clickable = true;
 		button.MouseExited += () => clickable = false;
@@ -55,7 +60,7 @@ public partial class TowerIcon : Node2D {
 
 	// Clickability for if the button can be touched
 	public bool GetClickability() {
-		return (enabled & clickable);
+		return clickable;
 	}
 	public void ChangeClickability() {
 		clickable = !clickable;
@@ -71,26 +76,26 @@ public partial class TowerIcon : Node2D {
 
 	// Disabled the button entirely
 	public void DisableIcon() {
-		icon.Modulate = enabled ? new Color(20, 20, 20, 1) : new Color(1, 1, 1, 1);
+		icon.Modulate = !enabled ? new Color(20, 20, 20, 1) : new Color(1, 1, 1, 1);
 		button.Visible = !button.Visible;
 		enabled = !enabled;
 	}
 
 	public void SellTower() {
-		PlayerManager.instance.ChangeMoney(25);
+		PlayerManager.instance.ChangeMoney((int)Mathf.Ceil(price * 0.75f));
 		PlayerManager.instance.towers.Remove(GetTowerName());
 		this.QueueFree();
 	}
 
 	public void OnClick() {
 		SellButton.Visible = !SellButton.Visible;
-		icon.Modulate = SellButton.Visible ? new Color(1.35f, 1.35f, 1.35f, 1) : new Color(1, 1, 1, 1);
-
-		// if (placeable) {
-			
-		// }
-		// else {
-
-		// }
+		placeable = !placeable;
+		if (enabled) {
+			icon.Modulate = SellButton.Visible ? new Color(1.35f, 1.35f, 1.35f, 1) : new Color(1, 1, 1, 1);
+		}
+		else {
+			icon.Modulate = new Color(20, 20, 20, 1);
+			placeable = false;
+		}
 	}
 }

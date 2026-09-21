@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class TroopTowerClass : Node {
+public partial class TroopTowerClass : Node3D {
 	[ExportCategory("Variables")]
 	[Export] public int troopCount;
 	[Export] public float respawnTime;
