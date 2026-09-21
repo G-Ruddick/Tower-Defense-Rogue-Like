@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4j2ecnd71ivo" path="res://Scripts/Title Screen/SettingsMenu.cs" id="1_ajseo"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="1_mwx4l"]
+[ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="2_4f7rx"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="2_pfkyh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
@@ -48,33 +49,54 @@ animations = [{
 [node name="SettingsMenu" type="CanvasLayer" unique_id=42179175 node_paths=PackedStringArray("mainMenu", "soundMenu", "gameplayMenu", "quitButton", "leaveGameButton", "returnButton", "soundSettingsButton", "gamePlaySettingsButton", "masterVolumeSlider", "musicVolumeSlider", "sfxVolumeSlider", "voicesVolumeSlider", "brightnessSlider", "gameSpeedSlider")]
 layer = 10000
 script = ExtResource("1_ajseo")
-mainMenu = NodePath("Main Menu")
-soundMenu = NodePath("Sound Settings")
-gameplayMenu = NodePath("Gameplay Settings")
-quitButton = NodePath("Main Menu/Quit Button")
-leaveGameButton = NodePath("Main Menu/Leave Game Button")
-returnButton = NodePath("Return To Game Button")
-soundSettingsButton = NodePath("Main Menu/Sound Settings Button")
-gamePlaySettingsButton = NodePath("Main Menu/GamePlay Settungs Button")
-masterVolumeSlider = NodePath("Sound Settings/Master Volume Slider")
-musicVolumeSlider = NodePath("Sound Settings/Music Volume Slider")
-sfxVolumeSlider = NodePath("Sound Settings/Sfx Volume Slider")
-voicesVolumeSlider = NodePath("Sound Settings/Voices Volume Slider")
-brightnessSlider = NodePath("Gameplay Settings/Brightness Slider")
-gameSpeedSlider = NodePath("Gameplay Settings/Game Speed Slider")
+mainMenu = NodePath("Control/Main Menu")
+soundMenu = NodePath("Control/Sound Settings")
+gameplayMenu = NodePath("Control/Gameplay Settings")
+quitButton = NodePath("Control/Main Menu/Quit Button")
+leaveGameButton = NodePath("Control/Main Menu/Leave Game Button")
+returnButton = NodePath("Control/Return To Game Button")
+soundSettingsButton = NodePath("Control/Main Menu/Sound Settings Button")
+gamePlaySettingsButton = NodePath("Control/Main Menu/GamePlay Settungs Button")
+masterVolumeSlider = NodePath("Control/Sound Settings/Master Volume Slider")
+musicVolumeSlider = NodePath("Control/Sound Settings/Music Volume Slider")
+sfxVolumeSlider = NodePath("Control/Sound Settings/Sfx Volume Slider")
+voicesVolumeSlider = NodePath("Control/Sound Settings/Voices Volume Slider")
+brightnessSlider = NodePath("Control/Gameplay Settings/Brightness Slider")
+gameSpeedSlider = NodePath("Control/Gameplay Settings/Game Speed Slider")
 
-[node name="Return To Game Button" parent="." unique_id=590249941 instance=ExtResource("1_mwx4l")]
-position = Vector2(174.00002, 85.00006)
+[node name="Control" type="Control" parent="." unique_id=45974605]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1151.66
+offset_bottom = 649.835
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Backboard" type="Sprite2D" parent="Control" unique_id=718840094]
+modulate = Color(1, 0.91733336, 0.84000003, 1)
+position = Vector2(577.5, 325.99997)
+scale = Vector2(25.604168, 29.039999)
+texture = ExtResource("2_4f7rx")
+region_enabled = true
+region_rect = Rect2(0, 32, 48, 25)
+
+[node name="Return To Game Button" parent="Control" unique_id=590249941 instance=ExtResource("1_mwx4l")]
+layout_mode = 0
+offset_left = 174.00002
+offset_top = 85.00006
+offset_right = 174.00002
+offset_bottom = 85.00006
 scale = Vector2(5.3200016, 5.3200016)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Return To Game Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Control/Return To Game Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_h1vrk")
 animation = &"Default"
 
-[node name="Button Text" parent="Return To Game Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Control/Return To Game Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -84,15 +106,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Button Area" parent="Return To Game Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Control/Return To Game Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Return To Game Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Control/Return To Game Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_st2lo")
 
-[node name="Main Menu" type="Node2D" parent="." unique_id=866542660]
+[node name="Main Menu" type="Node2D" parent="Control" unique_id=866542660]
 
-[node name="Title" type="Label" parent="Main Menu" unique_id=1063068519]
+[node name="Title" type="Label" parent="Control/Main Menu" unique_id=1063068519]
 offset_left = 354.0
 offset_top = 15.0
 offset_right = 814.0
@@ -104,19 +126,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Leave Game Button" parent="Main Menu" unique_id=421950271 instance=ExtResource("1_mwx4l")]
-position = Vector2(978.00006, 563)
+[node name="Leave Game Button" parent="Control/Main Menu" unique_id=421950271 instance=ExtResource("1_mwx4l")]
+offset_left = 978.00006
+offset_top = 563.0
+offset_right = 978.00006
+offset_bottom = 563.0
 scale = Vector2(5.3200016, 5.3200016)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Main Menu/Leave Game Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Control/Main Menu/Leave Game Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_h1vrk")
 animation = &"Mouse Inside"
 frame_progress = 0.57224566
 
-[node name="Button Text" parent="Main Menu/Leave Game Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Control/Main Menu/Leave Game Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -125,25 +150,28 @@ text = "Leave"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="Main Menu/Leave Game Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Control/Main Menu/Leave Game Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Main Menu/Leave Game Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Control/Main Menu/Leave Game Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_st2lo")
 
-[node name="Quit Button" parent="Main Menu" unique_id=459038363 instance=ExtResource("1_mwx4l")]
-position = Vector2(978.00006, 563)
+[node name="Quit Button" parent="Control/Main Menu" unique_id=459038363 instance=ExtResource("1_mwx4l")]
+offset_left = 978.00006
+offset_top = 563.0
+offset_right = 978.00006
+offset_bottom = 563.0
 scale = Vector2(5.3200016, 5.3200016)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Main Menu/Quit Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Control/Main Menu/Quit Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_h1vrk")
 animation = &"Default"
 frame_progress = 0.69849
 
-[node name="Button Text" parent="Main Menu/Quit Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Control/Main Menu/Quit Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -152,24 +180,27 @@ text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="Main Menu/Quit Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Control/Main Menu/Quit Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Main Menu/Quit Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Control/Main Menu/Quit Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_st2lo")
 
-[node name="Sound Settings Button" parent="Main Menu" unique_id=1685914308 instance=ExtResource("1_mwx4l")]
-position = Vector2(579, 216)
+[node name="Sound Settings Button" parent="Control/Main Menu" unique_id=1685914308 instance=ExtResource("1_mwx4l")]
+offset_left = 579.0
+offset_top = 216.0
+offset_right = 579.0
+offset_bottom = 216.0
 scale = Vector2(7.6400013, 7.6400013)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Main Menu/Sound Settings Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Control/Main Menu/Sound Settings Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_h1vrk")
 animation = &"Disabled"
 
-[node name="Button Text" parent="Main Menu/Sound Settings Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Control/Main Menu/Sound Settings Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -179,25 +210,28 @@ text = "Sound Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="Main Menu/Sound Settings Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Control/Main Menu/Sound Settings Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Main Menu/Sound Settings Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Control/Main Menu/Sound Settings Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_st2lo")
 
-[node name="GamePlay Settungs Button" parent="Main Menu" unique_id=1481059286 instance=ExtResource("1_mwx4l")]
-position = Vector2(579, 438.99997)
+[node name="GamePlay Settungs Button" parent="Control/Main Menu" unique_id=1481059286 instance=ExtResource("1_mwx4l")]
+offset_left = 579.0
+offset_top = 438.99997
+offset_right = 579.0
+offset_bottom = 438.99997
 scale = Vector2(7.6400013, 7.6400013)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Main Menu/GamePlay Settungs Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Control/Main Menu/GamePlay Settungs Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_h1vrk")
 animation = &"Disabled"
 frame_progress = 0.30492765
 
-[node name="Button Text" parent="Main Menu/GamePlay Settungs Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Control/Main Menu/GamePlay Settungs Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -207,16 +241,16 @@ text = "Gameplay Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="Main Menu/GamePlay Settungs Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Control/Main Menu/GamePlay Settungs Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Main Menu/GamePlay Settungs Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Control/Main Menu/GamePlay Settungs Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_st2lo")
 
-[node name="Sound Settings" type="Node2D" parent="." unique_id=252867527]
+[node name="Sound Settings" type="Node2D" parent="Control" unique_id=252867527]
 visible = false
 
-[node name="Title" type="Label" parent="Sound Settings" unique_id=256580621]
+[node name="Title" type="Label" parent="Control/Sound Settings" unique_id=256580621]
 offset_left = 354.0
 offset_top = 15.0
 offset_right = 814.0
@@ -227,7 +261,7 @@ text = "Sound Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Master Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1257065003]
+[node name="Master Volume Slider" type="HSlider" parent="Control/Sound Settings" unique_id=1257065003]
 offset_left = 304.00003
 offset_top = 194.0
 offset_right = 754.0
@@ -235,7 +269,7 @@ offset_bottom = 210.0
 scale = Vector2(1.83, 1.83)
 value = 100.0
 
-[node name="Label" type="Label" parent="Sound Settings/Master Volume Slider" unique_id=118182721]
+[node name="Label" type="Label" parent="Control/Sound Settings/Master Volume Slider" unique_id=118182721]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -247,7 +281,7 @@ text = "Master"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Music Volume Slider" type="HSlider" parent="Sound Settings" unique_id=883729898]
+[node name="Music Volume Slider" type="HSlider" parent="Control/Sound Settings" unique_id=883729898]
 offset_left = 304.00003
 offset_top = 324.0
 offset_right = 754.0
@@ -255,7 +289,7 @@ offset_bottom = 340.0
 scale = Vector2(1.83, 1.83)
 value = 100.0
 
-[node name="Label" type="Label" parent="Sound Settings/Music Volume Slider" unique_id=1224736083]
+[node name="Label" type="Label" parent="Control/Sound Settings/Music Volume Slider" unique_id=1224736083]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -267,7 +301,7 @@ text = "Music"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Sfx Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1416382771]
+[node name="Sfx Volume Slider" type="HSlider" parent="Control/Sound Settings" unique_id=1416382771]
 offset_left = 304.00003
 offset_top = 454.0
 offset_right = 754.0
@@ -275,7 +309,7 @@ offset_bottom = 470.0
 scale = Vector2(1.83, 1.83)
 value = 100.0
 
-[node name="Label" type="Label" parent="Sound Settings/Sfx Volume Slider" unique_id=523859308]
+[node name="Label" type="Label" parent="Control/Sound Settings/Sfx Volume Slider" unique_id=523859308]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -287,7 +321,7 @@ text = "Sound Effects"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Voices Volume Slider" type="HSlider" parent="Sound Settings" unique_id=1182039475]
+[node name="Voices Volume Slider" type="HSlider" parent="Control/Sound Settings" unique_id=1182039475]
 offset_left = 304.00003
 offset_top = 593.0
 offset_right = 754.0
@@ -295,7 +329,7 @@ offset_bottom = 609.0
 scale = Vector2(1.83, 1.83)
 value = 100.0
 
-[node name="Label" type="Label" parent="Sound Settings/Voices Volume Slider" unique_id=99444702]
+[node name="Label" type="Label" parent="Control/Sound Settings/Voices Volume Slider" unique_id=99444702]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -307,10 +341,10 @@ text = "Character Voices"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Gameplay Settings" type="Node2D" parent="." unique_id=99870061]
+[node name="Gameplay Settings" type="Node2D" parent="Control" unique_id=99870061]
 visible = false
 
-[node name="Title" type="Label" parent="Gameplay Settings" unique_id=1035845361]
+[node name="Title" type="Label" parent="Control/Gameplay Settings" unique_id=1035845361]
 offset_left = 354.0
 offset_top = 15.0
 offset_right = 930.0
@@ -321,7 +355,7 @@ text = "Gameplay Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Brightness Slider" type="HSlider" parent="Gameplay Settings" unique_id=1380417044]
+[node name="Brightness Slider" type="HSlider" parent="Control/Gameplay Settings" unique_id=1380417044]
 offset_left = 304.00003
 offset_top = 194.0
 offset_right = 754.0
@@ -329,7 +363,7 @@ offset_bottom = 210.0
 scale = Vector2(1.83, 1.83)
 value = 100.0
 
-[node name="Label" type="Label" parent="Gameplay Settings/Brightness Slider" unique_id=1324846196]
+[node name="Label" type="Label" parent="Control/Gameplay Settings/Brightness Slider" unique_id=1324846196]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -341,7 +375,7 @@ text = "Brightness"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Game Speed Slider" type="HSlider" parent="Gameplay Settings" unique_id=1415202362]
+[node name="Game Speed Slider" type="HSlider" parent="Control/Gameplay Settings" unique_id=1415202362]
 offset_left = 304.00003
 offset_top = 324.0
 offset_right = 754.0
@@ -352,7 +386,7 @@ max_value = 4.0
 step = 0.5
 value = 1.0
 
-[node name="Label" type="Label" parent="Gameplay Settings/Game Speed Slider" unique_id=1108108680]
+[node name="Label" type="Label" parent="Control/Gameplay Settings/Game Speed Slider" unique_id=1108108680]
 layout_mode = 0
 offset_left = 50.0
 offset_top = -52.459015
@@ -364,8 +398,8 @@ text = "Game Speed"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[editable path="Return To Game Button"]
-[editable path="Main Menu/Leave Game Button"]
-[editable path="Main Menu/Quit Button"]
-[editable path="Main Menu/Sound Settings Button"]
-[editable path="Main Menu/GamePlay Settungs Button"]
+[editable path="Control/Return To Game Button"]
+[editable path="Control/Main Menu/Leave Game Button"]
+[editable path="Control/Main Menu/Quit Button"]
+[editable path="Control/Main Menu/Sound Settings Button"]
+[editable path="Control/Main Menu/GamePlay Settungs Button"]

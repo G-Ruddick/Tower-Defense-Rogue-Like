@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://cw2gt22gjbjal"]
+
+[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_cxj2j"]
+[ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_07xen"]
+[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
+[ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="4_oifrw"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oifrw"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(8, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu15y"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oifrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu15y")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sacsp"]
+size = Vector3(0.32, 0.16, 0.32)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
+height = 0.64
+radius = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("5_oifrw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("5_oifrw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iu15y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1r4k"]
+size = Vector2(56, 24)
+
+[node name="ArcherTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("towerSprite", "towerRadius", "UIElement", "sellButton")]
+script = ExtResource("1_cxj2j")
+towerName = "Archer Tower"
+towerCost = 50
+towerSprite = NodePath("TowerSprite")
+towerRadius = NodePath("TowerSize")
+UIElement = NodePath("Tower UI")
+sellButton = NodePath("Tower UI/Sell Button")
+
+[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange")]
+script = ExtResource("2_07xen")
+attackArea = NodePath("../Attack Range")
+attackRange = NodePath("../Attack Range/CollisionShape3D")
+
+[node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
+offset = Vector2(0, 32)
+texture_filter = 0
+render_priority = 5
+texture = ExtResource("3_b5oln")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 64)
+
+[node name="Archer" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1960342473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.42, 0)
+texture_filter = 0
+render_priority = 6
+sprite_frames = SubResource("SpriteFrames_sacsp")
+
+[node name="Archer2" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1252883703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03075448, 0.42, 0)
+texture_filter = 0
+render_priority = 6
+sprite_frames = SubResource("SpriteFrames_sacsp")
+
+[node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerSize" unique_id=2036799115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_sacsp")
+
+[node name="Attack Range" type="Area3D" parent="." unique_id=782235652]
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Range" unique_id=673916723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332, 0)
+shape = SubResource("CylinderShape3D_sacsp")
+
+[node name="Tower UI" type="Control" parent="." unique_id=220820527]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("4_oifrw")
+
+[node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("4_b5oln")]
+layout_mode = 0
+offset_left = -27.58
+offset_top = 69.0
+offset_right = 27.592001
+offset_bottom = 92.482
+scale = Vector2(1.7099993, 1.7099993)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Tower UI/Sell Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
+sprite_frames = SubResource("SpriteFrames_iu15y")
+
+[node name="Button Text" parent="Tower UI/Sell Button" index="1" unique_id=1737478061]
+offset_left = 1.1494253
+offset_right = 53.149426
+text = "Sell"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Tower UI/Sell Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+
+[node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_d1r4k")
+
+[editable path="Tower UI/Sell Button"]

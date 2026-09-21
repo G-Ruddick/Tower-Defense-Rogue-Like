@@ -53,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 mouse_force_pass_scroll_events = false
 script = ExtResource("1_xwubi")
 leaveButton = NodePath("Leave Shop Button")
@@ -90,7 +90,11 @@ region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
 [node name="Leave Shop Button" parent="." unique_id=590249941 instance=ExtResource("1_jffka")]
-position = Vector2(1047, 595)
+layout_mode = 0
+offset_left = 1047.0
+offset_top = 595.0
+offset_right = 1047.0
+offset_bottom = 595.0
 scale = Vector2(3.375, 3.375)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
@@ -116,7 +120,11 @@ scale = Vector2(2.8000195, 1.2)
 shape = SubResource("RectangleShape2D_3vlva")
 
 [node name="View Map Button" parent="." unique_id=39449858 instance=ExtResource("1_jffka")]
-position = Vector2(119, 277)
+layout_mode = 0
+offset_left = 119.0
+offset_top = 277.0
+offset_right = 119.0
+offset_bottom = 277.0
 scale = Vector2(3.115, 3.115)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
@@ -142,7 +150,11 @@ scale = Vector2(2.8000195, 1.2)
 shape = SubResource("RectangleShape2D_3vlva")
 
 [node name="Reroll Shop Button" parent="." unique_id=1234429503 instance=ExtResource("1_jffka")]
-position = Vector2(124, 182)
+layout_mode = 0
+offset_left = 124.0
+offset_top = 182.0
+offset_right = 124.0
+offset_bottom = 182.0
 scale = Vector2(3.375, 3.375)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"

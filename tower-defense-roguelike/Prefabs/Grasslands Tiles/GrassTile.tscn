@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dkot480e235ky" path="res://Textures/Tiles.png" id="1_n3ehl"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
+size = Vector3(0.32, 0.01, 0.32)
+
 [node name="Grass Tile" type="Node3D" unique_id=135346494]
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=160414072]
@@ -12,3 +15,11 @@ texture_filter = 0
 texture = ExtResource("1_n3ehl")
 region_enabled = true
 region_rect = Rect2(64, 0, 32, 32)
+
+[node name="GrassArea" type="Area3D" parent="." unique_id=1846367744]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassArea" unique_id=1669993956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+shape = SubResource("BoxShape3D_dv6u4")

@@ -80,91 +80,116 @@ animations = [{
 
 [node name="Game" type="Node3D" unique_id=1162375626]
 
-[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("shopScreen", "playerManager", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
+[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
 script = ExtResource("1_gl6un")
 shopScreen = NodePath("../UI/ShopScreen")
-playerManager = NodePath("../Player Manager")
+camera = NodePath("../Camera3D")
 playerHealthLabel = NodePath("../UI/Player Stats/Health")
 playerMoneyLabel = NodePath("../UI/Player Stats/Gold")
 waveNumberLabel = NodePath("../UI/Player Stats/Round")
 settingsButton = NodePath("../UI/Settings Button")
 nextWaveButton = NodePath("../UI/Next Wave Button")
 
-[node name="Player Manager" type="Node" parent="." unique_id=520578689]
+[node name="Player Manager" type="Node" parent="." unique_id=520578689 node_paths=PackedStringArray("playerTowersNode")]
 script = ExtResource("2_b2bpf")
+playerTowersNode = NodePath("../UI/Towers/Player Towers")
 
 [node name="MapCreator" type="Node" parent="." unique_id=1015966873]
 script = ExtResource("1_iukft")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=326357734]
-visible = false
 
 [node name="ShopScreen" parent="UI" unique_id=472434983 instance=ExtResource("6_7lihs")]
 visible = false
 
-[node name="Player Stats" type="Node2D" parent="UI" unique_id=201160717]
+[node name="Player Stats" type="Control" parent="UI" unique_id=1125997180]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 7.53
+offset_right = 247.03
+offset_bottom = 89.44
 
 [node name="Backboard" type="Sprite2D" parent="UI/Player Stats" unique_id=2014873934]
-position = Vector2(127, 60)
+position = Vector2(120, 52.47)
 scale = Vector2(5, 3.2799993)
 texture = ExtResource("7_fgofq")
 region_enabled = true
 region_rect = Rect2(0, 32, 48, 32)
 
 [node name="Health" type="Label" parent="UI/Player Stats" unique_id=1340879312]
-offset_left = 15.0
-offset_top = 11.0
-offset_right = 99.0
-offset_bottom = 47.291668
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.4699998
+offset_right = 92.0
+offset_bottom = 39.76167
 theme_override_font_sizes/font_size = 26
 text = "Health"
 
 [node name="Gold" type="Label" parent="UI/Player Stats" unique_id=313544983]
-offset_left = 16.0
-offset_top = 52.0
-offset_right = 75.0
-offset_bottom = 88.29167
+layout_mode = 0
+offset_left = 9.0
+offset_top = 44.47
+offset_right = 68.0
+offset_bottom = 80.76167
 theme_override_font_sizes/font_size = 26
 text = "Gold"
 
 [node name="Round" type="Label" parent="UI/Player Stats" unique_id=954464956]
-offset_left = 172.0
-offset_top = 11.0
-offset_right = 241.0
-offset_bottom = 86.583336
+layout_mode = 0
+offset_left = 165.0
+offset_top = 3.4699998
+offset_right = 234.0
+offset_bottom = 79.05334
 theme_override_font_sizes/font_size = 22
 text = "Wave
 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Towers" type="Node2D" parent="UI" unique_id=539282058]
+[node name="Towers" type="Control" parent="UI" unique_id=530804919]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 313.94
+offset_top = 7.265
+offset_right = 854.17
+offset_bottom = 155.44
+mouse_filter = 1
 
 [node name="Backboard" type="Sprite2D" parent="UI/Towers" unique_id=953144540]
-position = Vector2(584.00006, 102)
+position = Vector2(270.06006, 94.735)
 scale = Vector2(8.4400015, 5.9200006)
 texture = ExtResource("7_fgofq")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
 [node name="Header" type="Label" parent="UI/Towers" unique_id=1988017925]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 535.0
-offset_top = 8.0
-offset_right = 640.0
-offset_bottom = 49.875
+offset_left = -49.054993
+offset_top = 0.73500013
+offset_right = 55.945007
+offset_bottom = 42.61
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 theme_override_font_sizes/font_size = 30
 text = "Towers"
 horizontal_alignment = 1
 
-[node name="Abilities" type="Node2D" parent="UI" unique_id=529500699]
+[node name="Player Towers" type="Node" parent="UI/Towers" unique_id=1658257320]
+
+[node name="Abilities" type="Control" parent="UI" unique_id=1101927646]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 520.0
+offset_right = 244.0
+offset_bottom = 645.0
 
 [node name="Backboard" type="Sprite2D" parent="UI/Abilities" unique_id=575405481]
-position = Vector2(124.00001, 565.00006)
+position = Vector2(120.00001, 45.00006)
 rotation = -3.1415925
 scale = Vector2(5, 5.0117283)
 texture = ExtResource("7_fgofq")
@@ -172,15 +197,19 @@ region_enabled = true
 region_rect = Rect2(0, 32, 48, 32)
 
 [node name="Header" type="Label" parent="UI/Abilities" unique_id=970566332]
-offset_left = 6.0
-offset_top = 523.0
-offset_right = 107.0
-offset_bottom = 559.2917
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 103.0
+offset_bottom = 39.291687
 theme_override_font_sizes/font_size = 26
 text = "Abilities"
 
 [node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
-position = Vector2(1110, 40.999992)
+offset_left = 1146.9999
+offset_top = 5.0
+offset_right = 1169.7499
+offset_bottom = 29.17
 rotation = 1.5707964
 scale = Vector2(3.105, 3.105)
 mouseInsideAnimation = "Mouse Inside"
@@ -188,15 +217,16 @@ inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+position = Vector2(11.448314, 12.122387)
 scale = Vector2(0.40387118, 1)
 sprite_frames = SubResource("SpriteFrames_7lihs")
 animation = &"Disabled"
 
 [node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
-offset_left = -28.195496
-offset_top = -12.030083
-offset_right = 27.804504
-offset_bottom = 11.969917
+offset_left = -16.74718
+offset_top = 0.09230423
+offset_right = 39.25282
+offset_bottom = 24.092304
 scale = Vector2(1.0035818, 1)
 theme_override_font_sizes/font_size = 9
 text = "|||"
@@ -204,28 +234,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
+position = Vector2(11.448314, 12.122387)
 scale = Vector2(1.1308471, 1.2)
 
 [node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Next Wave Button" parent="UI" unique_id=555688118 instance=ExtResource("3_kldst")]
-position = Vector2(1083, 575)
+offset_left = 1074.0001
+offset_top = 563.0
+offset_right = 1096.2101
+offset_bottom = 587.14
 scale = Vector2(5.3200016, 5.3200016)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Next Wave Button" index="0" unique_id=947915153]
+position = Vector2(11.120315, 12.112779)
 scale = Vector2(0.39581537, 1)
 sprite_frames = SubResource("SpriteFrames_fgofq")
 animation = &"Disabled"
 
 [node name="Button Text" parent="UI/Next Wave Button" index="1" unique_id=1737478061]
-offset_left = -28.0
-offset_top = -12.0
-offset_right = 28.0
-offset_bottom = 12.0
+offset_left = -16.879684
+offset_top = 0.11277957
+offset_right = 39.120316
+offset_bottom = 24.11278
 theme_override_constants/line_spacing = -2
 theme_override_font_sizes/font_size = 6
 text = "Next 
@@ -234,15 +270,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button Area" parent="UI/Next Wave Button" index="2" unique_id=116881939]
+position = Vector2(11.120316, 12.11278)
 scale = Vector2(1.1082907, 1.2)
+priority = 100
 
 [node name="Area Shape" parent="UI/Next Wave Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_2irst")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
-transform = Transform3D(1, 0, 0, 0, 0.7852692, 0.6191546, 0, -0.6191546, 0.7852692, 3.823464, 5.474524, 8.607655)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 2.985, 4.358, 7.816241)
 projection = 1
-size = 4.619
+size = 3.667
 near = 0.001
 
 [editable path="UI/Settings Button"]
