@@ -28,6 +28,8 @@ public partial class Shop : Control {
 
 				this.Visible = false;
 				shopOpen = false;
+
+				StartTile.instance.SpawnEnemies();
 			}
 
 			if (mapButton.GetClickability()) {
