@@ -54,6 +54,10 @@ public partial class TowerClass : Node3D {
 		// removing money from player
 		PlayerManager.instance.ChangeMoney(-newTower.towerCost);
 
+		if (TowerStats.TowerDictionary[name].usePrice > PlayerManager.instance.GetMoney()) {
+			PlayerManager.instance.GetActiveTower().OnClick();
+		}
+
 		return true;
 	}
 

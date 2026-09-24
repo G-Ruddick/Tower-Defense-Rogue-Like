@@ -74,6 +74,7 @@ public partial class GameManager: Node {
 						TowerIcon tower = PlayerManager.instance.GetActiveTower();
 						if (tower != null) {
 							if (!TowerClass.BuyTower(gameAsset.Position, tower.GetTowerName())) {
+								tower.OnClick();
 								tower.DisableIcon();
 							}
 						}

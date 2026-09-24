@@ -60,7 +60,7 @@ leaveButton = NodePath("Leave Shop Button")
 mapButton = NodePath("View Map Button")
 rerollButton = NodePath("Reroll Shop Button")
 
-[node name="Backboard4" type="Sprite2D" parent="." unique_id=1192749386]
+[node name="background" type="Sprite2D" parent="." unique_id=1192749386]
 modulate = Color(0, 1.0819027, 1.3220654, 1)
 position = Vector2(574, 418.00003)
 scale = Vector2(19.44, 32.62685)
@@ -68,21 +68,30 @@ texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Backboard" type="Sprite2D" parent="." unique_id=301312601]
+[node name="Tower Shop" type="Sprite2D" parent="." unique_id=301312601]
 position = Vector2(599.8, 313.2)
 scale = Vector2(10.4, 9.2)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Backboard2" type="Sprite2D" parent="." unique_id=239199317]
+[node name="Control" type="Control" parent="Tower Shop" unique_id=832674955]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -30.846153
+offset_top = -14.913045
+offset_right = 30.983849
+offset_bottom = 7.8969526
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="Ability Shop" type="Sprite2D" parent="." unique_id=239199317]
 position = Vector2(599.8, 553.4)
 scale = Vector2(10.4, 9.2)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Backboard3" type="Sprite2D" parent="." unique_id=1016529843]
+[node name="Perk Shop" type="Sprite2D" parent="." unique_id=1016529843]
 position = Vector2(1046.0001, 400)
 scale = Vector2(3.0399985, 14.6799965)
 texture = ExtResource("2_w0vvm")
@@ -184,12 +193,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -148.0
-offset_top = 562.0
-offset_right = 150.0
-offset_bottom = 631.7917
+offset_left = 277.0
+offset_top = 90.0
+offset_right = 575.0
+offset_bottom = 159.79169
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 46
 text = "Shop Screen"
 horizontal_alignment = 1
 vertical_alignment = 1
