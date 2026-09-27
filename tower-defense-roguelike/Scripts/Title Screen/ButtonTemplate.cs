@@ -8,7 +8,7 @@ public partial class ButtonTemplate : Control {
 	[Export] private string defaultAnimation;
 
 	[ExportCategory("Button Components")]
-	[Export] private AnimatedSprite2D buttonSprite;
+	[Export] public AnimatedSprite2D buttonSprite;
 	[Export] private Area2D buttonArea;
 	[Export] private CollisionShape2D areaShape;
 	[Export] public Label textBox;
@@ -55,6 +55,10 @@ public partial class ButtonTemplate : Control {
 
 	public void ChangeClickability() {
 		buttonArea.Visible = !buttonArea.Visible;
+	}
+
+	public bool GetAreaState() {
+		return buttonArea.Visible;
 	}
 
 	// changing button sprite to when mouse if hovering over

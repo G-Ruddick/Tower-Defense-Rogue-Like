@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://da3a4is7vynjc"]
 
 [ext_resource type="Script" uid="uid://bkjlr4dqo2j4h" path="res://Scripts/Game Scene/Towers/TowerIcon.cs" id="1_dbmcp"]
-[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="2_ccmsd"]
+[ext_resource type="Texture2D" uid="uid://bssgx4tg2w50k" path="res://Textures/Tower Icons.png" id="2_dlare"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_dlare"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_do7tc"]
 
@@ -51,7 +51,7 @@ SellButton = NodePath("Sell Button")
 Cost = NodePath("Cost")
 
 [node name="ArcherTower" type="Sprite2D" parent="." unique_id=1133058594]
-texture = ExtResource("2_ccmsd")
+texture = ExtResource("2_dlare")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
@@ -82,7 +82,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -16.0
-offset_top = 7.3333335
+offset_top = 7.3333325
 offset_right = 16.0
 offset_bottom = 17.104166
 grow_horizontal = 0

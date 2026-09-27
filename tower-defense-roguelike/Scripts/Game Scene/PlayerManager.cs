@@ -25,8 +25,8 @@ public partial class PlayerManager : Node {
 		SetMoney(200);
 		maxNumberOfTowers = 5;
 
-		towers.Add("Archer Tower");
-		UpdateTowers();
+		// towers.Add("Archer Tower");
+		// UpdateTowers();
 	}
 	
 	// Money Functions
@@ -101,13 +101,5 @@ public partial class PlayerManager : Node {
 		}
 
 		return null;
-	}
-
-	public void OnMonneyChange() {
-		foreach(TowerIcon tower in playerTowersNode.GetChildren()) {
-			if (money < tower.price) {
-				tower.DisableIcon();
-			}
-		}
 	}
 }

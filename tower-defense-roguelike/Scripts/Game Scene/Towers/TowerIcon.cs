@@ -6,14 +6,18 @@ public partial class TowerIcon : Node2D {
 	[Export] private bool clickable;
 	[Export] private bool placeable;
 	[Export] private string towerName;
-	[Export] public int price;
-	
+
 	[ExportCategory("Components")]
 	[Export] private Sprite2D icon;
 	[Export] private Area2D button;
 	[Export] private CollisionShape2D clickableArea;
 	[Export] public ButtonTemplate SellButton;
 	[Export] private Label Cost;
+
+	// Colors
+	private Color enabledColor = new Color(1, 1, 1, 1);
+	private Color disabledColor = new Color(0.2f, 0.2f, 0.2f, 1);
+	private Color placeableColor = new Color(1.35f, 1.35f, 1.35f, 1);
 
 	public override void _Ready() {
 		if (icon == null) {
@@ -29,9 +33,6 @@ public partial class TowerIcon : Node2D {
 		clickable = false;
 		placeable = false;
 		SellButton.Visible = false;
-
-		// getting tower price
-		price = TowerStats.TowerDictionary[towerName].buyPrice;
 		Cost.Text = TowerStats.TowerDictionary[towerName].usePrice.ToString();
 
 		button.MouseEntered += () => clickable = true;
@@ -42,12 +43,22 @@ public partial class TowerIcon : Node2D {
 		if (@event.IsActionPressed("Select")) {
 			if (SellButton.GetClickability()) {
 				SellTower();
+				return;
 			}
 
 			if (GetClickability()) {
 				OnClick();
+				return;
 			}
 		}
+	}
+
+	public override void _Process(double delta) {
+		if (PlayerManager.instance.GetMoney() < TowerStats.TowerDictionary[towerName].usePrice) { enabled = false; }
+		else { enabled = true; }
+
+		if (enabled) { icon.Modulate = placeable ? placeableColor : enabledColor; }
+		else { icon.Modulate = disabledColor; }
 	}
 
 	public override void _ExitTree() {
@@ -74,27 +85,31 @@ public partial class TowerIcon : Node2D {
 		placeable = !placeable;
 	}
 
+	public void OnPlace() {
+		if (placeable) {
+			SellButton.Visible = !SellButton.Visible;
+			placeable = false;
+		}
+	}
+
 	// Disabled the button entirely
 	public void DisableIcon() {
-		icon.Modulate = !enabled ? new Color(20, 20, 20, 1) : new Color(1, 1, 1, 1);
-		button.Visible = !button.Visible;
 		enabled = !enabled;
+		SellButton.Visible = false;
 	}
 
 	public void SellTower() {
-		PlayerManager.instance.ChangeMoney((int)Mathf.Ceil(price * 0.75f));
+		PlayerManager.instance.ChangeMoney((int)Mathf.Ceil(TowerStats.TowerDictionary[towerName].buyPrice * 0.75f));
 		PlayerManager.instance.towers.Remove(GetTowerName());
 		this.QueueFree();
 	}
 
 	public void OnClick() {
 		SellButton.Visible = !SellButton.Visible;
-		placeable = !placeable;
 		if (enabled) {
-			icon.Modulate = SellButton.Visible ? new Color(1.35f, 1.35f, 1.35f, 1) : new Color(1, 1, 1, 1);
+			placeable = !placeable;
 		}
 		else {
-			icon.Modulate = new Color(20, 20, 20, 1);
 			placeable = false;
 		}
 	}
