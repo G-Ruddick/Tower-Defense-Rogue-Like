@@ -102,12 +102,4 @@ public partial class PlayerManager : Node {
 
 		return null;
 	}
-
-	public void OnMonneyChange() {
-		foreach(TowerIcon tower in playerTowersNode.GetChildren()) {
-			if (money < tower.price) {
-				tower.DisableIcon();
-			}
-		}
-	}
 }

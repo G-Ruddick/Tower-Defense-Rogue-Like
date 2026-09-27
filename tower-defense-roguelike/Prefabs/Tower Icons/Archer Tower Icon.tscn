@@ -44,6 +44,7 @@ script = ExtResource("1_dbmcp")
 enabled = true
 clickable = true
 towerName = "Archer Tower"
+price = 50
 icon = NodePath("ArcherTower")
 button = NodePath("Clickable Area")
 clickableArea = NodePath("Clickable Area/CollisionShape2D")
