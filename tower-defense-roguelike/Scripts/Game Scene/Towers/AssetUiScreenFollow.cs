@@ -6,5 +6,6 @@ public partial class AssetUiScreenFollow : Control {
 		Vector2 screenPosition = camera.UnprojectPosition(((Node3D)GetParent()).Position);
 
 		this.Position = screenPosition;
+		this.Scale = new Vector2(1, 1) / camera.Size;
 	}
 }
