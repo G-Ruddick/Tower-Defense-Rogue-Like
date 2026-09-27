@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://r56e7npxdm73"]
+
+[ext_resource type="Script" uid="uid://sr4617nh80q1" path="res://Scripts/Game Scene/Towers/ShopIcon.cs" id="1_dldce"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="1_fmsqb"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="2_dldce"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ba1qt"]
+load_path = "res://.godot/imported/Tower Icons.png-2a9d2d3e3db006f97c0cd7c63413c53c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("2_dldce")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("2_dldce")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_paf0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wmo6"]
+size = Vector2(56, 24)
+
+[node name="ShopIcon" type="Node2D" unique_id=1170776714 node_paths=PackedStringArray("icon", "costButton", "towerNameLabel", "buyCostLabel", "useCostLabel")]
+scale = Vector2(4, 4)
+script = ExtResource("1_dldce")
+icon = NodePath("ArcherTower")
+costButton = NodePath("Purchase Button")
+towerNameLabel = NodePath("Name")
+buyCostLabel = NodePath("Purchase Button/Button Text")
+useCostLabel = NodePath("Cost")
+
+[node name="ArcherTower" type="Sprite2D" parent="." unique_id=1169485659]
+texture = SubResource("CompressedTexture2D_ba1qt")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Name" type="Label" parent="." unique_id=287959756]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = -7.229167
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="." unique_id=1875427151]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.57
+offset_top = 7.0
+offset_right = 15.43
+offset_bottom = 16.770832
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.94, 0.70437336, 0.0564, 1)
+theme_override_colors/font_outline_color = Color(0.99967045, 0.92553276, 0.7813341, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 7
+text = "cost"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Purchase Button" parent="." unique_id=580980688 instance=ExtResource("1_fmsqb")]
+offset_left = -8.0
+offset_top = 19.0
+offset_right = 47.172
+offset_bottom = 42.482002
+scale = Vector2(0.29, 0.29)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Purchase Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
+scale = Vector2(1.9655136, 1.4137974)
+sprite_frames = SubResource("SpriteFrames_paf0y")
+
+[node name="Button Text" parent="Purchase Button" index="1" unique_id=1737478061]
+offset_top = -3.983
+offset_right = 52.0
+offset_bottom = 25.3295
+theme_override_font_sizes/font_size = 21
+text = "Cost"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Purchase Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+scale = Vector2(1.9655136, 1.4137974)
+
+[node name="Area Shape" parent="Purchase Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_0wmo6")
+
+[editable path="Purchase Button"]

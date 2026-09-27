@@ -68,21 +68,21 @@ texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Tower Shop" type="Sprite2D" parent="." unique_id=301312601]
+[node name="Tower Shop background" type="Sprite2D" parent="." unique_id=301312601]
 position = Vector2(599.8, 313.2)
 scale = Vector2(10.4, 9.2)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Control" type="Control" parent="Tower Shop" unique_id=832674955]
-layout_mode = 3
+[node name="Tower Shop" type="Control" parent="." unique_id=832674955]
 anchors_preset = 0
-offset_left = -30.846153
-offset_top = -14.913045
-offset_right = 30.983849
-offset_bottom = 7.8969526
+offset_left = 279.0
+offset_top = 176.0
+offset_right = 922.0
+offset_bottom = 388.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
 
 [node name="Ability Shop" type="Sprite2D" parent="." unique_id=239199317]
 position = Vector2(599.8, 553.4)
@@ -170,20 +170,23 @@ inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="Reroll Shop Button" index="0" unique_id=947915153]
+position = Vector2(3.064494, 0)
+scale = Vector2(1.2624321, 1)
 sprite_frames = SubResource("SpriteFrames_w0vvm")
 animation = &"Disabled"
 
 [node name="Button Text" parent="Reroll Shop Button" index="1" unique_id=1737478061]
-offset_left = -28.0
-offset_top = -12.0
-offset_right = 28.0
-offset_bottom = 12.0
-text = "Reroll"
-horizontal_alignment = 1
+offset_left = -29.925926
+offset_top = -12.148149
+offset_right = 26.074074
+offset_bottom = 11.851851
+theme_override_font_sizes/font_size = 11
+text = "Reroll : 50"
 vertical_alignment = 1
 
 [node name="Button Area" parent="Reroll Shop Button" index="2" unique_id=116881939]
-scale = Vector2(2.8000195, 1.2)
+position = Vector2(3.064494, 0)
+scale = Vector2(3.5348344, 1.2)
 
 [node name="Area Shape" parent="Reroll Shop Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3vlva")

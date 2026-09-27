@@ -8,7 +8,8 @@ public partial class TowerStats {
 		{ "Archer Tower", (0, 100, 50) }
 	};
 
-	public void ResetStats() {
+	// resetting all towers to default
+	public static void ResetStats() {
 		TowerDictionary = new Dictionary<string, (int index, int buyPrice, int usePrice)> {
 			{ "Archer Tower", (0, 100, 50) }
 		};

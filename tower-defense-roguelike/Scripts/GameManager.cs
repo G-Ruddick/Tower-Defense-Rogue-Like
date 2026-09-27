@@ -47,8 +47,10 @@ public partial class GameManager: Node {
 			}
 			if (nextWaveButton.GetClickability()) {
 				nextWaveButton.Visible = false;
-				Shop.shop.shopOpen = true;
-				Shop.shop.Visible = true;
+				Shop.instance.shopOpen = true;
+				Shop.instance.Visible = true;
+				Shop.instance.rerollCost = 10;
+				Shop.instance.Reroll(false);
 
 				waveNumber++;
 			}
