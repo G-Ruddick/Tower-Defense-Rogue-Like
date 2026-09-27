@@ -13,13 +13,14 @@ public partial class TowerClass : Node3D {
 	[Export] private Sprite3D towerSprite;
 	[Export] public Area3D towerRadius;
 	[Export] public Control UIElement;
-	[Export] private Sprite3D rangeSprite;
 
 	[ExportCategory("UI")]
 	[Export] private ButtonTemplate sellButton;
+	[Export] private Sprite3D rangeSprite;
 
 	public override void _Ready() {
 		UIElement.Visible = false;
+		rangeSprite.Visible = false;
 		
 		// getting tower stats
 		towerCost = TowerStats.TowerDictionary[towerName].usePrice;
@@ -68,5 +69,6 @@ public partial class TowerClass : Node3D {
 
 	public void UIToggle() {
 		UIElement.Visible = ! UIElement.Visible;
+		rangeSprite.Visible = !rangeSprite.Visible;
 	}
 }

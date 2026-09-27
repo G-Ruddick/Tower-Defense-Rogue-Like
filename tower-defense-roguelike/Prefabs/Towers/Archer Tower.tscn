@@ -67,7 +67,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1r4k"]
 size = Vector2(56, 24)
 
-[node name="ArcherTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("towerSprite", "towerRadius", "UIElement", "sellButton")]
+[node name="ArcherTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
 script = ExtResource("1_cxj2j")
 towerName = "Archer Tower"
 towerCost = 50
@@ -75,6 +75,7 @@ towerSprite = NodePath("TowerSprite")
 towerRadius = NodePath("TowerSize")
 UIElement = NodePath("Tower UI")
 sellButton = NodePath("Tower UI/Sell Button")
+rangeSprite = NodePath("Tower Range Sprite")
 
 [node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange")]
 script = ExtResource("2_07xen")
@@ -125,12 +126,6 @@ anchors_preset = 0
 mouse_filter = 1
 script = ExtResource("4_oifrw")
 
-[node name="Tower Range" type="Sprite2D" parent="Tower UI" unique_id=1909873707]
-modulate = Color(1, 1, 1, 0.34509805)
-scale = Vector2(2, 2)
-texture = ExtResource("5_iu15y")
-region_rect = Rect2(0, 0, 640, 640)
-
 [node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("4_b5oln")]
 layout_mode = 0
 offset_left = -27.58
@@ -161,5 +156,11 @@ position = Vector2(27.402298, 10.160919)
 [node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
 position = Vector2(0, 2.3841858e-07)
 shape = SubResource("RectangleShape2D_d1r4k")
+
+[node name="Tower Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
+transform = Transform3D(0.313, 0, 0, 0, -1.3681665e-08, -0.313, 0, 0.313, -1.3681665e-08, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.2)
+render_priority = 4
+texture = ExtResource("5_iu15y")
 
 [editable path="Tower UI/Sell Button"]
