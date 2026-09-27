@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
 [ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="4_oifrw"]
+[ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_iu15y"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oifrw"]
@@ -124,13 +125,19 @@ anchors_preset = 0
 mouse_filter = 1
 script = ExtResource("4_oifrw")
 
+[node name="Tower Range" type="Sprite2D" parent="Tower UI" unique_id=1909873707]
+modulate = Color(1, 1, 1, 0.34509805)
+scale = Vector2(2, 2)
+texture = ExtResource("5_iu15y")
+region_rect = Rect2(0, 0, 640, 640)
+
 [node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("4_b5oln")]
 layout_mode = 0
 offset_left = -27.58
-offset_top = 69.0
+offset_top = 80.675
 offset_right = 27.592001
-offset_bottom = 92.482
-scale = Vector2(1.7099993, 1.7099993)
+offset_bottom = 104.15696
+scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouseInsideAnimation = "Selected"
 inactiveAnimation = "Selected"

@@ -13,6 +13,7 @@ public partial class TowerClass : Node3D {
 	[Export] private Sprite3D towerSprite;
 	[Export] public Area3D towerRadius;
 	[Export] public Control UIElement;
+	[Export] private Sprite3D rangeSprite;
 
 	[ExportCategory("UI")]
 	[Export] private ButtonTemplate sellButton;
