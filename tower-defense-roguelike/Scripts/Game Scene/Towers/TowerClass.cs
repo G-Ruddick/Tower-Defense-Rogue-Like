@@ -9,6 +9,11 @@ public partial class TowerClass : Node3D {
 
 	public static int towersplaced = 0;
 
+	[ExportCategory("Tower Type")]
+	[Export] public AttackTowerClass attackClass;
+	[Export] public GenerativeTowerClass generateClass;
+	[Export] public TroopTowerClass troopClass;
+
 	[ExportCategory("Components")]
 	[Export] private Sprite3D towerSprite;
 	[Export] public Area3D towerRadius;
@@ -70,5 +75,28 @@ public partial class TowerClass : Node3D {
 	public void UIToggle() {
 		UIElement.Visible = ! UIElement.Visible;
 		rangeSprite.Visible = !rangeSprite.Visible;
+	}
+
+	public void DisableTowerElements() {
+		if (attackClass != null) { attackClass.enabled = false; }
+		if (generateClass != null) { generateClass.enabled = false; }
+		if (troopClass != null) { troopClass.enabled = false; }
+
+	}
+	
+	public void EnableTowerElements() {
+		if (attackClass != null) { attackClass.enabled = true; }
+		if (generateClass != null) { generateClass.enabled = true; }
+		if (troopClass != null) { troopClass.enabled = true; }
+
+	}
+
+	public void SetTowerAsCursorObject() {
+		DisableTowerElements();
+		towerRadius.QueueFree();
+
+		rangeSprite.Visible = true;
+		rangeSprite.Modulate -= new Color(0.05f, 0.05f, 0.05f, 0.02f);
+		towerSprite.Modulate -= new Color(0.2f, 0.2f, 0.2f, 0.02f);
 	}
 }

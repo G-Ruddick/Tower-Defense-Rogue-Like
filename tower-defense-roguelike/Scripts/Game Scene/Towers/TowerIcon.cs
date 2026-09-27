@@ -16,8 +16,7 @@ public partial class TowerIcon : Node2D {
 
 	// Colors
 	private Color enabledColor = new Color(1, 1, 1, 1);
-	private Color disabledColor = new Color(0.2f, 0.2f, 0.2f, 1);
-	private Color placeableColor = new Color(1.35f, 1.35f, 1.35f, 1);
+	private Color disabledColor = new Color(0.3f, 0.3f, 0.3f, 1);
 
 	public override void _Ready() {
 		if (icon == null) {
@@ -39,6 +38,18 @@ public partial class TowerIcon : Node2D {
 		button.MouseExited += () => clickable = false;
 	}
 
+	public override void _Process(double delta) {
+		if (PlayerManager.instance.GetMoney() < TowerStats.TowerDictionary[towerName].usePrice) { enabled = false; }
+		else { enabled = true; }
+
+		if (enabled) { icon.Modulate = enabledColor; }
+		else { icon.Modulate = disabledColor; }
+
+		if (enabled) {
+			SellButton.Visible = PlayerManager.instance.GetActiveTower() == this;
+		}
+	}
+
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("Select")) {
 			if (SellButton.GetClickability()) {
@@ -51,14 +62,6 @@ public partial class TowerIcon : Node2D {
 				return;
 			}
 		}
-	}
-
-	public override void _Process(double delta) {
-		if (PlayerManager.instance.GetMoney() < TowerStats.TowerDictionary[towerName].usePrice) { enabled = false; }
-		else { enabled = true; }
-
-		if (enabled) { icon.Modulate = placeable ? placeableColor : enabledColor; }
-		else { icon.Modulate = disabledColor; }
 	}
 
 	public override void _ExitTree() {
@@ -95,6 +98,7 @@ public partial class TowerIcon : Node2D {
 	// Disabled the button entirely
 	public void DisableIcon() {
 		enabled = !enabled;
+		placeable = false;
 		SellButton.Visible = false;
 	}
 
@@ -105,12 +109,12 @@ public partial class TowerIcon : Node2D {
 	}
 
 	public void OnClick() {
-		SellButton.Visible = !SellButton.Visible;
 		if (enabled) {
 			placeable = !placeable;
 		}
 		else {
 			placeable = false;
+			SellButton.Visible = !SellButton.Visible;
 		}
 	}
 }
