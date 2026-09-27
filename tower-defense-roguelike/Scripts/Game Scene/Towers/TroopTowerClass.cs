@@ -5,6 +5,7 @@ public partial class TroopTowerClass : Node3D {
 	[ExportCategory("Variables")]
 	[Export] public int troopCount;
 	[Export] public float respawnTime;
+	[Export] public bool enabled;
 
 	[ExportCategory("Components")]
 	[Export] public Area3D troopRange;

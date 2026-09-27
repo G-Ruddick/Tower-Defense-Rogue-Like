@@ -7,6 +7,7 @@ public partial class GameManager: Node {
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
+	[Export] private TowerClass towerIcon;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
@@ -34,6 +35,42 @@ public partial class GameManager: Node {
 		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
 		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
 		waveNumberLabel.Text = "Wave\n" + waveNumber;
+				
+		// checking for tower placement
+		if (PlayerManager.instance.GetActiveTower() != null) {
+			// creating tower icon
+			if (towerIcon == null || towerIcon.towerName != PlayerManager.instance.GetActiveTower().GetTowerName()) {
+				if (towerIcon != null) { 
+					towerIcon.QueueFree(); 
+				}
+
+				PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
+				towerIcon = (TowerClass)prefab.Instantiate();
+				towerIcon.Name = "cursor icon";
+				PlayerManager.instance.AddChild(towerIcon);
+				
+				towerIcon.SetTowerAsCursorObject();
+			}
+
+			var mousePosition = GetViewport().GetMousePosition();
+			var origin = camera.ProjectRayOrigin(mousePosition);
+			var end = origin + camera.ProjectRayNormal(mousePosition) * 1000f;
+			var query = PhysicsRayQueryParameters3D.Create(origin, end);
+			query.CollisionMask = (1 << 1) | (1 << 2);
+			query.CollideWithAreas = true;
+			
+			var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
+			if (result.Count > 0) {
+				Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
+				towerIcon.Position = gameAsset.Position;
+			}
+		}
+		else {
+			if (towerIcon != null) {
+				towerIcon.QueueFree();
+				towerIcon = null;
+			}
+		}
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -80,7 +117,6 @@ public partial class GameManager: Node {
 							}
 						}
 					}
-
 					else if (gameAsset.Name.ToString().Contains("Tower")) {
 						((TowerClass)gameAsset).UIToggle();
 					}
