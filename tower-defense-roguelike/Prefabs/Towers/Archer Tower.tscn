@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_07xen"]
 [ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
+[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/ArcProjectile.cs" id="4_d1r4k"]
 [ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="4_oifrw"]
 [ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_iu15y"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
@@ -11,6 +12,31 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
 height = 0.64
 radius = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1r4k"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 48, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2vjt"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(8, 48, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1r4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2vjt")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
+size = Vector3(0.02, 0.02, 0.02)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oifrw"]
 atlas = ExtResource("3_b5oln")
@@ -76,20 +102,63 @@ towerSprite = NodePath("TowerSprite")
 towerRadius = NodePath("TowerSize")
 UIElement = NodePath("Tower UI")
 sellButton = NodePath("Tower UI/Sell Button")
-rangeSprite = NodePath("Tower Range Sprite")
+rangeSprite = NodePath("Attack Tower Class/Tower Range Sprite")
 
-[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange")]
+[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "rangeSprite")]
 script = ExtResource("2_07xen")
+numberOfAttacks = 2
+projectileSpeed = 20.0
+reloadTime = 3.0
 attackArea = NodePath("Attack Range")
 attackRange = NodePath("Attack Range/CollisionShape3D")
+projectile = NodePath("Arrow")
+rangeSprite = NodePath("Tower Range Sprite")
 
 [node name="Attack Range" type="Area3D" parent="Attack Tower Class" unique_id=782235652]
+collision_layer = 8
+collision_mask = 8
 input_ray_pickable = false
-monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Tower Class/Attack Range" unique_id=673916723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332, 0)
 shape = SubResource("CylinderShape3D_sacsp")
+
+[node name="Tower Range Sprite" type="Sprite3D" parent="Attack Tower Class" unique_id=899007697]
+transform = Transform3D(0.313, 0, 0, 0, -1.3681665e-08, -0.313, 0, 0.313, -1.3681665e-08, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.2)
+render_priority = 4
+texture = ExtResource("5_iu15y")
+
+[node name="Arrow" type="Node3D" parent="Attack Tower Class" unique_id=1389337847 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "projectileArea", "baseCollision")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41598314, 0)
+top_level = true
+visible = false
+script = ExtResource("4_d1r4k")
+diagonalCollision = NodePath("HitBox/diagonal")
+projectileSprite = NodePath("Sprite")
+projectileArea = NodePath("HitBox")
+baseCollision = NodePath("HitBox/straight")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="Attack Tower Class/Arrow" unique_id=769067434]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+offset = Vector2(0, 0.5)
+texture_filter = 0
+render_priority = 5
+sprite_frames = SubResource("SpriteFrames_dv6u4")
+frame_progress = 0.31370157
+
+[node name="HitBox" type="Area3D" parent="Attack Tower Class/Arrow" unique_id=332190538]
+collision_layer = 2
+collision_mask = 2
+
+[node name="straight" type="CollisionShape3D" parent="Attack Tower Class/Arrow/HitBox" unique_id=2086062022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014544526, 0, 0)
+shape = SubResource("BoxShape3D_dv6u4")
+
+[node name="diagonal" type="CollisionShape3D" parent="Attack Tower Class/Arrow/HitBox" unique_id=529763621]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00475619, 0.00999999, 0)
+visible = false
+shape = SubResource("BoxShape3D_dv6u4")
 
 [node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
@@ -157,11 +226,5 @@ position = Vector2(27.402298, 10.160919)
 [node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
 position = Vector2(0, 2.3841858e-07)
 shape = SubResource("RectangleShape2D_d1r4k")
-
-[node name="Tower Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
-transform = Transform3D(0.313, 0, 0, 0, -1.3681665e-08, -0.313, 0, 0.313, -1.3681665e-08, 0, 0, 0)
-modulate = Color(1, 1, 1, 0.2)
-render_priority = 4
-texture = ExtResource("5_iu15y")
 
 [editable path="Tower UI/Sell Button"]

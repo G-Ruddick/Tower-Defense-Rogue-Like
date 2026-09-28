@@ -74,7 +74,10 @@ public partial class TowerClass : Node3D {
 
 	public void UIToggle() {
 		UIElement.Visible = ! UIElement.Visible;
-		rangeSprite.Visible = !rangeSprite.Visible;
+		
+		if (attackClass != null) {
+			attackClass.rangeSprite.Visible = !attackClass.rangeSprite.Visible;
+		}
 	}
 
 	public void DisableTowerElements() {
@@ -95,8 +98,11 @@ public partial class TowerClass : Node3D {
 		DisableTowerElements();
 		towerRadius.QueueFree();
 
-		rangeSprite.Visible = true;
-		rangeSprite.Modulate -= new Color(0.05f, 0.05f, 0.05f, 0.02f);
+		if (attackClass != null) {
+			rangeSprite.Visible = true;
+			rangeSprite.Modulate -= new Color(0.05f, 0.05f, 0.05f, 0.02f);
+		}
+		
 		towerSprite.Modulate -= new Color(0.2f, 0.2f, 0.2f, 0.02f);
 	}
 }
