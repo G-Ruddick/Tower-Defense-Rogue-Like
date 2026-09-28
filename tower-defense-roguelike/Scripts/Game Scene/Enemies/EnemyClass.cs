@@ -41,6 +41,10 @@ public partial class EnemyClass : Node3D {
 				walkLocation.X -= 0.32f;
 			}
 		}
+
+		if (health <= 0) {
+			Die();
+		}
 	}
 
 	public string GetEnemyName() {
