@@ -107,6 +107,7 @@ rangeSprite = NodePath("Attack Tower Class/Tower Range Sprite")
 [node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "rangeSprite")]
 script = ExtResource("2_07xen")
 numberOfAttacks = 2
+Damage = 3
 projectileSpeed = 20.0
 reloadTime = 3.0
 attackArea = NodePath("Attack Range")

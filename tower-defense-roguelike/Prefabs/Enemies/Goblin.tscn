@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dqigr2nlyp5o7" path="res://Textures/Goblin.png" id="1_3i1w8"]
 [ext_resource type="Script" uid="uid://bamao4ro4cbux" path="res://Scripts/Game Scene/Enemies/EnemyClass.cs" id="1_m4nab"]
+[ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="3_umqjw"]
+[ext_resource type="Texture2D" uid="uid://rnq7ddx163r1" path="res://Textures/Enemy Health Bar.png" id="4_2h7ky"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
 size = Vector3(0.1, 0.16, 0.1)
@@ -10,10 +12,10 @@ size = Vector3(0.1, 0.16, 0.1)
 height = 0.16
 radius = 0.2
 
-[node name="Goblin" type="Node3D" unique_id=1731016193 node_paths=PackedStringArray("enemySprite", "enemyRangeArea", "enemyHitbox", "groundLook")]
+[node name="Goblin" type="Node3D" unique_id=1731016193 node_paths=PackedStringArray("enemySprite", "enemyRangeArea", "enemyHitbox", "groundLook", "ui", "healthbar", "healthbarPercent")]
 script = ExtResource("1_m4nab")
 enemyName = "Goblin"
-health = 20.0
+maxHealth = 15.0
 speed = 10.0
 attackPower = 5.0
 gold = 10
@@ -22,6 +24,9 @@ enemySprite = NodePath("Sprite3D")
 enemyRangeArea = NodePath("SightLine")
 enemyHitbox = NodePath("HitBox")
 groundLook = NodePath("Path Detection")
+ui = NodePath("Enemy UI")
+healthbar = NodePath("Enemy UI/Enemy Health Bar Slider")
+healthbarPercent = NodePath("Enemy UI/Enemy Health Bar Slider/Health")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1047126910]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
@@ -54,3 +59,28 @@ shape = SubResource("CylinderShape3D_pe01b")
 collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Enemy UI" type="Control" parent="." unique_id=992718747]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_force_pass_scroll_events = false
+script = ExtResource("3_umqjw")
+
+[node name="Enemy Health Bar Slider" type="Node2D" parent="Enemy UI" unique_id=2105790277]
+position = Vector2(0, -143)
+scale = Vector2(1.25, 1.25)
+
+[node name="Bar" type="Sprite2D" parent="Enemy UI/Enemy Health Bar Slider" unique_id=1461933332]
+modulate = Color(1, 1, 1, 0.61960787)
+texture = ExtResource("4_2h7ky")
+region_enabled = true
+region_rect = Rect2(96, 0, 96, 16)
+
+[node name="Health" type="Sprite2D" parent="Enemy UI/Enemy Health Bar Slider" unique_id=1853190943]
+position = Vector2(-38.000004, 0)
+texture = ExtResource("4_2h7ky")
+offset = Vector2(38, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 96, 16)
