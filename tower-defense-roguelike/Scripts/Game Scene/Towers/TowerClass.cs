@@ -81,7 +81,10 @@ public partial class TowerClass : Node3D {
 	}
 
 	public void DisableTowerElements() {
-		if (attackClass != null) { attackClass.enabled = false; }
+		if (attackClass != null) { 
+			attackClass.enabled = false;
+			attackClass.attackRange.Visible = false;
+		}
 		if (generateClass != null) { generateClass.enabled = false; }
 		if (troopClass != null) { troopClass.enabled = false; }
 
