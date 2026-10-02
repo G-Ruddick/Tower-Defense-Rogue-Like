@@ -50,6 +50,7 @@ public partial class Shop : Control {
 				shopOpen = false;
 
 				StartTile.instance.SpawnEnemies();
+				StartTile.instance.SpawnEnemies(0.05f, -0.1f);
 			}
 
 			if (mapButton.GetClickability()) {
