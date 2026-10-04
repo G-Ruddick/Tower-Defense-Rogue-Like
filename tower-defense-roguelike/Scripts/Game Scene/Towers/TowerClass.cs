@@ -82,7 +82,7 @@ public partial class TowerClass : Node3D {
 
 	public void DisableTowerElements() {
 		if (attackClass != null) { 
-			attackClass.enabled = false;
+			attackClass.Visible = false;
 			attackClass.attackRange.Visible = false;
 		}
 		if (generateClass != null) { generateClass.enabled = false; }
@@ -103,6 +103,7 @@ public partial class TowerClass : Node3D {
 
 		if (attackClass != null) {
 			rangeSprite.Visible = true;
+			attackClass.attackArea.Visible = false;
 			rangeSprite.Modulate -= new Color(0.05f, 0.05f, 0.05f, 0.02f);
 		}
 		

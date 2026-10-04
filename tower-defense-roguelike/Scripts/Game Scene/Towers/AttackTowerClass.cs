@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class AttackTowerClass : Node3D {
 	private int enemyLayer = 1 << 2;
-	private EnemyClass[] enemyTargets;
+	private List<EnemyClass> enemyTargets = new List<EnemyClass>();
 
 	private List<ProjectileClass> projectilePool = new List<ProjectileClass>();
 
@@ -27,10 +27,9 @@ public partial class AttackTowerClass : Node3D {
 	[Export] public Sprite3D rangeSprite;
 
 	public override void _Ready() {
-		enemyTargets = new EnemyClass[numberOfAttacks];
-
 		attackArea.AreaEntered += OnRangeEnter;
 		attackArea.AreaExited += OnRangeExit;
+		projectile.Visible = false;
 
 		Attack();
 	}
@@ -45,52 +44,54 @@ public partial class AttackTowerClass : Node3D {
 
 	private void OnRangeEnter(Node3D body) {
 		if (body is Area3D enemyLayer) {
-			GD.Print("enemy entered");
+			// GD.Print("enemy entered");
 
-			for (int i = 0; i < enemyTargets.Length; i++) {
-				if (enemyTargets[i] == null) {
-					enemyTargets[i] = body.GetParent() as EnemyClass;
-					break;
-				}
-			}
+			enemyTargets.Add(body.GetParent() as EnemyClass);
 		}
 	}
 	
 	private void OnRangeExit(Node3D body) {
 		if (body is Area3D enemyLayer) {
-			GD.Print("enemy exited");
+			// GD.Print("enemy exited");
 
-			for (int i = 0; i < enemyTargets.Length; i++) {
+			for (int i = 0; i < enemyTargets.Count; i++) {
 				if (enemyTargets[i] == body.GetParent() as EnemyClass) {
-					enemyTargets[i] = null;
+					enemyTargets.RemoveAt(i);
 					break;
 				}
 			}
+
 		}
 	}
 
 	private async void Attack() {
 		while (true) {
-			if (enemyTargets.Length <= 0) { continue; }
+			if (enemyTargets.Count == 0) {
+				await ToSignal(GetTree().CreateTimer(0), "timeout");
+				continue; 
+			}
 
-			for(int i = 0; i < enemyTargets.Length; i++) {
+			int overflow = 0;
+			for(int i = 0; i < numberOfAttacks; i++) {
 				bool fired = false;
 				
-				if (enemyTargets[i] != null) {
-					for (int j = 0; j < projectilePool.Count; j++) {
-						if (projectilePool[j].Visible == false) {
-							projectilePool[j].FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i].enemyHitbox.GlobalPosition);
-							fired = true;
-							break;
-						}
+				if (i >= enemyTargets.Count) {
+					overflow++;
+				}
+
+				for (int j = 0; j < projectilePool.Count; j++) {
+					if (projectilePool[j].Visible == false) {
+						projectilePool[j].FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
+						fired = true;
+						break;
 					}
+				}
 
-					if (fired) { break; }
-
+				if (!fired) {  
 					ProjectileClass newProjectile = (ProjectileClass)projectile.Duplicate();
 					projectilePool.Add(newProjectile);
 					parentProjectile.AddChild(newProjectile);
-					newProjectile.FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i].enemyHitbox.GlobalPosition);
+					newProjectile.FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
 				}
 			}
 
