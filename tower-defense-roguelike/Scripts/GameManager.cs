@@ -3,6 +3,7 @@ using Godot;
 public partial class GameManager: Node {
 	private int waveNumber;
 	private bool movingScreen;
+	public static int waveCost = 100;
 
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
