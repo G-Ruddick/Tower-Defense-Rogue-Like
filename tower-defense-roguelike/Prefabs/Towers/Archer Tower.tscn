@@ -13,25 +13,33 @@
 height = 0.64
 radius = 1.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d1r4k"]
-atlas = ExtResource("3_b5oln")
-region = Rect2(0, 48, 8, 8)
+[sub_resource type="BoxShape3D" id="BoxShape3D_pe01b"]
+size = Vector3(0.01, 0.01, 0.01)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m2vjt"]
 atlas = ExtResource("3_b5oln")
 region = Rect2(8, 48, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1r4k"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 48, 8, 8)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d1r4k")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_m2vjt")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Diagonal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1r4k")
+}],
+"loop": 1,
+"name": &"Straight",
 "speed": 5.0
 }]
 
@@ -102,21 +110,24 @@ towerSprite = NodePath("TowerSprite")
 towerRadius = NodePath("TowerSize")
 UIElement = NodePath("Tower UI")
 sellButton = NodePath("Tower UI/Sell Button")
-rangeSprite = NodePath("Attack Tower Class/Tower Range Sprite")
-
-[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "rangeSprite")]
-script = ExtResource("2_07xen")
-numberOfAttacks = 2
-Damage = 3
-projectileSpeed = 20.0
-reloadTime = 3.0
-attackArea = NodePath("Attack Range")
-attackRange = NodePath("Attack Range/CollisionShape3D")
-projectile = NodePath("Arrow")
 rangeSprite = NodePath("Tower Range Sprite")
 
+[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "parentProjectile", "projectileStartingPositions", "rangeSprite")]
+script = ExtResource("2_07xen")
+numberOfAttacks = 2
+damage = 2
+projectileSpeed = 5.0
+reloadTime = 0.75
+projectilePoolSize = 8
+attackArea = NodePath("Attack Range")
+attackRange = NodePath("Attack Range/CollisionShape3D")
+projectile = NodePath("Projectiles/Arrow")
+parentProjectile = NodePath("Projectiles")
+projectileStartingPositions = [NodePath("../Archer"), NodePath("../Archer2")]
+rangeSprite = NodePath("../Tower Range Sprite")
+
 [node name="Attack Range" type="Area3D" parent="Attack Tower Class" unique_id=782235652]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 8
 input_ray_pickable = false
 
@@ -124,42 +135,50 @@ input_ray_pickable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332, 0)
 shape = SubResource("CylinderShape3D_sacsp")
 
-[node name="Tower Range Sprite" type="Sprite3D" parent="Attack Tower Class" unique_id=899007697]
+[node name="Projectiles" type="Node3D" parent="Attack Tower Class" unique_id=335103201]
+
+[node name="Arrow" type="RigidBody3D" parent="Attack Tower Class/Projectiles" unique_id=29258021 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "baseCollision", "projectileArea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89207745, 0)
+visible = false
+collision_layer = 0
+collision_mask = 0
+lock_rotation = true
+script = ExtResource("4_d1r4k")
+diagonalCollision = NodePath("Area/diagonal")
+projectileSprite = NodePath("Sprite")
+baseCollision = NodePath("Area/straight")
+projectileArea = NodePath("Area")
+
+[node name="rigidbodyshape" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Arrow" unique_id=2040285079]
+shape = SubResource("BoxShape3D_pe01b")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="Attack Tower Class/Projectiles/Arrow" unique_id=769067434]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+offset = Vector2(0, 0.5)
+texture_filter = 0
+render_priority = 6
+sprite_frames = SubResource("SpriteFrames_dv6u4")
+animation = &"Straight"
+frame_progress = 0.8452519
+
+[node name="Area" type="Area3D" parent="Attack Tower Class/Projectiles/Arrow" unique_id=1069640228]
+collision_layer = 0
+collision_mask = 12
+
+[node name="straight" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Arrow/Area" unique_id=2086062022]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014544526, 0, 0)
+shape = SubResource("BoxShape3D_dv6u4")
+
+[node name="diagonal" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Arrow/Area" unique_id=529763621]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00475619, 0.00999999, 0)
+visible = false
+shape = SubResource("BoxShape3D_dv6u4")
+
+[node name="Tower Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
 transform = Transform3D(0.313, 0, 0, 0, -1.3681665e-08, -0.313, 0, 0.313, -1.3681665e-08, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.2)
 render_priority = 4
 texture = ExtResource("5_iu15y")
-
-[node name="Arrow" type="Node3D" parent="Attack Tower Class" unique_id=1389337847 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "projectileArea", "baseCollision")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41598314, 0)
-top_level = true
-visible = false
-script = ExtResource("4_d1r4k")
-diagonalCollision = NodePath("HitBox/diagonal")
-projectileSprite = NodePath("Sprite")
-projectileArea = NodePath("HitBox")
-baseCollision = NodePath("HitBox/straight")
-
-[node name="Sprite" type="AnimatedSprite3D" parent="Attack Tower Class/Arrow" unique_id=769067434]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
-offset = Vector2(0, 0.5)
-texture_filter = 0
-render_priority = 5
-sprite_frames = SubResource("SpriteFrames_dv6u4")
-frame_progress = 0.31370157
-
-[node name="HitBox" type="Area3D" parent="Attack Tower Class/Arrow" unique_id=332190538]
-collision_layer = 2
-collision_mask = 2
-
-[node name="straight" type="CollisionShape3D" parent="Attack Tower Class/Arrow/HitBox" unique_id=2086062022]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014544526, 0, 0)
-shape = SubResource("BoxShape3D_dv6u4")
-
-[node name="diagonal" type="CollisionShape3D" parent="Attack Tower Class/Arrow/HitBox" unique_id=529763621]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00475619, 0.00999999, 0)
-visible = false
-shape = SubResource("BoxShape3D_dv6u4")
 
 [node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
@@ -170,21 +189,21 @@ texture = ExtResource("3_b5oln")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 64)
 
-[node name="Archer" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1960342473]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 0.42, 0)
+[node name="Archer" type="AnimatedSprite3D" parent="." unique_id=1960342473]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, -0.06, 0.42, 0)
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_sacsp")
 
-[node name="Archer2" type="AnimatedSprite3D" parent="TowerSprite" unique_id=1252883703]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03075448, 0.42, 0)
+[node name="Archer2" type="AnimatedSprite3D" parent="." unique_id=1252883703]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.03075448, 0.42, 0)
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_sacsp")
 
 [node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 0
 collision_priority = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TowerSize" unique_id=2036799115]

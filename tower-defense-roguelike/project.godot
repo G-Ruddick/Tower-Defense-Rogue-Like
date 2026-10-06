@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tower Defense Roguelike"
-run/main_scene="uid://cyayd05uiowdu"
+run/main_scene="uid://2j8pd8qy40n"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
