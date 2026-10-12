@@ -15,15 +15,14 @@ public partial class MapCreation : Node {
 	public string levelType;
 
 	private TileTypes[,] mapGrid;
-	private int[] startTile = new int[2];
-	private int[] endTile = new int[2];
+	private Vector2I startTile = new Vector2I();
+	private Vector2I endTile = new Vector2I();
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		// temporary values
 		mapHeight = 16;
 		mapLength = 20;
-		levelType = "res://Prefabs/Grasslands Tiles/";
+		levelType = "Grasslands Tiles";
 		
 		CreateMap();
 		PrintMap();
@@ -33,45 +32,16 @@ public partial class MapCreation : Node {
 	// Creating Map array
 	public void CreateMap() {
 		bool validMap = false;
-		int[] currentTile = new int[2];
-		int[] nextTile = new int[2];
+		Vector2I currentTile = new Vector2I(0, 0);
+		Vector2I nextTile = new Vector2I(0, 0);
 
 		while (!validMap) {
 			mapGrid = new TileTypes[mapHeight, mapLength];
 
 			int pathLength = 0;
 
-			// setting starting tile for enemy spawning
-			if (((int)GD.Randi() % 2) == 0) {
-				startTile[0] = (int)(GD.Randi() % (mapHeight - 1));
-				startTile[1] = (int)(GD.Randi() % 2) == 0 ? 0 : (mapLength - 1);
-			}
-			else {
-				startTile[0] = (int)(GD.Randi() % 2) == 0 ? 0 : (mapHeight - 1);
-				startTile[1] = (int)(GD.Randi() % (mapLength - 1));
-			}
-
-			currentTile[0] = startTile[0];
-			currentTile[1] = startTile[1];
-
-			// setting starting direction
-			if (currentTile[0] == 0) {
-				mapGrid[currentTile[0], currentTile[1]] = TileTypes.South;
-				currentTile[0]++;
-			}
-			else if (currentTile[0] == mapHeight - 1) {
-				mapGrid[currentTile[0], currentTile[1]] = TileTypes.North;
-				currentTile[0]--;
-				
-			}
-			else if (currentTile[1] == 0) {
-				mapGrid[currentTile[0], currentTile[1]] = TileTypes.East;
-				currentTile[1]++;
-			}
-			else {
-				mapGrid[currentTile[0], currentTile[1]] = TileTypes.West;
-				currentTile[1]--;
-			}
+			SetStartTile();
+			currentTile = SetCurrentTile(startTile);
 
 			bool endReached = false;
 			TileTypes direction = TileTypes.Void;
@@ -81,13 +51,7 @@ public partial class MapCreation : Node {
 				
 				bool validDirection = false;
 
-				// checking for edge of the map
-				if (currentTile[0] == 0 || currentTile[0] == (mapHeight - 1) || currentTile[1] == 0 || currentTile[1] == (mapLength - 1)) {
-					endTile[0] = currentTile[0];
-					endTile[1] = currentTile[1];
-
-					mapGrid[endTile[0], endTile[1]] = direction;
-
+				if (ValidateEndReached(ref currentTile, ref direction)) {
 					endReached = true;
 					break;
 				}
@@ -95,121 +59,189 @@ public partial class MapCreation : Node {
 				direction = TileTypes.Void;
 
 				while (!validDirection) {
-					// checking for no more available directions
-					if (!directionOptions.Any()) {
-						break;
+					if (!directionOptions.Any()) { 
+						break; 
 					}
 
-					if (directionOptions.Contains(direction.ToString())) {
-						if ((int)GD.Randi() % 4 == 0) {
-							direction = Enum.Parse<TileTypes>(directionOptions[(int)(GD.Randi() % directionOptions.Count)]);
-						}
-					}
-					else {
-						direction = Enum.Parse<TileTypes>(directionOptions[(int)(GD.Randi() % directionOptions.Count)]);
-					}
-
-					
-					// resetting next tile
-					nextTile[0] = currentTile[0];
-					nextTile[1] = currentTile[1];
-
-					// updating current tile north or south
-					if (direction == TileTypes.North) {
-						nextTile[0]--;
-					}
-					else if (direction == TileTypes.South) {
-						nextTile[0]++;
-					}
-					// updating current tile east or west
-					if (direction == TileTypes.East) {
-						nextTile[1]++;
-					}
-					else if (direction == TileTypes.West) {
-						nextTile[1]--;
-					}
-
-					// checking to see if tile is occupied
-					if (mapGrid[nextTile[0], nextTile[1]] != 0) {
-						directionOptions.Remove(direction.ToString());
-					}
-					else {
-						validDirection = true;
-					}
+					validDirection = ValidateDirection(ref directionOptions, ref direction, ref nextTile, ref currentTile);
 				}
+
 				if (!validDirection) {
 					endReached = false;
 					break;
 				}
 
-				mapGrid[currentTile[0], currentTile[1]] = direction;
-
-				currentTile[0] = nextTile[0];
-				currentTile[1] = nextTile[1];
-
+				mapGrid[currentTile.X, currentTile.Y] = direction;
+				currentTile = nextTile;
 				pathLength++;
 			}
 			
-			// checking for valid map
-			if (endReached && (pathLength > mapHeight * mapLength / 12) && (pathLength < mapHeight * mapLength / 3)) {
-				validMap = true;
+			validMap = endReached & ValidateMap(pathLength);
+		}
+	}
+
+	private void SetStartTile() {
+		if (((int)GD.Randi() % 2) == 0) {
+			startTile.X = (int)(GD.Randi() % (mapHeight - 1));
+			startTile.Y = (int)(GD.Randi() % 2) == 0 ? 0 : (mapLength - 1);
+		}
+		else {
+			startTile.X = (int)(GD.Randi() % 2) == 0 ? 0 : (mapHeight - 1);
+			startTile.Y = (int)(GD.Randi() % (mapLength - 1));
+		}
+	}
+
+	private Vector2I SetCurrentTile(Vector2I currentTile) {
+		if (currentTile.X == 0) {
+			mapGrid[currentTile.X, currentTile.Y] = TileTypes.South;
+			currentTile.X++;
+		}
+		else if (currentTile.X == mapHeight - 1) {
+			mapGrid[currentTile.X, currentTile.Y] = TileTypes.North;
+			currentTile.X--;
+			
+		}
+		
+		if (currentTile.Y == 0) {
+			mapGrid[currentTile.X, currentTile.Y] = TileTypes.East;
+			currentTile.Y++;
+		}
+		else {
+			mapGrid[currentTile.X, currentTile.Y] = TileTypes.West;
+			currentTile.Y--;
+		}
+
+		return currentTile;
+	}
+
+	private bool ValidateEndReached(ref Vector2I currentTile, ref TileTypes direction) {
+		if (currentTile.X != 0 && currentTile.X != (mapHeight - 1) && currentTile.Y != 0 && currentTile.Y != (mapLength - 1)) {
+			return false;
+		}
+
+		endTile.X = currentTile.X;
+		endTile.Y = currentTile.Y;
+
+		mapGrid[endTile[0], endTile[1]] = direction;
+
+		return true;
+	}
+
+	private bool ValidateDirection(ref List<string> directionOptions, ref TileTypes direction, ref Vector2I nextTile, ref Vector2I currentTile) {
+		direction = GetDirection(directionOptions, direction);
+		nextTile = MovePosition(currentTile, direction);
+
+		// checking to see if tile is occupied
+		if (mapGrid[nextTile.X, nextTile.Y] != 0) {
+			directionOptions.Remove(direction.ToString());
+			return false;
+		}
+
+		return true;
+	}
+
+	private TileTypes GetDirection(List<string> directionOptions, TileTypes direction) {
+		int randomNumber = (int)(GD.Randi() % directionOptions.Count);
+		int repeatChance = (int)GD.Randi() % 4;
+
+
+		if (directionOptions.Contains(direction.ToString()) && repeatChance != 0) {
+			return direction;
+		}
+		
+		direction = Enum.Parse<TileTypes>(directionOptions[randomNumber]);
+		return direction;
+	}
+
+	private Vector2I MovePosition(Vector2I currentTile, TileTypes direction) {
+		Vector2I nextTile = currentTile;
+
+		// updating current tile north or south
+		switch (direction) {
+			case TileTypes.North:
+				nextTile[0]--;
+				break;
+			case TileTypes.South:
+				nextTile[0]++;
+				break;
+			case TileTypes.East:
+				nextTile[1]++;
+				break;
+			case TileTypes.West:
+				nextTile[1]--;
+				break;
+		}
+
+		return nextTile;
+	}
+
+	private bool ValidateMap(int pathLength) {
+		bool minLength = pathLength > mapHeight * mapLength / 12;
+		bool maxLength = pathLength < mapHeight * mapLength / 3;
+
+		return minLength & maxLength;
+	}
+
+	// Map intantiation functions
+	public void InstantiateMap() {
+		for (int row = 0; row < mapHeight; row++) {
+			for (int column = 0; column < mapLength; column++) {
+				// Spawn and Despawn Tiles
+				if (startTile.X == row && startTile.Y == column) {
+					SpawnTile("StartTile", row, column);
+				}
+				if (endTile.X == row && endTile.Y == column) {
+					SpawnTile("EndTile", row, column);
+				}
+
+				if (mapGrid[row, column] != TileTypes.Void) {
+					SpawnPath("Grasslands Tiles/PathTileStrait", row, column);
+				}
+
+				// Grass and pth tile
+				SpawnTile(levelType, "GrassTile", row, column);
 			}
 		}
 	}
 
-	public void InstantiateMap() {
-		PackedScene tile = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/GrassTile.tscn");
-		PackedScene path = GD.Load<PackedScene>("res://Prefabs/Tiles/Grasslands Tiles/PathTileStrait.tscn");
-		PackedScene spawn = GD.Load<PackedScene>("res://Prefabs/Tiles/StartTile.tscn");
-		PackedScene despawn = GD.Load<PackedScene>("res://Prefabs/Tiles/EndTile.tscn");
-		
-		for (int row = 0; row < mapHeight; row++) {
-			for (int column = 0; column < mapLength; column++) {
-				// Spawn and Despawn Tiles
-				if (startTile[0] == row && startTile[1] == column) {
-					Node3D spawnPoint = (Node3D)spawn.Instantiate();
-					spawnPoint.Name = "Start Tile";
-					AddChild(spawnPoint);
-					spawnPoint.Position = new Vector3(column, 0, row) * 0.32f;
-				}
-				if (endTile[0] == row && endTile[1] == column) {
-					Node3D despawnPoint = (Node3D)despawn.Instantiate();
-					despawnPoint.Name = "Despawn Tile";
-					AddChild(despawnPoint);
-					despawnPoint.Position = new Vector3(column, 0, row) * 0.32f;
-				}
+	private void SpawnTile(string tileLocation, int row, int column) {
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + tileLocation + ".tscn");
+		Node3D tile = (Node3D)prefab.Instantiate();
+		tile.Name = tileLocation;
+		AddChild(tile);
+		tile.Position = new Vector3(column, 0, row) * 0.32f;
+	}
+	private void SpawnTile(string path, string name, int row, int column) {
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + path + "/" + name + ".tscn");
+		Node3D tile = (Node3D)prefab.Instantiate();
+		tile.Name = name + " " + row + " " + column;
+		AddChild(tile);
+		tile.Position = new Vector3(column, 0, row) * 0.32f;
+	}
 
-				// Grass and pth tile
-				Node3D grassTile = (Node3D)tile.Instantiate();
-				grassTile.Name = "Grass Tile" + row + " " + column;
-				AddChild(grassTile);
-				grassTile.Position = new Vector3(column, 0, row) * 0.32f;
+	private void SpawnPath(string pathLocation, int row, int column) {
+		// creating new path object
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + pathLocation + ".tscn");
+		Node3D pathTile = (Node3D)prefab.Instantiate();
+		pathTile.Name = "Path" + mapGrid[row, column].ToString() + " " + row + " " + column;
+		AddChild(pathTile);
+		pathTile.Position = new Vector3(column, 0, row) * 0.32f;
 
-				if (mapGrid[row, column] != TileTypes.Void) {
-					// creating new path object
-					Node3D pathTile = (Node3D)path.Instantiate();
-					pathTile.Name = "Path" + mapGrid[row, column].ToString() + " " + row + " " + column;
-					AddChild(pathTile);
-					pathTile.Position = new Vector3(column, 0, row) * 0.32f;
+		// setting rotation
+		if (mapGrid[row, column] == TileTypes.North) {
+			pathTile.RotationDegrees = new Vector3(0f, 180f, 0f);
+		}
 
-					// setting rotation
-					if (mapGrid[row, column] == TileTypes.North) {
-						pathTile.RotationDegrees = new Vector3(0f, 180f, 0f);
-					}
+		else if (mapGrid[row, column] == TileTypes.South) {
+			pathTile.RotationDegrees = new Vector3(0f, 0f, 0f);
+		}
 
-					else if (mapGrid[row, column] == TileTypes.South) {
-						pathTile.RotationDegrees = new Vector3(0f, 0f, 0f);
-					}
+		else if (mapGrid[row, column] == TileTypes.West) {
+			pathTile.RotationDegrees = new Vector3(0f, -90f, 0f);
+		}
 
-					else if (mapGrid[row, column] == TileTypes.West) {
-						pathTile.RotationDegrees = new Vector3(0f, -90f, 0f);
-					}
-
-					else if (mapGrid[row, column] == TileTypes.East) {
-						pathTile.RotationDegrees = new Vector3(0f, 90f, 0f);
-					}
-				}
-			}
+		else if (mapGrid[row, column] == TileTypes.East) {
+			pathTile.RotationDegrees = new Vector3(0f, 90f, 0f);
 		}
 	}
 
@@ -220,7 +252,7 @@ public partial class MapCreation : Node {
 
 			for (int x = 0; x < mapLength; x++)
 			{
-				if ((int)mapGrid[y, x] == 0) {
+				if (mapGrid[y, x] == 0) {
 					row += ". ";
 				}
 
@@ -242,7 +274,7 @@ public partial class MapCreation : Node {
 
 			GD.Print(row);
 		}
-		GD.Print("\n");
-		GD.Print("\n");
+
+		GD.Print("\n\n");
 	}
 }
