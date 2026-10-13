@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://braa6luf7v3yr"]
+
+[ext_resource type="Script" uid="uid://bamao4ro4cbux" path="res://Scripts/Game Scene/Enemies/EnemyClass.cs" id="1_6cixw"]
+[ext_resource type="Texture2D" uid="uid://4dvvyae6gevx" path="res://Textures/Dark Knight.png" id="2_6cixw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
+size = Vector3(0.2, 0.26, 0.2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pe01b"]
+height = 0.26
+radius = 0.3
+
+[node name="Dark Knight" type="Node3D" unique_id=1731016193 node_paths=PackedStringArray("enemySprite", "enemyRangeArea", "enemyHitbox", "groundLook")]
+script = ExtResource("1_6cixw")
+enemyName = "Dark Knight"
+health = 150.0
+speed = 2.0
+attackPower = 30.0
+gold = 50
+lifeSteal = 5
+enemySprite = NodePath("Sprite3D")
+enemyRangeArea = NodePath("SightLine")
+enemyHitbox = NodePath("HitBox")
+groundLook = NodePath("Path Detection")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1047126910]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+offset = Vector2(0, 16)
+modulate = Color(0.51, 0.51, 0.51, 1)
+texture_filter = 0
+render_priority = 5
+texture = ExtResource("2_6cixw")
+
+[node name="HitBox" type="Area3D" parent="." unique_id=1198586675]
+collision_layer = 8
+collision_mask = 8
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox" unique_id=324977930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12958984, 0)
+shape = SubResource("BoxShape3D_dv6u4")
+
+[node name="SightLine" type="Area3D" parent="." unique_id=1641865407]
+collision_layer = 8
+collision_mask = 8
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SightLine" unique_id=1005825234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+shape = SubResource("CylinderShape3D_pe01b")
+
+[node name="Path Detection" type="RayCast3D" parent="." unique_id=1305738918]
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false

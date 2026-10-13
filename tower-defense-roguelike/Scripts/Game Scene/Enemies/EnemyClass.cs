@@ -54,6 +54,7 @@ public partial class EnemyClass : Node3D {
 	public float GetHealth() {
 		return health;
 	}
+	
 	public void TakeDamage(float damage) {
 		health -= damage;
 	}

@@ -1,9 +1,10 @@
 using Godot;
 
 public partial class GameManager: Node {
-	private int waveNumber;
+	public int waveNumber;
 	private bool movingScreen;
-	public static int waveCost = 100;
+	public static int waveCostStart = 50;
+	public static int waveCostMultiplier = 3;
 
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;

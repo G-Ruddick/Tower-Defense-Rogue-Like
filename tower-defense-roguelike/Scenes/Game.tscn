@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://cyayd05uiowdu"]
 
-[ext_resource type="Script" uid="uid://djdtjw3pjvgx6" path="res://Scripts/GameManager.cs" id="1_gl6un"]
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Game Scene/Map Elements/MapCreation.cs" id="1_iukft"]
 [ext_resource type="Script" uid="uid://doo3b6sp30qop" path="res://Scripts/Game Scene/PlayerManager.cs" id="2_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_kldst"]
+[ext_resource type="Script" uid="uid://d6a0ya7anb20" path="res://Scripts/Game Scene/Enemies/EnemyWaveSpawner.cs" id="4_2irst"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
@@ -98,6 +99,7 @@ playerTowersNode = NodePath("../UI/Towers/Player Towers")
 script = ExtResource("1_iukft")
 
 [node name="Enemies" type="Node" parent="." unique_id=574245259]
+script = ExtResource("4_2irst")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=326357734]
 
