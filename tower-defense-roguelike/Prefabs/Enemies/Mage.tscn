@@ -5,6 +5,96 @@
 [ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="3_1j6gt"]
 [ext_resource type="Texture2D" uid="uid://rnq7ddx163r1" path="res://Textures/Enemy Health Bar.png" id="4_sk4x0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j6gt"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk4x0"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da7vo"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gsjf"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u6d0"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jrnq"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpg0i"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ludbl"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h1gd"]
+atlas = ExtResource("2_rmgw6")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1j6gt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk4x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da7vo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk4x0")
+}],
+"loop": 1,
+"name": &"Down Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gsjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u6d0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jrnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u6d0")
+}],
+"loop": 1,
+"name": &"Horizontal Walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpg0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ludbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h1gd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ludbl")
+}],
+"loop": 1,
+"name": &"Up Walk",
+"speed": 5.0
+}]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
 size = Vector3(0.1, 0.16, 0.1)
 
@@ -16,7 +106,7 @@ radius = 0.75
 script = ExtResource("1_rmgw6")
 enemyName = "Mage"
 maxHealth = 30.0
-speed = 5.0
+speed = 3.0
 attackPower = 20.0
 gold = 10
 lifeSteal = 2
@@ -28,13 +118,15 @@ ui = NodePath("Enemy UI")
 healthbar = NodePath("Enemy UI/Enemy Health Bar Slider")
 healthbarPercent = NodePath("Enemy UI/Enemy Health Bar Slider/Health")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1047126910]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=2077507447]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
 offset = Vector2(0, 8)
 modulate = Color(0.51, 0.51, 0.51, 1)
 texture_filter = 0
 render_priority = 5
-texture = ExtResource("2_rmgw6")
+sprite_frames = SubResource("SpriteFrames_dv6u4")
+animation = &"Up Walk"
+frame_progress = 0.7938067
 
 [node name="HitBox" type="Area3D" parent="." unique_id=1198586675]
 collision_layer = 8
