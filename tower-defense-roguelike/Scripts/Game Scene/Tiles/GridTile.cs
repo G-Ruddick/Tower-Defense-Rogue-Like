@@ -26,17 +26,19 @@ public partial class GridTile : Node3D {
 		ChangeColor(true);
 		SetVisibility(true);
 		
-		if (tileChecker.IsColliding()) {
-			Area3D collider = tileChecker.GetCollider() as Area3D;
-			
-			if (collider.CollisionLayer == 32) {
-				SetVisibility(false);
-				return;
-			}
-			
-			if (collider.CollisionLayer == 2) {
-				ChangeColor(false);
-			}
+		if (!tileChecker.IsColliding()) {
+			return;
+		}
+		
+		Area3D collider = tileChecker.GetCollider() as Area3D;
+		
+		if (collider.CollisionLayer == 32) {
+			SetVisibility(false);
+			return;
+		}
+		
+		if (collider.CollisionLayer == 2) {
+			ChangeColor(false);
 		}
 	}
 }
