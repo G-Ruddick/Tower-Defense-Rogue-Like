@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyayd05uiowdu"]
 
-[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://de04devlcjl8i" path="res://Scripts/GameManager.cs" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Game Scene/Map Elements/MapCreation.cs" id="1_iukft"]
 [ext_resource type="Script" uid="uid://doo3b6sp30qop" path="res://Scripts/Game Scene/PlayerManager.cs" id="2_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_kldst"]
@@ -97,6 +97,12 @@ playerTowersNode = NodePath("../UI/Towers/Player Towers")
 
 [node name="MapCreator" type="Node" parent="." unique_id=1015966873]
 script = ExtResource("1_iukft")
+
+[node name="Grid" type="Node" parent="MapCreator" unique_id=976569334]
+
+[node name="Paths" type="Node" parent="MapCreator" unique_id=2109549363]
+
+[node name="Base" type="Node" parent="MapCreator" unique_id=1141084228]
 
 [node name="Enemies" type="Node" parent="." unique_id=574245259]
 script = ExtResource("4_2irst")

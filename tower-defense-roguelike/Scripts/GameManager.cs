@@ -1,10 +1,13 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class GameManager: Node {
 	public int waveNumber;
 	private bool movingScreen;
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
+
+	public List<GridTile> gridCells = new List<GridTile>();
 
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
@@ -40,6 +43,8 @@ public partial class GameManager: Node {
 				
 		// checking for tower placement
 		if (PlayerManager.instance.GetActiveTower() != null) {
+			SetGridVisibility(true);
+
 			// creating tower icon
 			if (towerIcon == null || towerIcon.towerName != PlayerManager.instance.GetActiveTower().GetTowerName()) {
 				if (towerIcon != null) { 
@@ -54,12 +59,7 @@ public partial class GameManager: Node {
 				towerIcon.SetTowerAsCursorObject();
 			}
 
-			var mousePosition = GetViewport().GetMousePosition();
-			var origin = camera.ProjectRayOrigin(mousePosition);
-			var end = origin + camera.ProjectRayNormal(mousePosition) * 1000f;
-			var query = PhysicsRayQueryParameters3D.Create(origin, end);
-			query.CollisionMask = (1 << 1) | (1 << 2);
-			query.CollideWithAreas = true;
+			var query = GetQuery();
 			
 			var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 			if (result.Count > 0) {
@@ -68,6 +68,8 @@ public partial class GameManager: Node {
 			}
 		}
 		else {
+			SetGridVisibility(false);
+
 			if (towerIcon != null) {
 				towerIcon.QueueFree();
 				towerIcon = null;
@@ -85,24 +87,13 @@ public partial class GameManager: Node {
 				DisableUI();
 			}
 			if (nextWaveButton.GetClickability()) {
-				nextWaveButton.Visible = false;
-				Shop.instance.shopOpen = true;
-				Shop.instance.Visible = true;
-				Shop.instance.rerollCost = 10;
-				Shop.instance.Reroll(false);
-
-				waveNumber++;
+				NextWaveButton();
 			}
 
 			// map interactions
 			if (GetViewport().GuiGetHoveredControl() == null) {
 				// getting mouse screen position;
-				var mousePosition = GetViewport().GetMousePosition();
-				var origin = camera.ProjectRayOrigin(mousePosition);
-				var end = origin + camera.ProjectRayNormal(mousePosition) * 1000f;
-				var query = PhysicsRayQueryParameters3D.Create(origin, end);
-				query.CollisionMask = (1 << 1) | (1 << 2);
-				query.CollideWithAreas = true;
+				var query = GetQuery();
 				
 				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 				if (result.Count > 0) {
@@ -133,6 +124,7 @@ public partial class GameManager: Node {
 		if (@event.IsActionReleased("Move")) {
 			movingScreen = false;
 		}
+		
 		if (@event is InputEventMouseMotion mouseMotion && movingScreen) {
 			Vector3 position = new Vector3(-mouseMotion.Relative.X, 0, -mouseMotion.Relative.Y) / 200 + camera.GlobalPosition;
 			camera.GlobalPosition = position;
@@ -148,8 +140,41 @@ public partial class GameManager: Node {
 		}
 	}
 
+	private void NextWaveButton() {
+		nextWaveButton.Visible = false;
+		Shop.instance.shopOpen = true;
+		Shop.instance.Visible = true;
+		Shop.instance.rerollCost = 10;
+		Shop.instance.Reroll(false);
+
+		waveNumber++;
+	}
+
 	private void DisableUI() {
 		settingsButton.ChangeClickability();
 		nextWaveButton.ChangeClickability();
+	}
+
+	private PhysicsRayQueryParameters3D GetQuery() {
+		var mousePosition = GetViewport().GetMousePosition();
+		var origin = camera.ProjectRayOrigin(mousePosition);
+		var end = origin + camera.ProjectRayNormal(mousePosition) * 1000f;
+		var query = PhysicsRayQueryParameters3D.Create(origin, end);
+		query.CollisionMask = 2 | 4 | 32;
+		query.CollideWithAreas = true;
+
+		return query;
+	}
+
+	private void SetGridVisibility(bool visibility) {
+		foreach (GridTile cell in gridCells) {
+			cell.SetVisibility(visibility);
+			
+			if (!visibility) {
+				continue;
+			}
+
+			cell.CheckForObjects();
+		}
 	}
 }

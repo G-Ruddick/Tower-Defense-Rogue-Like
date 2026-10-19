@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cax44kfkl1g4q"]
+
+[ext_resource type="Texture2D" uid="uid://b3l6t7muls3t1" path="res://Textures/Grid Tile.png" id="1_ddqu5"]
+[ext_resource type="Script" uid="uid://bpt6iehhgungt" path="res://Scripts/Game Scene/Tiles/GridTile.cs" id="1_nlfsn"]
+
+[node name="GridTile" type="Node3D" unique_id=1712392484 node_paths=PackedStringArray("tileSpite", "tileChecker")]
+script = ExtResource("1_nlfsn")
+tileSpite = NodePath("Tile Sprite")
+tileChecker = NodePath("Tile Checking")
+
+[node name="Tile Sprite" type="Sprite3D" parent="." unique_id=1951181614]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.00097189844, 0)
+modulate = Color(1, 0, 0, 1)
+texture_filter = 0
+render_priority = 3
+texture = ExtResource("1_ddqu5")
+
+[node name="Tile Checking" type="RayCast3D" parent="." unique_id=927757807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29099524, 0)
+collision_mask = 34
+collide_with_areas = true
+collide_with_bodies = false
