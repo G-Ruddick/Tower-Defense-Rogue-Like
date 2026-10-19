@@ -74,7 +74,7 @@ size_flags_vertical = 3
 mouse_filter = 1
 
 [node name="Backboard" type="Sprite2D" parent="Control" unique_id=718840094]
-modulate = Color(1, 0.91733336, 0.84000003, 1)
+modulate = Color(1, 0.91733336, 0.84000003, 0.92941177)
 position = Vector2(577.5, 325.99997)
 scale = Vector2(25.604168, 29.039999)
 texture = ExtResource("2_4f7rx")

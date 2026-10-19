@@ -78,10 +78,10 @@ public partial class GameManager: Node {
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("Select")) {
 			if (settingsButton.GetClickability()) {
-				SettingsMenu.settingsMenu.Visible = true;
+				SettingsMenu.instance.Visible = true;
 				DisableUI();
 			}
-			if (SettingsMenu.settingsMenu.returnButton.GetClickability()) {
+			if (SettingsMenu.instance.returnButton.GetClickability()) {
 				DisableUI();
 			}
 			if (nextWaveButton.GetClickability()) {
