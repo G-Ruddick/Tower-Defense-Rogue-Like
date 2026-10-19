@@ -14,7 +14,7 @@ public partial class EnemyClass : Node3D {
 
 
 	[ExportCategory("Components")]
-	[Export] private Sprite3D enemySprite;
+	[Export] private AnimatedSprite3D enemySprite;
 	[Export] public Area3D enemyRangeArea;
 	[Export] public Area3D enemyHitbox;
 	[Export] private RayCast3D groundLook;
@@ -52,26 +52,39 @@ public partial class EnemyClass : Node3D {
 
 		// Enemy movement
 		this.Position = this.Position.MoveToward(walkLocation, speed / 10 * (float)delta);
-		
-		if (this.Position == walkLocation && groundLook.IsColliding()) {
-			Node3D path = (groundLook.GetCollider() as Area3D).GetParent() as Node3D;
-			
-			if (path.Rotation.Y == 0) {
-				walkLocation.Z += 0.32f;
-			}
-			else if (path.Rotation.Y == Mathf.DegToRad(180)) {
-				walkLocation.Z -= 0.32f;
-			}
-			else if (path.Rotation.Y == Mathf.DegToRad(90)) {
-				walkLocation.X += 0.32f;
-			}
-			else if (path.Rotation.Y == Mathf.DegToRad(-90)) {
-				walkLocation.X -= 0.32f;
-			}
-		}
+		Move();
 
 		if (health <= 0) {
 			Die();
+		}
+	}
+
+	private void Move() {
+		if (this.Position != walkLocation || !groundLook.IsColliding()) {
+			return;
+		}
+
+		Node3D path = (groundLook.GetCollider() as Area3D).GetParent() as Node3D;
+		
+		if (path.Rotation.Y == 0) {
+			walkLocation.Z += 0.32f;
+			enemySprite.Play("Down Walk");
+		}
+		else if (path.Rotation.Y == Mathf.DegToRad(180)) {
+			walkLocation.Z -= 0.32f;
+			enemySprite.Play("Up Walk");
+		}
+		else if (path.Rotation.Y == Mathf.DegToRad(90)) {
+			walkLocation.X += 0.32f;
+
+			enemySprite.Play("Horizontal Walk");
+			enemySprite.FlipH = false;
+		}
+		else if (path.Rotation.Y == Mathf.DegToRad(-90)) {
+			walkLocation.X -= 0.32f;
+
+			enemySprite.Play("Horizontal Walk");
+			enemySprite.FlipH = true;
 		}
 	}
 
