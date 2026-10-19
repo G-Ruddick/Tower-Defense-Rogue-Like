@@ -21,7 +21,7 @@ public partial class AttackTowerClass : Node3D {
 	[Export] public CollisionShape3D attackRange;
 	[Export] public Node3D projectile;
 	[Export] public Node parentProjectile;
-	[Export] private Node3D[] projectileStartingPositions;
+	[Export] private AnimatedSprite3D[] projectileStartingPositions;
 
 	[ExportCategory("UI")]
 	[Export] public Sprite3D rangeSprite;
@@ -71,6 +71,13 @@ public partial class AttackTowerClass : Node3D {
 				continue; 
 			}
 
+			await ToSignal(GetTree().CreateTimer(reloadTime), "timeout");
+			foreach (AnimatedSprite3D attacker in projectileStartingPositions) {
+				attacker.Frame = 0;
+				attacker.FrameProgress = 0.0f;
+				attacker.Play();
+			}
+
 			int overflow = 0;
 			for(int i = 0; i < numberOfAttacks; i++) {
 				bool fired = false;
@@ -81,6 +88,7 @@ public partial class AttackTowerClass : Node3D {
 
 				for (int j = 0; j < projectilePool.Count; j++) {
 					if (projectilePool[j].Visible == false) {
+						SetAttackerDirection(projectileStartingPositions[i], enemyTargets[i - overflow].GlobalPosition);
 						projectilePool[j].FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
 						fired = true;
 						break;
@@ -91,11 +99,34 @@ public partial class AttackTowerClass : Node3D {
 					ProjectileClass newProjectile = (ProjectileClass)projectile.Duplicate();
 					projectilePool.Add(newProjectile);
 					parentProjectile.AddChild(newProjectile);
+
+					SetAttackerDirection(projectileStartingPositions[i], enemyTargets[i - overflow].GlobalPosition);
 					newProjectile.FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
 				}
 			}
-
-			await ToSignal(GetTree().CreateTimer(reloadTime), "timeout");
 		}
+	}
+
+	private void SetAttackerDirection(AnimatedSprite3D attacker, Vector3 target) {
+		Vector3 direction = (target - attacker.GlobalPosition).Normalized();
+
+		if (direction.X > 0) {
+			attacker.FlipH = true;
+		}
+		else {
+			attacker.FlipH = false;
+		}
+
+		if (Mathf.Abs(direction.X) >= Mathf.Abs(direction.Z)) {
+			attacker.Play("Side Fire");
+			return;
+		}
+
+		if (direction.Z >= 0) {
+			attacker.Play("Front Fire");
+			return;
+		}
+
+		attacker.Play("Back Fire");
 	}
 }
