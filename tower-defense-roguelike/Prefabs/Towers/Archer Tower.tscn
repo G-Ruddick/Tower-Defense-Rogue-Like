@@ -16,19 +16,19 @@ radius = 1.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_pe01b"]
 size = Vector3(0.01, 0.01, 0.01)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m2vjt"]
-atlas = ExtResource("3_b5oln")
-region = Rect2(8, 48, 8, 8)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1r4k"]
 atlas = ExtResource("3_b5oln")
-region = Rect2(0, 48, 8, 8)
+region = Rect2(8, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0api"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 40, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m2vjt")
+"texture": SubResource("AtlasTexture_d1r4k")
 }],
 "loop": 1,
 "name": &"Diagonal",
@@ -36,7 +36,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d1r4k")
+"texture": SubResource("AtlasTexture_l0api")
 }],
 "loop": 1,
 "name": &"Straight",
@@ -46,26 +46,73 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
 size = Vector3(0.02, 0.02, 0.02)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oifrw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o40fn"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(24, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onmp0"]
 atlas = ExtResource("3_b5oln")
 region = Rect2(8, 56, 8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iu15y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jfqf"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(16, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcuxl"]
 atlas = ExtResource("3_b5oln")
 region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s6sp"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(8, 48, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8brh"]
+atlas = ExtResource("3_b5oln")
+region = Rect2(0, 48, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oifrw")
+"texture": SubResource("AtlasTexture_o40fn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iu15y")
+"texture": SubResource("AtlasTexture_onmp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
 }],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
+"loop": 0,
+"name": &"Back Fire",
+"speed": 2.67
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcuxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}],
+"loop": 0,
+"name": &"Front Fire",
+"speed": 2.67
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8brh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}],
+"loop": 0,
+"name": &"Side Fire",
+"speed": 2.67
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sacsp"]
@@ -116,9 +163,9 @@ rangeSprite = NodePath("Tower Range Sprite")
 script = ExtResource("2_07xen")
 numberOfAttacks = 2
 damage = 2
-projectileSpeed = 5.0
+projectileSpeed = 8.0
 reloadTime = 0.75
-projectilePoolSize = 8
+projectilePoolSize = 5
 attackArea = NodePath("Attack Range")
 attackRange = NodePath("Attack Range/CollisionShape3D")
 projectile = NodePath("Projectiles/Arrow")
@@ -158,8 +205,7 @@ offset = Vector2(0, 0.5)
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_dv6u4")
-animation = &"Straight"
-frame_progress = 0.8452519
+animation = &"Diagonal"
 
 [node name="Area" type="Area3D" parent="Attack Tower Class/Projectiles/Arrow" unique_id=1069640228]
 collision_layer = 0
@@ -194,12 +240,14 @@ transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_sacsp")
+animation = &"Side Fire"
 
-[node name="Archer2" type="AnimatedSprite3D" parent="." unique_id=1252883703]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.03075448, 0.42, 0)
+[node name="Archer2" type="AnimatedSprite3D" parent="." unique_id=1277676840]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.031, 0.42, 0)
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_sacsp")
+animation = &"Side Fire"
 
 [node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
 collision_layer = 2
