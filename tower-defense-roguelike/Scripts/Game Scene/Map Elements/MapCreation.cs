@@ -198,8 +198,9 @@ public partial class MapCreation : Node {
 					SpawnPath("Grasslands Tiles/PathTileStrait", row, column);
 				}
 
-				// Grass and pth tile
+				// Grass and grid tiles
 				SpawnTile(levelType, "GrassTile", row, column);
+				SpawnGrid(row, column);
 			}
 		}
 	}
@@ -208,14 +209,14 @@ public partial class MapCreation : Node {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + tileLocation + ".tscn");
 		Node3D tile = (Node3D)prefab.Instantiate();
 		tile.Name = tileLocation;
-		AddChild(tile);
+		GetChild(2).AddChild(tile);
 		tile.Position = new Vector3(column, 0, row) * 0.32f;
 	}
 	private void SpawnTile(string path, string name, int row, int column) {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + path + "/" + name + ".tscn");
 		Node3D tile = (Node3D)prefab.Instantiate();
 		tile.Name = name + " " + row + " " + column;
-		AddChild(tile);
+		GetChild(2).AddChild(tile);
 		tile.Position = new Vector3(column, 0, row) * 0.32f;
 	}
 
@@ -224,7 +225,7 @@ public partial class MapCreation : Node {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + pathLocation + ".tscn");
 		Node3D pathTile = (Node3D)prefab.Instantiate();
 		pathTile.Name = "Path" + mapGrid[row, column].ToString() + " " + row + " " + column;
-		AddChild(pathTile);
+		GetChild(1).AddChild(pathTile);
 		pathTile.Position = new Vector3(column, 0, row) * 0.32f;
 
 		// setting rotation
@@ -243,6 +244,16 @@ public partial class MapCreation : Node {
 		else if (mapGrid[row, column] == TileTypes.East) {
 			pathTile.RotationDegrees = new Vector3(0f, 90f, 0f);
 		}
+	}
+
+	private void SpawnGrid(int row, int column) {
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/GridTile.tscn");
+		GridTile cell = (GridTile)prefab.Instantiate();
+		cell.Name = "Grid Cell " + column + " " + row;
+		GetChild(0).AddChild(cell);
+
+		cell.Position = new Vector3(column, 0, row) * 0.32f;
+		GameManager.gameManager.gridCells.Add(cell);
 	}
 
 	public void PrintMap() {
