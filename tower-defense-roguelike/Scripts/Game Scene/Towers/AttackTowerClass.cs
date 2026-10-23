@@ -38,6 +38,7 @@ public partial class AttackTowerClass : Node3D {
 		for (int i = projectilePool.Count - 1; i >= 0; i--) {
 			if (i > projectilePoolSize && projectilePool[i].Visible == false) {
 				projectilePool[i].QueueFree();
+				projectilePool.RemoveAt(i);
 			}
 		}
 	}
@@ -45,7 +46,6 @@ public partial class AttackTowerClass : Node3D {
 	private void OnRangeEnter(Node3D body) {
 		if (body is Area3D enemyLayer) {
 			// GD.Print("enemy entered");
-
 			enemyTargets.Add(body.GetParent() as EnemyClass);
 		}
 	}
@@ -66,12 +66,13 @@ public partial class AttackTowerClass : Node3D {
 
 	private async void Attack() {
 		while (true) {
+			await ToSignal(GetTree().CreateTimer(reloadTime), "timeout");
+
 			if (enemyTargets.Count == 0) {
 				await ToSignal(GetTree().CreateTimer(0), "timeout");
 				continue; 
 			}
 
-			await ToSignal(GetTree().CreateTimer(reloadTime), "timeout");
 			foreach (AnimatedSprite3D attacker in projectileStartingPositions) {
 				attacker.Frame = 0;
 				attacker.FrameProgress = 0.0f;
