@@ -44,7 +44,7 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
-size = Vector3(0.02, 0.02, 0.02)
+size = Vector3(0.03, 0.03, 0.03)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o40fn"]
 atlas = ExtResource("3_b5oln")
