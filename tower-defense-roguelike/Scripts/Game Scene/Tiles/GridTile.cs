@@ -7,6 +7,7 @@ public partial class GridTile : Node3D {
 
 	public override void _Ready() {
 		tileChecker.ForceRaycastUpdate();
+		this.Visible = false;
 	}
 
 	public void ChangeColor(bool validPlacement) {

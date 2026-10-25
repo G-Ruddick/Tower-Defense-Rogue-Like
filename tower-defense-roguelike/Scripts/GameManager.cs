@@ -6,6 +6,7 @@ public partial class GameManager: Node {
 	private bool movingScreen;
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
+	private float resetTimer = 0f;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
@@ -40,6 +41,18 @@ public partial class GameManager: Node {
 		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
 		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
 		waveNumberLabel.Text = "Wave\n" + waveNumber;
+
+		// handling quick reset
+		if (Input.IsActionPressed("Reset")) {
+			resetTimer += (float)delta;
+
+			if (resetTimer >= 1f) {
+				QuickReset();
+			}
+		}
+		if (Input.IsActionJustReleased("Reset")) {
+			resetTimer = 0;
+		}
 				
 		// checking for tower placement
 		if (PlayerManager.instance.GetActiveTower() != null) {
@@ -51,12 +64,7 @@ public partial class GameManager: Node {
 					towerIcon.QueueFree(); 
 				}
 
-				PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
-				towerIcon = (TowerClass)prefab.Instantiate();
-				towerIcon.Name = "cursor icon";
-				PlayerManager.instance.AddChild(towerIcon);
-				
-				towerIcon.SetTowerAsCursorObject();
+				CreateTowerCursor();
 			}
 
 			var query = GetQuery();
@@ -143,6 +151,20 @@ public partial class GameManager: Node {
 		if (@event.IsActionPressed("Scroll Up")) {
 			camera.Size -= 0.1f;
 		}
+	}
+
+	private void QuickReset() {
+		GD.Print("Reloading Game Scene");
+		GetTree().ReloadCurrentScene();
+	}
+
+	private void CreateTowerCursor(){
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
+		towerIcon = (TowerClass)prefab.Instantiate();
+		towerIcon.Name = "cursor icon";
+		PlayerManager.instance.AddChild(towerIcon);
+		
+		towerIcon.SetTowerAsCursorObject();
 	}
 
 	private void NextWaveButton() {

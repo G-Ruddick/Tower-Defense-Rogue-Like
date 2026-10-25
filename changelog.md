@@ -7,7 +7,7 @@
   * Bug Fix: Shop Icon not using correct icon positioning when being created
   * Changed Tower Blueprint to abstract only using one prefab
     - Deleted Archer Tower Icon prefab
-  * 
+  * Added quick reset function
   * 
 
 ### v 0.06.0 - 10/20/2026
