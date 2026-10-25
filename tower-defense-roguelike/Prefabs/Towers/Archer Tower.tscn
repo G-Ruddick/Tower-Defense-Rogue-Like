@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://cw2gt22gjbjal"]
+[gd_scene format=3 uid="uid://hmtnh4hmdymf"]
 
 [ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_cxj2j"]
 [ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_07xen"]
 [ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
-[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/ArcProjectile.cs" id="4_d1r4k"]
+[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/Projectiles/ArcProjectile.cs" id="4_d1r4k"]
 [ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="4_oifrw"]
 [ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_iu15y"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
 height = 0.64
-radius = 1.0
+radius = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pe01b"]
 size = Vector3(0.01, 0.01, 0.01)
@@ -223,7 +223,7 @@ visible = false
 shape = SubResource("BoxShape3D_dv6u4")
 
 [node name="Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
-transform = Transform3D(0.312, 0, 0, 0, -1.3637953e-08, -0.312, 0, 0.312, -1.3637953e-08, 0, 0, 0)
+transform = Transform3D(0.468, 0, 0, 0, -2.045693e-08, -0.468, 0, 0.468, -2.045693e-08, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.2)
 render_priority = 4
 texture = ExtResource("5_iu15y")
@@ -245,6 +245,8 @@ texture_filter = 0
 render_priority = 5
 sprite_frames = SubResource("SpriteFrames_sacsp")
 animation = &"Front Fire"
+frame = 2
+frame_progress = 1.0
 
 [node name="Archer2" type="AnimatedSprite3D" parent="." unique_id=1277676840]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0.06, 0.42, 0)
