@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://da3a4is7vynjc"]
+[gd_scene format=3 uid="uid://d0jsnq5nj32au"]
 
-[ext_resource type="Script" uid="uid://bkjlr4dqo2j4h" path="res://Scripts/Game Scene/Towers/TowerIcon.cs" id="1_dbmcp"]
-[ext_resource type="Texture2D" uid="uid://bssgx4tg2w50k" path="res://Textures/Tower Icons.png" id="2_dlare"]
-[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_dlare"]
-[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_do7tc"]
+[ext_resource type="Script" uid="uid://h352107aoic3" path="res://Scripts/Game Scene/Towers/TowerBlueprint.cs" id="1_8r326"]
+[ext_resource type="Texture2D" uid="uid://bssgx4tg2w50k" path="res://Textures/Tower Icons.png" id="2_qgcij"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_wfhwo"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_60bf1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dv6u4"]
 size = Vector2(32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
-atlas = ExtResource("4_do7tc")
+atlas = ExtResource("4_60bf1")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
-atlas = ExtResource("4_do7tc")
+atlas = ExtResource("4_60bf1")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
@@ -38,20 +38,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vngns"]
 size = Vector2(56, 24)
 
-[node name="Archer Tower Icon" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "SellButton", "Cost")]
+[node name="Blueprint" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "SellButton", "towerCostLabel", "towerNameLabel")]
 scale = Vector2(3, 3)
-script = ExtResource("1_dbmcp")
+script = ExtResource("1_8r326")
 enabled = true
 clickable = true
-towerName = "Archer Tower"
-icon = NodePath("ArcherTower")
+icon = NodePath("Sprite")
 button = NodePath("Clickable Area")
 clickableArea = NodePath("Clickable Area/CollisionShape2D")
 SellButton = NodePath("Sell Button")
-Cost = NodePath("Cost")
+towerCostLabel = NodePath("Cost")
+towerNameLabel = NodePath("Name")
 
-[node name="ArcherTower" type="Sprite2D" parent="." unique_id=1133058594]
-texture = ExtResource("2_dlare")
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1133058594]
+texture = ExtResource("2_qgcij")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 
@@ -71,7 +71,7 @@ offset_bottom = -7.229167
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 6
-text = "Archer"
+text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -91,11 +91,11 @@ theme_override_colors/font_color = Color(0.94, 0.70437336, 0.0564, 1)
 theme_override_colors/font_outline_color = Color(0.99967045, 0.92553276, 0.7813341, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 7
-text = "50"
+text = "price"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Sell Button" parent="." unique_id=590249941 instance=ExtResource("3_dlare")]
+[node name="Sell Button" parent="." unique_id=590249941 instance=ExtResource("3_wfhwo")]
 offset_left = -8.0
 offset_top = 16.666664
 offset_right = 47.172

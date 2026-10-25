@@ -28,7 +28,7 @@ public partial class ProjectileClass : RigidBody3D {
 		if (body is Area3D enemyArea) {
 			EnemyClass enemy = enemyArea.GetParent<Node3D>() as EnemyClass;
 
-			if (enemy == target) {
+			if (enemy != null && enemy == target) {
 				enemy.TakeDamage(damage);
 			}
 		}

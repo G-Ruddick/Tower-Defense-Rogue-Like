@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class TowerIcon : Node2D {
+public partial class TowerBlueprint : Node2D {
 	[ExportCategory("Variables")]
 	[Export] private bool enabled;
 	[Export] private bool clickable;
@@ -12,7 +12,8 @@ public partial class TowerIcon : Node2D {
 	[Export] private Area2D button;
 	[Export] private CollisionShape2D clickableArea;
 	[Export] public ButtonTemplate SellButton;
-	[Export] private Label Cost;
+	[Export] private Label towerCostLabel;
+	[Export] private Label towerNameLabel;
 
 	// Colors
 	private Color enabledColor = new Color(1, 1, 1, 1);
@@ -32,13 +33,13 @@ public partial class TowerIcon : Node2D {
 		clickable = false;
 		placeable = false;
 		SellButton.Visible = false;
-		Cost.Text = TowerStats.TowerDictionary[towerName].usePrice.ToString();
-
 		button.MouseEntered += () => clickable = true;
 		button.MouseExited += () => clickable = false;
 	}
 
 	public override void _Process(double delta) {
+		towerCostLabel.Text = TowerStats.TowerDictionary[towerName].usePrice.ToString();
+
 		if (PlayerManager.instance.GetMoney() < TowerStats.TowerDictionary[towerName].usePrice) { enabled = false; }
 		else { enabled = true; }
 
@@ -52,6 +53,10 @@ public partial class TowerIcon : Node2D {
 
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("Select")) {
+			foreach(Node i in PlayerManager.instance.playerTowersNode.GetChildren()) {
+				GD.Print(i.Name);
+			}
+
 			if (SellButton.GetClickability()) {
 				SellTower();
 				return;
@@ -64,9 +69,9 @@ public partial class TowerIcon : Node2D {
 		}
 	}
 
-	public override void _ExitTree() {
-		PlayerManager.instance.CallDeferred(nameof(PlayerManager.instance.UpdateTowers));
-	}
+	// public override void _ExitTree() {
+	// 	PlayerManager.instance.CallDeferred(nameof(PlayerManager.instance.UpdateTowers));
+	// }
 
 	public string GetTowerName() {
 		return towerName;
@@ -104,17 +109,52 @@ public partial class TowerIcon : Node2D {
 
 	public void SellTower() {
 		PlayerManager.instance.ChangeMoney((int)Mathf.Ceil(TowerStats.TowerDictionary[towerName].buyPrice * 0.75f));
-		PlayerManager.instance.towers.Remove(GetTowerName());
-		this.QueueFree();
+		PlayerManager.instance.towers.Remove(towerName);
+		PlayerManager.instance.UpdateTowers();
+
+		// PlayerManager.instance.SetTowersInactive();
+		QueueFree();
 	}
 
 	public void OnClick() {
+		PlayerManager.instance.SetTowersInactive(this);
+		
+
 		if (enabled) {
 			placeable = !placeable;
+			return;
 		}
-		else {
-			placeable = false;
-			SellButton.Visible = !SellButton.Visible;
+
+		placeable = false;
+		SellButton.Visible = !SellButton.Visible;
+	}
+
+	public static TowerBlueprint CreateBlueprint(string name) {
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tower Icons/Tower Blueprint.tscn");
+		TowerBlueprint blueprint = prefab.Instantiate() as TowerBlueprint;
+		blueprint.Name = name + " Blueprint";
+		PlayerManager.instance.playerTowersNode.AddChild(blueprint);
+
+		blueprint.towerName = name;
+		blueprint.towerNameLabel.Text = name;
+		blueprint.towerCostLabel.Text = TowerStats.TowerDictionary[name].usePrice.ToString();
+
+		blueprint.icon.RegionRect = GetSprite(blueprint);
+
+		return blueprint;
+	}
+
+	private static Rect2 GetSprite(TowerBlueprint blueprint) {
+		Rect2 iconLocation  = new Rect2(0, 0, 32, 32);
+		float textureWidth = blueprint.icon.Texture.GetWidth() / 32;
+		float xValue = TowerStats.TowerDictionary[blueprint.towerName].index % textureWidth;
+		iconLocation.Position = new Vector2(xValue * 32, 0);
+		
+		while(textureWidth > (blueprint.icon.Texture.GetWidth() / 32)) {
+			iconLocation.Position = iconLocation.Position + new Vector2(0, 1);
+			textureWidth -= blueprint.icon.Texture.GetWidth() / 32;
 		}
+
+		return iconLocation;
 	}
 }

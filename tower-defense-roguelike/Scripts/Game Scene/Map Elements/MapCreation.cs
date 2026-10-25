@@ -25,7 +25,7 @@ public partial class MapCreation : Node {
 		levelType = "Grasslands Tiles";
 		
 		CreateMap();
-		PrintMap();
+		// PrintMap();
 		InstantiateMap();
 	}
 
