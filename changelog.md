@@ -5,6 +5,7 @@
     - Added Mortar Tower
       - Added AOE projectile that can ether explode on conact or only on the ground
     - Added quick reset function
+    - Added Game Over Screen that appears when player health is no longer positive
   * Changed:
     - Changed Arc Projectile code to use time instead of speed
     - Changed Tower Blueprint to abstract only using one prefab
@@ -15,6 +16,7 @@
 
 ### v 0.06.0 - 10/20/2026
   * Added:
+    - Added Change Log
     - Added walking animation to enemies
     - Added firing animations to Archer Tower
     - Added grid on screen to show available tower placing locations
