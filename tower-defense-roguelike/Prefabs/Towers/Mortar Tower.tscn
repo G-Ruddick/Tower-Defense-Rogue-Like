@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/ArcProjectile.cs" id="3_u3mnp"]
 [ext_resource type="Texture2D" uid="uid://cr88gq5ni0ycl" path="res://Textures/Mortar Tower.png" id="4_judl5"]
 [ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_u2mxk"]
-[ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="6_xh3gu"]
+[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="6_xh3gu"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="7_rc2rl"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="8_jwu75"]
 
@@ -41,6 +41,9 @@ animations = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
 size = Vector3(0.064, 0.064, 0.064)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dv6u4"]
+radius = 0.25
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3mnp"]
 atlas = ExtResource("4_judl5")
@@ -129,9 +132,9 @@ rangeSprite = NodePath("Range Sprite")
 script = ExtResource("2_t4fi4")
 numberOfAttacks = 1
 damage = 15
-projectileSpeed = 10.0
-reloadTime = 2.0
-projectilePoolSize = 5
+travelTime = 1.0
+reloadTime = 3.0
+projectilePoolSize = 3
 attackArea = NodePath("Attack Range")
 attackRange = NodePath("Attack Range/CollisionShape3D")
 projectile = NodePath("Projectiles/Mortar Shell")
@@ -147,10 +150,11 @@ input_ray_pickable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Tower Class/Attack Range" unique_id=673916723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("CylinderShape3D_sacsp")
+debug_color = Color(1, 0, 0, 0.42000002)
 
 [node name="Projectiles" type="Node3D" parent="Attack Tower Class" unique_id=335103201]
 
-[node name="Mortar Shell" type="RigidBody3D" parent="Attack Tower Class/Projectiles" unique_id=29258021 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "baseCollision", "projectileArea")]
+[node name="Mortar Shell" type="RigidBody3D" parent="Attack Tower Class/Projectiles" unique_id=29258021 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "baseCollision", "projectileArea", "AOEArea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89207745, 0)
 visible = false
 collision_layer = 0
@@ -158,9 +162,11 @@ collision_mask = 0
 lock_rotation = true
 script = ExtResource("3_u3mnp")
 diagonalCollision = NodePath("Area/straight")
+hitType = 2
 projectileSprite = NodePath("Sprite")
 baseCollision = NodePath("Area/straight")
 projectileArea = NodePath("Area")
+AOEArea = NodePath("AOE Area")
 
 [node name="rigidbodyshape" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Mortar Shell" unique_id=2040285079]
 shape = SubResource("BoxShape3D_pe01b")
@@ -168,6 +174,7 @@ shape = SubResource("BoxShape3D_pe01b")
 [node name="Sprite" type="AnimatedSprite3D" parent="Attack Tower Class/Projectiles/Mortar Shell" unique_id=769067434]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
 offset = Vector2(0, 0.5)
+alpha_cut = 2
 texture_filter = 0
 render_priority = 6
 sprite_frames = SubResource("SpriteFrames_dv6u4")
@@ -175,14 +182,27 @@ animation = &"Straight"
 
 [node name="Area" type="Area3D" parent="Attack Tower Class/Projectiles/Mortar Shell" unique_id=1069640228]
 collision_layer = 0
-collision_mask = 12
+collision_mask = 4
+monitorable = false
 
 [node name="straight" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Mortar Shell/Area" unique_id=2086062022]
 shape = SubResource("BoxShape3D_dv6u4")
 
+[node name="AOE Area" type="Area3D" parent="Attack Tower Class/Projectiles/Mortar Shell" unique_id=1821109649]
+visible = false
+collision_layer = 0
+collision_mask = 8
+input_ray_pickable = false
+monitorable = false
+
+[node name="HitBox" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Mortar Shell/AOE Area" unique_id=1480335297]
+shape = SubResource("SphereShape3D_dv6u4")
+debug_color = Color(1, 0, 0, 0.42000002)
+
 [node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
 offset = Vector2(0, 16)
+alpha_cut = 2
 texture_filter = 0
 render_priority = 5
 texture = ExtResource("4_judl5")
@@ -190,12 +210,13 @@ region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
 
 [node name="Cannon" type="AnimatedSprite3D" parent="." unique_id=1960342473]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.218, 0.16)
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.266, 0.16)
 offset = Vector2(0, 7.25)
+alpha_cut = 2
 texture_filter = 0
-render_priority = 6
+render_priority = 5
 sprite_frames = SubResource("SpriteFrames_sacsp")
-animation = &"Side Fire"
+animation = &"Front Fire"
 
 [node name="Range Sprite" type="Sprite3D" parent="." unique_id=284350971]
 transform = Transform3D(0.78, 0, 0, 0, -3.409488e-08, -0.78, 0, 0.78, -3.409488e-08, 0, 0, 0)

@@ -51,7 +51,7 @@ public partial class ShopIcon : Node2D {
 		blueprint.Position = screenPos;
 
 		blueprint.towerName = name;
-		blueprint.towerNameLabel.Text = name;
+		blueprint.towerNameLabel.Text = name.Replace(" Tower", "");
 		blueprint.buyCostLabel.Text = TowerStats.TowerDictionary[name].buyPrice.ToString();
 		blueprint.useCostLabel.Text = TowerStats.TowerDictionary[name].usePrice.ToString();
 

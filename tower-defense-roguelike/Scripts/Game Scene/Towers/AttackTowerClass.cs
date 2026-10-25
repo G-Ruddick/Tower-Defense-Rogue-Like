@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 
 public partial class AttackTowerClass : Node3D {
-	private int enemyLayer = 1 << 2;
 	private List<EnemyClass> enemyTargets = new List<EnemyClass>();
 
 	private List<ProjectileClass> projectilePool = new List<ProjectileClass>();
@@ -11,7 +10,7 @@ public partial class AttackTowerClass : Node3D {
 	[ExportCategory("Variables")]
 	[Export] public int numberOfAttacks;
 	[Export] public int damage;
-	[Export] public float projectileSpeed;
+	[Export] public float travelTime;
 	[Export] public float reloadTime;
 	[Export] public int projectilePoolSize;
 	[Export] public bool enabled;
@@ -35,6 +34,8 @@ public partial class AttackTowerClass : Node3D {
 	}
 
 	public override void _Process(double delta) {
+		rangeSprite.Scale = Vector3.One * 0.312f * (attackRange.Shape as CylinderShape3D).Radius;
+
 		for (int i = projectilePool.Count - 1; i >= 0; i--) {
 			if (i > projectilePoolSize && projectilePool[i].Visible == false) {
 				projectilePool[i].QueueFree();
@@ -44,13 +45,20 @@ public partial class AttackTowerClass : Node3D {
 	}
 
 	private void OnRangeEnter(Node3D body) {
-		if (body is Area3D enemyLayer) {
-			enemyTargets.Add(body.GetParent() as EnemyClass);
+		GD.Print(body + " entered");
+		if (body is Area3D) {
+			EnemyClass enemy = body.GetParent() as EnemyClass;
+
+			if (enemy == null) {
+				return;
+			}
+
+			enemyTargets.Add(enemy);
 		}
 	}
 	
 	private void OnRangeExit(Node3D body) {
-		if (body is Area3D enemyLayer) {
+		if (body is Area3D) {
 			// GD.Print("enemy exited");
 
 			for (int i = 0; i < enemyTargets.Count; i++) {
@@ -85,10 +93,14 @@ public partial class AttackTowerClass : Node3D {
 					overflow++;
 				}
 
+				if (enemyTargets[i - overflow] == null) {
+					continue;
+				}
+
 				for (int j = 0; j < projectilePool.Count; j++) {
 					if (projectilePool[j].Visible == false) {
 						SetAttackerDirection(projectileStartingPositions[i], enemyTargets[i - overflow].GlobalPosition);
-						projectilePool[j].FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
+						projectilePool[j].FireProjectile(damage, travelTime, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
 						fired = true;
 						break;
 					}
@@ -100,7 +112,7 @@ public partial class AttackTowerClass : Node3D {
 					parentProjectile.AddChild(newProjectile);
 
 					SetAttackerDirection(projectileStartingPositions[i], enemyTargets[i - overflow].GlobalPosition);
-					newProjectile.FireProjectile(damage, projectileSpeed, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
+					newProjectile.FireProjectile(damage, travelTime, projectileStartingPositions[i].Position, enemyTargets[i - overflow]);
 				}
 			}
 		}

@@ -53,10 +53,6 @@ public partial class TowerBlueprint : Node2D {
 
 	public override void _Input(InputEvent @event) {
 		if (@event.IsActionPressed("Select")) {
-			foreach(Node i in PlayerManager.instance.playerTowersNode.GetChildren()) {
-				GD.Print(i.Name);
-			}
-
 			if (SellButton.GetClickability()) {
 				SellTower();
 				return;
@@ -68,10 +64,6 @@ public partial class TowerBlueprint : Node2D {
 			}
 		}
 	}
-
-	// public override void _ExitTree() {
-	// 	PlayerManager.instance.CallDeferred(nameof(PlayerManager.instance.UpdateTowers));
-	// }
 
 	public string GetTowerName() {
 		return towerName;
@@ -136,7 +128,7 @@ public partial class TowerBlueprint : Node2D {
 		PlayerManager.instance.playerTowersNode.AddChild(blueprint);
 
 		blueprint.towerName = name;
-		blueprint.towerNameLabel.Text = name;
+		blueprint.towerNameLabel.Text = name.Replace(" Tower", "");
 		blueprint.towerCostLabel.Text = TowerStats.TowerDictionary[name].usePrice.ToString();
 
 		blueprint.icon.RegionRect = GetSprite(blueprint);
