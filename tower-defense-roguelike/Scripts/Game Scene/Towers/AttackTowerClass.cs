@@ -45,7 +45,6 @@ public partial class AttackTowerClass : Node3D {
 	}
 
 	private void OnRangeEnter(Node3D body) {
-		GD.Print(body + " entered");
 		if (body is Area3D) {
 			EnemyClass enemy = body.GetParent() as EnemyClass;
 

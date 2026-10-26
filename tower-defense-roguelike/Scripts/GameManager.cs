@@ -13,7 +13,7 @@ public partial class GameManager: Node {
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
-	[Export] private TowerClass towerIcon;
+	private TowerClass towerIcon;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
@@ -37,10 +37,7 @@ public partial class GameManager: Node {
 	}
 
 	public override void _Process(double delta) {
-		// updating labels to the game state
-		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
-		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
-		waveNumberLabel.Text = "Wave\n" + waveNumber;
+		UpdateStats();
 
 		// handling quick reset
 		if (Input.IsActionPressed("Reset")) {
@@ -175,6 +172,12 @@ public partial class GameManager: Node {
 		Shop.instance.Reroll(false);
 
 		waveNumber++;
+	}
+
+	private void UpdateStats() {
+		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
+		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
+		waveNumberLabel.Text = "Wave\n" + waveNumber;
 	}
 
 	private void DisableUI() {
