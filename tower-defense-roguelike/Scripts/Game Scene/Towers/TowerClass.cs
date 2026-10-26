@@ -80,13 +80,10 @@ public partial class TowerClass : Node3D {
 		}
 	}
 
-	public void DisableTowerElements() {
-		if (attackClass != null) { 
-			attackClass.Visible = false;
-			attackClass.attackRange.Visible = false;
-		}
-		if (generateClass != null) { generateClass.enabled = false; }
-		if (troopClass != null) { troopClass.enabled = false; }
+	public void RemoveTowerElements() {
+		if (attackClass != null) { attackClass.QueueFree(); }
+		if (generateClass != null) { generateClass.QueueFree(); }
+		if (troopClass != null) { troopClass.QueueFree(); }
 
 	}
 	
@@ -98,7 +95,7 @@ public partial class TowerClass : Node3D {
 	}
 
 	public void SetTowerAsCursorObject() {
-		DisableTowerElements();
+		RemoveTowerElements();
 		towerRadius.QueueFree();
 
 		if (attackClass != null) {

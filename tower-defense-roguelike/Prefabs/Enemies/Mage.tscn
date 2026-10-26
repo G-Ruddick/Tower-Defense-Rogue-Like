@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bamao4ro4cbux" path="res://Scripts/Game Scene/Enemies/EnemyClass.cs" id="1_rmgw6"]
 [ext_resource type="Texture2D" uid="uid://cicac2iaejrga" path="res://Textures/Mage.png" id="2_rmgw6"]
-[ext_resource type="Script" uid="uid://c7k24p5x6uykl" path="res://Scripts/Game Scene/Towers/AssetUiScreenFollow.cs" id="3_1j6gt"]
+[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="3_1j6gt"]
 [ext_resource type="Texture2D" uid="uid://rnq7ddx163r1" path="res://Textures/Enemy Health Bar.png" id="4_sk4x0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1j6gt"]
@@ -122,6 +122,7 @@ healthbarPercent = NodePath("Enemy UI/Enemy Health Bar Slider/Health")
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
 offset = Vector2(0, 8)
 modulate = Color(0.51, 0.51, 0.51, 1)
+alpha_cut = 2
 texture_filter = 0
 render_priority = 5
 sprite_frames = SubResource("SpriteFrames_dv6u4")

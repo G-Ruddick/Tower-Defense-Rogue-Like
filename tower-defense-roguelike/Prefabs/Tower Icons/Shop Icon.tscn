@@ -40,16 +40,16 @@ size = Vector2(56, 24)
 [node name="ShopIcon" type="Node2D" unique_id=1170776714 node_paths=PackedStringArray("icon", "costButton", "towerNameLabel", "buyCostLabel", "useCostLabel")]
 scale = Vector2(4, 4)
 script = ExtResource("1_dldce")
-icon = NodePath("ArcherTower")
+icon = NodePath("Tower")
 costButton = NodePath("Purchase Button")
 towerNameLabel = NodePath("Name")
 buyCostLabel = NodePath("Purchase Button/Button Text")
 useCostLabel = NodePath("Cost")
 
-[node name="ArcherTower" type="Sprite2D" parent="." unique_id=1169485659]
+[node name="Tower" type="Sprite2D" parent="." unique_id=1169485659]
 texture = SubResource("CompressedTexture2D_ba1qt")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+region_rect = Rect2(64, 0, 32, 32)
 
 [node name="Name" type="Label" parent="." unique_id=287959756]
 anchors_preset = 5

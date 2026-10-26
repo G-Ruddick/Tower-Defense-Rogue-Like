@@ -26,6 +26,8 @@ public partial class PlayerManager : Node {
 		maxNumberOfTowers = 5;
 
 		towers.Add("Archer Tower");
+		towers.Add("Mortar Tower");
+		towers.Add("Mage Tower");
 		UpdateTowers();
 	}
 	
@@ -53,53 +55,60 @@ public partial class PlayerManager : Node {
 
 	// adding towers to the players inventory
 	public void UpdateTowers() {
-		float x = 102f, x1 = 380f, x2 = 788f;
-		Vector2 position = new Vector2(0, 96);
-
 		// resetting towers
-		foreach (TowerIcon tower in playerTowersNode.GetChildren()) {
+		foreach (TowerBlueprint tower in playerTowersNode.GetChildren()) {
 			tower.QueueFree();
 		}
 
 		for(int i = 0; i < towers.Count; i++) {
-			// creating icon
-			PackedScene icon = GD.Load<PackedScene>("res://Prefabs/Tower Icons/" + towers[i] + " Icon.tscn");
-			TowerIcon newIcon = (TowerIcon)icon.Instantiate();
-			newIcon.Name = towers[i];
-			playerTowersNode.AddChild(newIcon);
+			TowerBlueprint blueprint = TowerBlueprint.CreateBlueprint(towers[i]);
 
-			// positioning icon;
-			if (towers.Count % 2 == 1) {
-				if (i == (float)towers.Count / 2) {
-					position.X = (x2 + x1) / 2;
-				}
-				else if (i < (float)towers.Count / 2) {
-					position.X = ((x2 + x1) / 2) - (x * i);
-				}
-				else if (i > (float)towers.Count / 2) {
-					position.X = (x2 + x1) / 2 + (x * (towers.Count - i));
-				}
-			}
-			else {
-				if (i <= towers.Count / 2) {
-					position.X = (x2 + x1) / 2 - (x * (towers.Count / 2 - i)) + (x / 2);
-				}
-				else if (i > towers.Count / 2) {
-					position.X = x1 + (x * i) + (x / 2);
-				}
-			}
-
-			newIcon.Position = position;
+			blueprint.Position = PositionBlueprint(i);
 		}
 	}
 
-	public TowerIcon GetActiveTower() {
-		foreach(TowerIcon tower in playerTowersNode.GetChildren()) {
+	private Vector2 PositionBlueprint(int index) {
+		float x = 102f, x1 = 380f, x2 = 788f;
+		Vector2 position = new Vector2(0, 96);
+
+		if (towers.Count % 2 == 1) {
+			if (index == (float)towers.Count / 2) {
+				position.X = (x2 + x1) / 2;
+			}
+			else if (index < (float)towers.Count / 2) {
+				position.X = ((x2 + x1) / 2) - (x * index);
+			}
+			else if (index > (float)towers.Count / 2) {
+				position.X = (x2 + x1) / 2 + (x * (towers.Count - index));
+			}
+		}
+		else {
+			if (index <= towers.Count / 2) {
+				position.X = (x2 + x1) / 2 - (x * (towers.Count / 2 - index)) + (x / 2);
+			}
+			else if (index > towers.Count / 2) {
+				position.X = x1 + (x * index) + (x / 2);
+			}
+		}
+
+		return position;
+	}
+
+	public TowerBlueprint GetActiveTower() {
+		foreach(TowerBlueprint tower in playerTowersNode.GetChildren()) {
 			if (tower.GetPlaceable()) {
 				return tower;
 			}
 		}
 
 		return null;
+	}
+	
+	public void SetTowersInactive(TowerBlueprint blueprint = null) {
+		foreach(TowerBlueprint tower in playerTowersNode.GetChildren()) {
+			if (tower.GetPlaceable() && tower != blueprint) {
+				tower.ChangePlaceable();
+			}
+		}
 	}
 }

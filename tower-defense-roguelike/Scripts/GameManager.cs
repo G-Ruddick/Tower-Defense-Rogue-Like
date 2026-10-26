@@ -6,13 +6,14 @@ public partial class GameManager: Node {
 	private bool movingScreen;
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
+	private float resetTimer = 0f;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
 	[ExportCategory("Scene Components")]
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
-	[Export] private TowerClass towerIcon;
+	private TowerClass towerIcon;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
@@ -36,10 +37,19 @@ public partial class GameManager: Node {
 	}
 
 	public override void _Process(double delta) {
-		// updating labels to the game state
-		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
-		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
-		waveNumberLabel.Text = "Wave\n" + waveNumber;
+		UpdateStats();
+
+		// handling quick reset
+		if (Input.IsActionPressed("Reset")) {
+			resetTimer += (float)delta;
+
+			if (resetTimer >= 1f) {
+				QuickReset();
+			}
+		}
+		if (Input.IsActionJustReleased("Reset")) {
+			resetTimer = 0;
+		}
 				
 		// checking for tower placement
 		if (PlayerManager.instance.GetActiveTower() != null) {
@@ -51,12 +61,7 @@ public partial class GameManager: Node {
 					towerIcon.QueueFree(); 
 				}
 
-				PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
-				towerIcon = (TowerClass)prefab.Instantiate();
-				towerIcon.Name = "cursor icon";
-				PlayerManager.instance.AddChild(towerIcon);
-				
-				towerIcon.SetTowerAsCursorObject();
+				CreateTowerCursor();
 			}
 
 			var query = GetQuery();
@@ -82,12 +87,17 @@ public partial class GameManager: Node {
 			if (settingsButton.GetClickability()) {
 				SettingsMenu.instance.Visible = true;
 				DisableUI();
+				return;
 			}
+
 			if (SettingsMenu.instance.returnButton.GetClickability()) {
 				DisableUI();
+				return;
 			}
+
 			if (nextWaveButton.GetClickability()) {
 				NextWaveButton();
+				return;
 			}
 
 			// map interactions
@@ -98,12 +108,12 @@ public partial class GameManager: Node {
 				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 				if (result.Count > 0) {
 					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-					GD.Print(gameAsset.Name);
-					GD.Print(gameAsset.Position);
+					// GD.Print(gameAsset.Name);
+					// GD.Print(gameAsset.Position);
 
 					if (gameAsset.Name.ToString().Contains("Grass")) {
 						// placing tower
-						TowerIcon tower = PlayerManager.instance.GetActiveTower();
+						TowerBlueprint tower = PlayerManager.instance.GetActiveTower();
 						if (tower != null) {
 							if (!TowerClass.BuyTower(gameAsset.Position, tower.GetTowerName())) {
 								tower.DisableIcon();
@@ -140,6 +150,20 @@ public partial class GameManager: Node {
 		}
 	}
 
+	private void QuickReset() {
+		GD.Print("Reloading Game Scene");
+		GetTree().ReloadCurrentScene();
+	}
+
+	private void CreateTowerCursor(){
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
+		towerIcon = (TowerClass)prefab.Instantiate();
+		towerIcon.Name = "cursor icon";
+		PlayerManager.instance.AddChild(towerIcon);
+		
+		towerIcon.SetTowerAsCursorObject();
+	}
+
 	private void NextWaveButton() {
 		nextWaveButton.Visible = false;
 		Shop.instance.shopOpen = true;
@@ -148,6 +172,12 @@ public partial class GameManager: Node {
 		Shop.instance.Reroll(false);
 
 		waveNumber++;
+	}
+
+	private void UpdateStats() {
+		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
+		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
+		waveNumberLabel.Text = "Wave\n" + waveNumber;
 	}
 
 	private void DisableUI() {

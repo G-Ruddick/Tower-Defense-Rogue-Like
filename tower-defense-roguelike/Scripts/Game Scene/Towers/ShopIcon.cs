@@ -51,20 +51,27 @@ public partial class ShopIcon : Node2D {
 		blueprint.Position = screenPos;
 
 		blueprint.towerName = name;
-		blueprint.towerNameLabel.Text = name;
+		blueprint.towerNameLabel.Text = name.Replace(" Tower", "");
 		blueprint.buyCostLabel.Text = TowerStats.TowerDictionary[name].buyPrice.ToString();
 		blueprint.useCostLabel.Text = TowerStats.TowerDictionary[name].usePrice.ToString();
 
-		// getting texture location
+		blueprint.icon.RegionRect = GetSprite(blueprint);
+	}
+
+	private static Rect2 GetSprite(ShopIcon blueprint) {
 		Rect2 iconLocation  = new Rect2(0, 0, 32, 32);
 		float textureWidth = blueprint.icon.Texture.GetWidth() / 32;
-		iconLocation.Position = new Vector2(TowerStats.TowerDictionary[name].index % textureWidth, 0);
-		while(textureWidth > (blueprint.icon.Texture.GetWidth() / 32)) {
-			iconLocation.Position = iconLocation.Position + new Vector2(0, 1);
-			textureWidth -= blueprint.icon.Texture.GetWidth() / 32;
+		float xValue = TowerStats.TowerDictionary[blueprint.towerName].index % textureWidth;
+		iconLocation.Position = new Vector2(xValue * 32, 0);
+
+		float y = TowerStats.TowerDictionary[blueprint.towerName].index;
+
+		while(y >= textureWidth) {
+			iconLocation.Position = iconLocation.Position + new Vector2(0, 32);
+			y -= textureWidth;
 		}
 
-		blueprint.icon.RegionRect = iconLocation;
+		return iconLocation;
 	}
 
 	private void PurchaseBlueprint() {

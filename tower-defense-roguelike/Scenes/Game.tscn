@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
+[ext_resource type="Script" uid="uid://bejreh4w4qfip" path="res://Scripts/Game Scene/GameOver.cs" id="9_bf53h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
 atlas = ExtResource("4_b2bpf")
@@ -20,35 +21,6 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
 atlas = ExtResource("4_b2bpf")
 region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7lihs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igacv")
-}],
-"loop": 1,
-"name": &"Default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_07l45")
-}],
-"loop": 1,
-"name": &"Disabled",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnbs0")
-}],
-"loop": 1,
-"name": &"Mouse Inside",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgofq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
 animations = [{
@@ -78,6 +50,35 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7lihs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igacv")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07l45")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbs0")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgofq"]
 
 [node name="Game" type="Node3D" unique_id=1162375626]
 
@@ -215,41 +216,6 @@ offset_bottom = 39.291687
 theme_override_font_sizes/font_size = 26
 text = "Abilities"
 
-[node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
-offset_left = 1146.9999
-offset_top = 5.0
-offset_right = 1169.7499
-offset_bottom = 29.17
-rotation = 1.5707964
-scale = Vector2(3.105, 3.105)
-mouseInsideAnimation = "Mouse Inside"
-inactiveAnimation = "Disabled"
-defaultAnimation = "Default"
-
-[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
-position = Vector2(11.448314, 12.122387)
-scale = Vector2(0.40387118, 1)
-sprite_frames = SubResource("SpriteFrames_7lihs")
-animation = &"Disabled"
-
-[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
-offset_left = -16.74718
-offset_top = 0.09230423
-offset_right = 39.25282
-offset_bottom = 24.092304
-scale = Vector2(1.0035818, 1)
-theme_override_font_sizes/font_size = 9
-text = "|||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
-position = Vector2(11.448314, 12.122387)
-scale = Vector2(1.1308471, 1.2)
-
-[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
-shape = SubResource("RectangleShape2D_fgofq")
-
 [node name="Next Wave Button" parent="UI" unique_id=555688118 instance=ExtResource("3_kldst")]
 offset_left = 1074.0001
 offset_top = 563.0
@@ -287,11 +253,192 @@ priority = 100
 [node name="Area Shape" parent="UI/Next Wave Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_2irst")
 
+[node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
+offset_left = 1146.9999
+offset_top = 5.0
+offset_right = 1169.7499
+offset_bottom = 29.17
+rotation = 1.5707964
+scale = Vector2(3.105, 3.105)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+position = Vector2(11.448314, 12.122387)
+scale = Vector2(0.40387118, 1)
+sprite_frames = SubResource("SpriteFrames_7lihs")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
+offset_left = -16.74718
+offset_top = 0.09230423
+offset_right = 39.25282
+offset_bottom = 24.092304
+scale = Vector2(1.0035818, 1)
+theme_override_font_sizes/font_size = 9
+text = "|||"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
+position = Vector2(11.448314, 12.122387)
+scale = Vector2(1.1308471, 1.2)
+
+[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_fgofq")
+
+[node name="Game Over Screen" type="Control" parent="UI" unique_id=1476551975 node_paths=PackedStringArray("restartButton", "quitButton")]
+process_mode = 3
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+script = ExtResource("9_bf53h")
+restartButton = NodePath("Restart Button")
+quitButton = NodePath("Quit Button")
+
+[node name="BackBoard" type="Sprite2D" parent="UI/Game Over Screen" unique_id=853573546]
+process_mode = 3
+modulate = Color(0.09923177, 0.09923177, 0.09923177, 0.9019608)
+position = Vector2(576, 324)
+scale = Vector2(17.999998, 25.92)
+texture = ExtResource("7_fgofq")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 25)
+
+[node name="Button Text" type="Label" parent="UI/Game Over Screen" unique_id=1684075254]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.5
+offset_top = -267.0
+offset_right = 271.5
+offset_bottom = -127.41667
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart Button" parent="UI/Game Over Screen" unique_id=580980688 instance=ExtResource("3_kldst")]
+process_mode = 3
+layout_mode = 0
+offset_left = 590.0
+offset_top = 379.00003
+offset_right = 612.20996
+offset_bottom = 403.14005
+scale = Vector2(5.3200016, 5.3200016)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Game Over Screen/Restart Button" index="0" unique_id=947915153]
+process_mode = 3
+position = Vector2(11.120315, 12.112779)
+scale = Vector2(1.9264168, 1)
+sprite_frames = SubResource("SpriteFrames_fgofq")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Game Over Screen/Restart Button" index="1" unique_id=1737478061]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.7575
+offset_top = -11.927501
+offset_right = 49.7575
+offset_bottom = 11.927501
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 16
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Game Over Screen/Restart Button" index="2" unique_id=116881939]
+process_mode = 3
+position = Vector2(11.120316, 12.11278)
+scale = Vector2(5.3940043, 1.2)
+priority = 100
+
+[node name="Area Shape" parent="UI/Game Over Screen/Restart Button/Button Area" index="0" unique_id=465698970]
+process_mode = 3
+shape = SubResource("RectangleShape2D_2irst")
+
+[node name="Quit Button" parent="UI/Game Over Screen" unique_id=2070790799 instance=ExtResource("3_kldst")]
+process_mode = 3
+layout_mode = 0
+offset_left = 590.0
+offset_top = 521.0
+offset_right = 612.20996
+offset_bottom = 545.14
+scale = Vector2(5.3200016, 5.3200016)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Game Over Screen/Quit Button" index="0" unique_id=947915153]
+process_mode = 3
+position = Vector2(11.120315, 12.112779)
+scale = Vector2(1.9264168, 1)
+sprite_frames = SubResource("SpriteFrames_fgofq")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Game Over Screen/Quit Button" index="1" unique_id=1737478061]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.7575
+offset_top = -11.927501
+offset_right = 49.7575
+offset_bottom = 11.927501
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 16
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Game Over Screen/Quit Button" index="2" unique_id=116881939]
+process_mode = 3
+position = Vector2(11.120316, 12.11278)
+scale = Vector2(5.3940043, 1.2)
+priority = 100
+
+[node name="Area Shape" parent="UI/Game Over Screen/Quit Button/Button Area" index="0" unique_id=465698970]
+process_mode = 3
+shape = SubResource("RectangleShape2D_2irst")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 2.985, 4.358, 7.816241)
 projection = 1
 size = 3.667
 near = 0.001
 
-[editable path="UI/Settings Button"]
 [editable path="UI/Next Wave Button"]
+[editable path="UI/Settings Button"]
+[editable path="UI/Game Over Screen/Restart Button"]
+[editable path="UI/Game Over Screen/Quit Button"]
