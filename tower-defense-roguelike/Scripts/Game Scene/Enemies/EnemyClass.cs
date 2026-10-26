@@ -107,7 +107,7 @@ public partial class EnemyClass : Node3D {
 
 	public void LifeSteal() {
 		PlayerManager.instance.ChangeLives(-lifeSteal);
-		GD.Print("Despawning enemy");
+		// GD.Print("Despawning enemy");
 		this.QueueFree();
 	}
 }

@@ -80,12 +80,9 @@ public partial class Shop : Control {
 			string name = "";
 			while (name == "") {
 				int index  = (int)GD.RandRange(0, availableTowers.Count - 1);
-				GD.Print(index);
 				name = availableTowers[index];
 
 				for (int j = 0; j < PlayerManager.instance.towers.Count; j++) {
-					GD.Print(name);
-					GD.Print(PlayerManager.instance.towers[j]);
 					if (name == PlayerManager.instance.towers[j]) {
 						name = "";
 						availableTowers.Remove(availableTowers[index]);

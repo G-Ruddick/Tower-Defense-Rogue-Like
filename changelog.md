@@ -1,5 +1,15 @@
 # Change Log
 
+### v 0.07.0 - 10/27/2026
+  * Added Mortar Tower
+    - Added AOE projectile that can ether explode on conact or only on the ground
+  * Changed Arc Projectile code to use time instead of speed
+  * Bug Fix: Shop Icon not using correct icon positioning when being created
+  * Changed Tower Blueprint to abstract only using one prefab
+    - Deleted Archer Tower Icon prefab
+  * 
+  * 
+
 ### v 0.06.0 - 10/20/2026
   * Added walking animation to enemies
   * Bug fix menu pause screen quitting game instead of returning to title

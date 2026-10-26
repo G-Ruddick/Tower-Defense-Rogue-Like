@@ -82,12 +82,17 @@ public partial class GameManager: Node {
 			if (settingsButton.GetClickability()) {
 				SettingsMenu.instance.Visible = true;
 				DisableUI();
+				return;
 			}
+
 			if (SettingsMenu.instance.returnButton.GetClickability()) {
 				DisableUI();
+				return;
 			}
+
 			if (nextWaveButton.GetClickability()) {
 				NextWaveButton();
+				return;
 			}
 
 			// map interactions
@@ -98,12 +103,12 @@ public partial class GameManager: Node {
 				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 				if (result.Count > 0) {
 					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-					GD.Print(gameAsset.Name);
-					GD.Print(gameAsset.Position);
+					// GD.Print(gameAsset.Name);
+					// GD.Print(gameAsset.Position);
 
 					if (gameAsset.Name.ToString().Contains("Grass")) {
 						// placing tower
-						TowerIcon tower = PlayerManager.instance.GetActiveTower();
+						TowerBlueprint tower = PlayerManager.instance.GetActiveTower();
 						if (tower != null) {
 							if (!TowerClass.BuyTower(gameAsset.Position, tower.GetTowerName())) {
 								tower.DisableIcon();

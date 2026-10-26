@@ -31,26 +31,24 @@ public partial class ArcProjectile : ProjectileClass {
 		}
 	}
 
-	public override async void FireProjectile(int damage, float speed, Vector3 startPosition, EnemyClass target) {
+	public override async void FireProjectile(int damage, float travelTime, Vector3 startPosition, EnemyClass target) {
 		this.Visible = true;
 		this.damage = damage;
-		this.speed = speed;
+		this.travelTime = travelTime;
 		this.Position = startPosition;
 		this.target = target;
 		this.GravityScale = 1f;
 
 		float gravity = (float)ProjectSettings.GetSetting("physics/3d/default_gravity") * this.GravityScale;
 
-		Vector3 displacement = Vector3.Up * (target.enemyHitbox.GlobalPosition.Y - this.GlobalPosition.Y);
-		displacement.X = MathF.Sqrt(MathF.Pow(target.enemyHitbox.GlobalPosition.X - this.GlobalPosition.X, 2) + MathF.Pow(target.enemyHitbox.GlobalPosition.Z - this.GlobalPosition.Z, 2));
-		float direction = MathF.Atan(((speed * speed) - MathF.Sqrt(MathF.Pow(speed, 4) - gravity * (gravity * MathF.Pow(displacement.X, 2) + 2 * displacement.Y * MathF.Pow(speed, 2)))) / (gravity * displacement.X));
+		Vector3 distance = target.enemyHitbox.GlobalPosition - this.GlobalPosition;
 
-		Vector3 velocity = Vector3.Zero;
-		velocity.X = MathF.Cos(direction) * (target.enemyHitbox.GlobalPosition.X - this.GlobalPosition.X) / displacement.X;
-		velocity.Y = MathF.Sin(direction);
-		velocity.Z = MathF.Cos(direction) * (target.enemyHitbox.GlobalPosition.Z - this.GlobalPosition.Z) / displacement.X;
+		Vector3 velocity = distance / travelTime;
+		float vy = (distance.Y + 0.5f * gravity * travelTime * travelTime) / travelTime;
+		velocity = new Vector3(velocity.X, vy, velocity.Z);
+		float vh = Mathf.Sqrt(distance.X * distance.X * distance.Z * distance.Z);
 
-		this.LinearVelocity = velocity.Normalized() * speed;
+		this.LinearVelocity = velocity;
 
 		await ToSignal(GetTree().CreateTimer(2.0f), "timeout");
 		this.Visible = false;
