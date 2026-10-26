@@ -27,6 +27,7 @@ public partial class PlayerManager : Node {
 
 		towers.Add("Archer Tower");
 		towers.Add("Mortar Tower");
+		towers.Add("Mage Tower");
 		UpdateTowers();
 	}
 	

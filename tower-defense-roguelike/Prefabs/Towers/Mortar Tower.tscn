@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_judl5"]
 [ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_t4fi4"]
-[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/ArcProjectile.cs" id="3_u3mnp"]
+[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/Projectiles/ArcProjectile.cs" id="3_u3mnp"]
 [ext_resource type="Texture2D" uid="uid://cr88gq5ni0ycl" path="res://Textures/Mortar Tower.png" id="4_judl5"]
 [ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_u2mxk"]
 [ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="6_xh3gu"]

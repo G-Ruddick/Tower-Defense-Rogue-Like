@@ -4,12 +4,15 @@
   * Added:
     - Added Mortar Tower
       - Added AOE projectile that can ether explode on conact or only on the ground
+    - Added Mage Tower
+      - Added Homing projectile that follows enemy until it hits target
     - Added quick reset function
     - Added Game Over Screen that appears when player health is no longer positive
   * Changed:
     - Changed Arc Projectile code to use time instead of speed
     - Changed Tower Blueprint to abstract only using one prefab
       - Deleted Archer Tower Icon prefab
+    - Increased Archer Tower Range
   * Bug Fix: 
     - Shop icon now shows correct tower icon
     - Grid no longer appears on game load and reset

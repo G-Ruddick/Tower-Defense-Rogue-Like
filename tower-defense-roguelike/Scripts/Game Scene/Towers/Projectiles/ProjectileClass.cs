@@ -77,15 +77,21 @@ public partial class ProjectileClass : RigidBody3D {
 		if (body is Area3D) {
 			EnemyClass enemy = body.GetParent<Node3D>() as EnemyClass;
 
-			if (enemy != null && enemy == target) {
+			if (enemy != null) {
+				if (enemy != target) {
+					return;
+				}
+
 				enemy.TakeDamage(damage);
 			}
 		}
 		else {
-			this.LinearVelocity = Vector3.Zero;
+			// this.LinearVelocity *= 0;
 			await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 		}
 
+		target = null;
+		this.LinearVelocity *= 0;
 		this.Visible = false;
 	}
 	

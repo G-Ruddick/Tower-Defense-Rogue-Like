@@ -1,0 +1,347 @@
+[gd_scene format=3 uid="uid://cw2gt22gjbjal"]
+
+[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_55psy"]
+[ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_evycg"]
+[ext_resource type="Script" uid="uid://bq4aogty11xuv" path="res://Scripts/Game Scene/Towers/Projectiles/HomingProjectile.cs" id="3_55psy"]
+[ext_resource type="Texture2D" uid="uid://ccvt8vmsmjrbl" path="res://Textures/Mage Tower.png" id="4_evycg"]
+[ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_pkcch"]
+[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="6_quu8j"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="7_tnnje"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="8_6pa2k"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
+height = 0.64
+radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pe01b"]
+size = Vector3(0.01, 0.01, 0.01)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0api"]
+atlas = ExtResource("4_evycg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o40fn"]
+atlas = ExtResource("4_evycg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onmp0"]
+atlas = ExtResource("4_evycg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0api")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onmp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}],
+"loop": 1,
+"name": &"Diagonal",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0api")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onmp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}],
+"loop": 1,
+"name": &"Straight",
+"speed": 15.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv6u4"]
+size = Vector3(0.06, 0.06, 0.06)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jfqf"]
+atlas = ExtResource("4_evycg")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcuxl"]
+atlas = ExtResource("4_evycg")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s6sp"]
+atlas = ExtResource("4_evycg")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8brh"]
+atlas = ExtResource("4_evycg")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t316y"]
+atlas = ExtResource("4_evycg")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ksbr"]
+atlas = ExtResource("4_evycg")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcuxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8brh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t316y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ksbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}],
+"loop": 0,
+"name": &"Back Fire",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcuxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8brh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t316y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ksbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}],
+"loop": 0,
+"name": &"Front Fire",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcuxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8brh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t316y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ksbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}],
+"loop": 0,
+"name": &"Side Fire",
+"speed": 2.5
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sacsp"]
+size = Vector3(0.32, 0.16, 0.32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("8_6pa2k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("8_6pa2k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iu15y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1r4k"]
+size = Vector2(56, 24)
+
+[node name="Mage Tower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("attackClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
+script = ExtResource("1_55psy")
+towerName = "Archer Tower"
+towerCost = 50
+attackClass = NodePath("Attack Tower Class")
+towerSprite = NodePath("TowerSprite")
+towerRadius = NodePath("TowerSize")
+UIElement = NodePath("Tower UI")
+sellButton = NodePath("Tower UI/Sell Button")
+rangeSprite = NodePath("Range Sprite")
+
+[node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "parentProjectile", "projectileStartingPositions", "rangeSprite")]
+script = ExtResource("2_evycg")
+numberOfAttacks = 1
+damage = 5
+travelTime = 3.0
+reloadTime = 2.0
+projectilePoolSize = 4
+attackArea = NodePath("Attack Range")
+attackRange = NodePath("Attack Range/CollisionShape3D")
+projectile = NodePath("Projectiles/Spell")
+parentProjectile = NodePath("Projectiles")
+projectileStartingPositions = [NodePath("../Wizard")]
+rangeSprite = NodePath("../Range Sprite")
+
+[node name="Attack Range" type="Area3D" parent="Attack Tower Class" unique_id=782235652]
+collision_layer = 0
+collision_mask = 8
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Tower Class/Attack Range" unique_id=673916723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332, 0)
+shape = SubResource("CylinderShape3D_sacsp")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[node name="Projectiles" type="Node3D" parent="Attack Tower Class" unique_id=335103201]
+
+[node name="Spell" type="RigidBody3D" parent="Attack Tower Class/Projectiles" unique_id=29258021 node_paths=PackedStringArray("projectileSprite", "baseCollision", "projectileArea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89207745, 0)
+collision_layer = 0
+collision_mask = 0
+input_ray_pickable = false
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("3_55psy")
+projectileSprite = NodePath("Sprite")
+baseCollision = NodePath("Area/Hitbox")
+projectileArea = NodePath("Area")
+
+[node name="rigidbodyshape" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Spell" unique_id=2040285079]
+shape = SubResource("BoxShape3D_pe01b")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="Attack Tower Class/Projectiles/Spell" unique_id=769067434]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+offset = Vector2(0, 0.5)
+texture_filter = 0
+render_priority = 6
+sprite_frames = SubResource("SpriteFrames_dv6u4")
+animation = &"Straight"
+frame_progress = 0.47895432
+
+[node name="Area" type="Area3D" parent="Attack Tower Class/Projectiles/Spell" unique_id=1069640228]
+collision_layer = 0
+collision_mask = 12
+
+[node name="Hitbox" type="CollisionShape3D" parent="Attack Tower Class/Projectiles/Spell/Area" unique_id=2086062022]
+shape = SubResource("BoxShape3D_dv6u4")
+
+[node name="Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
+transform = Transform3D(0.312, 0, 0, 0, -1.3637953e-08, -0.312, 0, 0.312, -1.3637953e-08, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.2)
+render_priority = 4
+texture = ExtResource("5_pkcch")
+
+[node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
+offset = Vector2(0, 32)
+alpha_cut = 2
+texture_filter = 0
+render_priority = 5
+texture = ExtResource("4_evycg")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 64)
+
+[node name="Wizard" type="AnimatedSprite3D" parent="." unique_id=1960342473]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.46, 0)
+alpha_cut = 2
+texture_filter = 0
+render_priority = 5
+sprite_frames = SubResource("SpriteFrames_sacsp")
+animation = &"Side Fire"
+
+[node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
+collision_layer = 2
+collision_mask = 0
+collision_priority = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerSize" unique_id=2036799115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_sacsp")
+
+[node name="Tower UI" type="Control" parent="." unique_id=220820527]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("6_quu8j")
+
+[node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("7_tnnje")]
+layout_mode = 0
+offset_left = -27.58
+offset_top = 80.675
+offset_right = 27.592001
+offset_bottom = 104.15696
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Tower UI/Sell Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
+sprite_frames = SubResource("SpriteFrames_iu15y")
+
+[node name="Button Text" parent="Tower UI/Sell Button" index="1" unique_id=1737478061]
+offset_left = 1.1494253
+offset_right = 53.149426
+text = "Sell"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Tower UI/Sell Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+
+[node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_d1r4k")
+
+[editable path="Tower UI/Sell Button"]
