@@ -86,12 +86,6 @@ public partial class GameManager: Node {
 		if (@event.IsActionPressed("Select")) {
 			if (settingsButton.GetClickability()) {
 				SettingsMenu.instance.Visible = true;
-				DisableUI();
-				return;
-			}
-
-			if (SettingsMenu.instance.returnButton.GetClickability()) {
-				DisableUI();
 				return;
 			}
 
@@ -178,11 +172,6 @@ public partial class GameManager: Node {
 		playerHealthLabel.Text = "Life: " + PlayerManager.instance.GetLives();
 		playerMoneyLabel.Text = "Gold: " + PlayerManager.instance.GetMoney();
 		waveNumberLabel.Text = "Wave\n" + waveNumber;
-	}
-
-	private void DisableUI() {
-		settingsButton.ChangeClickability();
-		nextWaveButton.ChangeClickability();
 	}
 
 	private PhysicsRayQueryParameters3D GetQuery() {

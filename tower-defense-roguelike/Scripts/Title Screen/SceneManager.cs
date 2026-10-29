@@ -13,10 +13,6 @@ public partial class SceneManager : Node {
 			if (settingsButton.GetClickability()) {
 				SettingsButton();
 			}
-			
-			if (SettingsMenu.instance.returnButton.GetClickability() && SettingsMenu.instance.mainMenu.Visible) {
-				ExitSettings();
-			}
 
 			if (quitButton.GetClickability()) {
 				QuitButton();
@@ -30,16 +26,6 @@ public partial class SceneManager : Node {
 
 	private void SettingsButton() {
 		SettingsMenu.instance.Visible = true;
-
-		playButton.ChangeClickability();
-		quitButton.ChangeClickability();
-		settingsButton.ChangeClickability();
-	}
-
-	private void ExitSettings() {
-		playButton.ChangeClickability();
-		quitButton.ChangeClickability();
-		settingsButton.ChangeClickability();
 	}
 
 	private void QuitButton() {
