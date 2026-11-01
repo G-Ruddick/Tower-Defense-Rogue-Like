@@ -207,6 +207,7 @@ animations = [{
 size = Vector2(56, 24)
 
 [node name="Mage Tower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("attackClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
+process_mode = 1
 script = ExtResource("1_55psy")
 towerName = "Archer Tower"
 towerCost = 50

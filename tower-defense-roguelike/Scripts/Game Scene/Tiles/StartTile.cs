@@ -17,7 +17,7 @@ public partial class StartTile : Node3D {
 		foreach (string enemy in enemyList) {
 			SpawnEnemies(enemy);
 
-			await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+			await ToSignal(GetTree().CreateTimer(0.1f, processAlways: false), "timeout");
 		}
 	}
 

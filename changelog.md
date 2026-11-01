@@ -1,5 +1,13 @@
 # Change Log
 
+### v 0.08.0 - 11/3/2026
+  * Added:
+    - 
+  * Changed:
+    - 
+  * Bug Fix:
+    - Entering settings now pauses the game properly
+
 ### v 0.07.0 - 10/27/2026
   * Added:
     - Added Mortar Tower

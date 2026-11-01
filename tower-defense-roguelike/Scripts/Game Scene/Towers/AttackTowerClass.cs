@@ -71,10 +71,10 @@ public partial class AttackTowerClass : Node3D {
 
 	private async void Attack() {
 		while (true) {
-			await ToSignal(GetTree().CreateTimer(reloadTime), "timeout");
+			await ToSignal(GetTree().CreateTimer(reloadTime, processAlways: false), "timeout");
 
 			if (enemyTargets.Count == 0) {
-				await ToSignal(GetTree().CreateTimer(0), "timeout");
+				await ToSignal(GetTree().CreateTimer(0, processAlways: false), "timeout");
 				continue; 
 			}
 
