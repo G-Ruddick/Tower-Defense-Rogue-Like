@@ -50,7 +50,7 @@ public partial class ArcProjectile : ProjectileClass {
 
 		this.LinearVelocity = velocity;
 
-		await ToSignal(GetTree().CreateTimer(2.0f), "timeout");
+		await ToSignal(GetTree().CreateTimer(2.0f, processAlways: false), "timeout");
 		this.Visible = false;
 		this.LinearVelocity = Vector3.Zero;
 	}

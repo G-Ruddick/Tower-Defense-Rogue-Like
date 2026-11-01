@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyayd05uiowdu"]
 
-[ext_resource type="Script" uid="uid://de04devlcjl8i" path="res://Scripts/GameManager.cs" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://de04devlcjl8i" path="res://Scripts/Game Scene/GameManager.cs" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Game Scene/Map Elements/MapCreation.cs" id="1_iukft"]
 [ext_resource type="Script" uid="uid://doo3b6sp30qop" path="res://Scripts/Game Scene/PlayerManager.cs" id="2_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_kldst"]
@@ -265,6 +265,7 @@ inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+process_mode = 1
 position = Vector2(11.448314, 12.122387)
 scale = Vector2(0.40387118, 1)
 sprite_frames = SubResource("SpriteFrames_7lihs")
@@ -290,6 +291,7 @@ shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Game Over Screen" type="Control" parent="UI" unique_id=1476551975 node_paths=PackedStringArray("restartButton", "quitButton")]
 process_mode = 3
+visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 15

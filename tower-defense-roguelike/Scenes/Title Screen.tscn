@@ -103,7 +103,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("2_qyra1")]
-position = Vector2(1068, 70.00001)
+offset_left = 1068.0
+offset_top = 70.00001
+offset_right = 1068.0
+offset_bottom = 70.00001
 rotation = 1.5707964
 scale = Vector2(5.3200016, 5.3200016)
 mouseInsideAnimation = "Mouse Inside"
@@ -133,7 +136,10 @@ scale = Vector2(1.1308471, 1.2)
 shape = SubResource("RectangleShape2D_x2sej")
 
 [node name="Quit Button" parent="UI" unique_id=1611576700 instance=ExtResource("2_qyra1")]
-position = Vector2(1046, 595)
+offset_left = 1046.0
+offset_top = 595.0
+offset_right = 1046.0
+offset_bottom = 595.0
 scale = Vector2(3.358055, 3.358055)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
@@ -159,7 +165,10 @@ scale = Vector2(2.8000195, 1.2)
 shape = SubResource("RectangleShape2D_hhp2p")
 
 [node name="Play Button" parent="UI" unique_id=1694775071 instance=ExtResource("2_qyra1")]
-position = Vector2(246.00002, 533)
+offset_left = 246.00002
+offset_top = 533.0
+offset_right = 246.00002
+offset_bottom = 533.0
 scale = Vector2(8.052582, 8.052582)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"

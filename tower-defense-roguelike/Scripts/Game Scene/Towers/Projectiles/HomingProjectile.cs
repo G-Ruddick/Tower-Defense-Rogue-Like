@@ -41,11 +41,11 @@ public partial class HomingProjectile : ProjectileClass {
 			distance = target.enemyHitbox.GlobalPosition - this.GlobalPosition;
 			this.LinearVelocity = distance.Normalized() * travelTime;
 
-			await ToSignal(GetTree().CreateTimer(0), "timeout");
+			await ToSignal(GetTree().CreateTimer(0, processAlways: false), "timeout");
 		}
 		
 		this.LinearVelocity *= 0;
-		await ToSignal(GetTree().CreateTimer(0), "timeout");
+		await ToSignal(GetTree().CreateTimer(0, processAlways: false), "timeout");
 		this.Visible = false;
 	}
 }

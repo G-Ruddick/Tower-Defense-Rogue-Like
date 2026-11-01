@@ -39,6 +39,7 @@ public partial class SettingsMenu : CanvasLayer {
 		gameplayMenu.Visible = false;
 
 		OnChangeScene();
+		this.VisibilityChanged += OnVisibilityChanged;
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -112,5 +113,10 @@ public partial class SettingsMenu : CanvasLayer {
 		GD.Print("Opening Sound Settings");
 		mainMenu.Visible = false;
 		gameplayMenu.Visible = true;
+	}
+
+	private void OnVisibilityChanged() {
+		// GD.Print(!GetTree().Paused);
+		GetTree().Paused = this.Visible;
 	}
 }
