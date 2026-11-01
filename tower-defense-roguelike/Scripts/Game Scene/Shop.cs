@@ -6,10 +6,15 @@ using System.Linq;
 public partial class Shop : Control {
 	public bool shopOpen;
 	public int rerollCost = 10;
+	
+	[ExportCategory("Buttons")]
+	[Export] private Control shop;
+	[Export] private Control map;
 
 	[ExportCategory("Buttons")]
 	[Export] private ButtonTemplate leaveButton;
 	[Export] private ButtonTemplate mapButton;
+	[Export] private ButtonTemplate returnToShopButton;
 	[Export] private ButtonTemplate rerollButton;
 
 	// singleton
@@ -21,7 +26,10 @@ public partial class Shop : Control {
 	public override void _Ready() {
 		instance = this;
 		shopOpen = false;
+		
 		this.Visible = false;
+		shop.Visible = true;
+		map.Visible = false;
 	}
 
 	public override void _Process(double delta) {
@@ -52,7 +60,7 @@ public partial class Shop : Control {
 				StartTile.instance.GetEnemyList();
 			}
 
-			if (mapButton.GetClickability()) {
+			if (mapButton.GetClickability() || returnToShopButton.GetClickability()) {
 				ViewMap();
 			}
 
@@ -64,7 +72,7 @@ public partial class Shop : Control {
 
 	public void Reroll(bool costMoney) {
 		// resetting shop
-		foreach (ShopIcon blueprint in GetNode("Tower Shop").GetChildren()) {
+		foreach (ShopIcon blueprint in GetNode("Shop/Tower Shop").GetChildren()) {
 			blueprint.QueueFree();
 		}
 
@@ -104,7 +112,15 @@ public partial class Shop : Control {
 		GD.Print("Rerolling Shop");
 	}
 
-	public void ViewMap() {
-		GD.Print("Displaying Map");
+	private void ViewMap() {
+		if (shop.Visible) {
+			shop.Visible = false;
+			map.Visible = true;
+
+			return;
+		}
+		
+		shop.Visible = true;
+		map.Visible = false;
 	} 
 }
