@@ -46,10 +46,11 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_st2lo"]
 
-[node name="SettingsMenu" type="CanvasLayer" unique_id=42179175 node_paths=PackedStringArray("mainMenu", "soundMenu", "gameplayMenu", "quitButton", "leaveGameButton", "returnButton", "soundSettingsButton", "gamePlaySettingsButton", "masterVolumeSlider", "musicVolumeSlider", "sfxVolumeSlider", "voicesVolumeSlider", "brightnessSlider", "gameSpeedSlider")]
+[node name="SettingsMenu" type="CanvasLayer" unique_id=42179175 node_paths=PackedStringArray("menuBrightness", "mainMenu", "soundMenu", "gameplayMenu", "quitButton", "leaveGameButton", "returnButton", "soundSettingsButton", "gamePlaySettingsButton", "masterVolumeSlider", "musicVolumeSlider", "sfxVolumeSlider", "voicesVolumeSlider", "brightnessSlider", "gameSpeedSlider")]
 process_mode = 3
 layer = 10000
 script = ExtResource("1_ajseo")
+menuBrightness = NodePath("Game Brightness")
 mainMenu = NodePath("Control/Main Menu")
 soundMenu = NodePath("Control/Sound Settings")
 gameplayMenu = NodePath("Control/Gameplay Settings")
@@ -124,6 +125,7 @@ shape = SubResource("RectangleShape2D_st2lo")
 
 [node name="Main Menu" type="Node2D" parent="Control" unique_id=866542660]
 process_mode = 3
+visible = false
 
 [node name="Title" type="Label" parent="Control/Main Menu" unique_id=1063068519]
 process_mode = 3
@@ -393,7 +395,6 @@ vertical_alignment = 1
 
 [node name="Gameplay Settings" type="Node2D" parent="Control" unique_id=99870061]
 process_mode = 3
-visible = false
 
 [node name="Title" type="Label" parent="Control/Gameplay Settings" unique_id=1035845361]
 process_mode = 3
@@ -414,7 +415,10 @@ offset_top = 194.0
 offset_right = 754.0
 offset_bottom = 210.0
 scale = Vector2(1.83, 1.83)
-value = 100.0
+min_value = 0.05
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Label" type="Label" parent="Control/Gameplay Settings/Brightness Slider" unique_id=1324846196]
 process_mode = 3
@@ -453,6 +457,8 @@ theme_override_font_sizes/font_size = 32
 text = "Game Speed"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Game Brightness" type="CanvasModulate" parent="." unique_id=1868670800]
 
 [editable path="Control/Return To Game Button"]
 [editable path="Control/Main Menu/Leave Game Button"]

@@ -2,6 +2,8 @@ using Godot;
 using System;
 
 public partial class SettingsMenu : CanvasLayer {
+	[Export] private CanvasModulate menuBrightness;
+
 	[ExportCategory("Menus")]
 	[Export] public Node2D mainMenu;
 	[Export] public Node2D soundMenu;
@@ -21,7 +23,7 @@ public partial class SettingsMenu : CanvasLayer {
 	[Export] private Slider voicesVolumeSlider;
 
 	[ExportCategory("Gameplay Menu")]
-	[Export] private Slider brightnessSlider;
+	[Export] public Slider brightnessSlider;
 	[Export] private Slider gameSpeedSlider;
 
 	// singleton object
@@ -30,7 +32,7 @@ public partial class SettingsMenu : CanvasLayer {
 		private set;
 	}
 
-	public override void _Ready() {
+	public override void _EnterTree() {
 		instance = this;
 
 		instance.Visible = false;
@@ -40,6 +42,8 @@ public partial class SettingsMenu : CanvasLayer {
 
 		OnChangeScene();
 		this.VisibilityChanged += OnVisibilityChanged;
+
+		brightnessSlider.ValueChanged += ChangeScreenBrightness;
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -118,5 +122,11 @@ public partial class SettingsMenu : CanvasLayer {
 	private void OnVisibilityChanged() {
 		// GD.Print(!GetTree().Paused);
 		GetTree().Paused = this.Visible;
+	}
+
+	private void ChangeScreenBrightness(double value) {
+		float fValue = (float)value;
+		Color newColor = new Color(fValue, fValue, fValue, 1);
+		menuBrightness.Color = newColor;
 	}
 }
