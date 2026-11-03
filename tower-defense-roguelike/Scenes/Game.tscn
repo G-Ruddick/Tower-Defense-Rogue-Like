@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyayd05uiowdu"]
 
-[ext_resource type="Script" uid="uid://de04devlcjl8i" path="res://Scripts/GameManager.cs" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://de04devlcjl8i" path="res://Scripts/Game Scene/GameManager.cs" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://cfap7rq8aicng" path="res://Scripts/Game Scene/Map Elements/MapCreation.cs" id="1_iukft"]
 [ext_resource type="Script" uid="uid://doo3b6sp30qop" path="res://Scripts/Game Scene/PlayerManager.cs" id="2_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_kldst"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
 [ext_resource type="Script" uid="uid://bejreh4w4qfip" path="res://Scripts/Game Scene/GameOver.cs" id="9_bf53h"]
+[ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
 atlas = ExtResource("4_b2bpf")
@@ -80,6 +81,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fgofq"]
 
+[sub_resource type="Environment" id="Environment_dv6u4"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_pe01b"]
+
+[sub_resource type="Compositor" id="Compositor_ophl0"]
+
 [node name="Game" type="Node3D" unique_id=1162375626]
 
 [node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
@@ -96,6 +103,11 @@ nextWaveButton = NodePath("../UI/Next Wave Button")
 script = ExtResource("2_b2bpf")
 playerTowersNode = NodePath("../UI/Towers/Player Towers")
 
+[node name="Brightness Manager" type="Node" parent="." unique_id=1236359525 node_paths=PackedStringArray("brightnessController2D", "brightnessController3D")]
+script = ExtResource("10_71axn")
+brightnessController2D = NodePath("../UI/UI Brightness")
+brightnessController3D = NodePath("../Game Brightness")
+
 [node name="MapCreator" type="Node" parent="." unique_id=1015966873]
 script = ExtResource("1_iukft")
 
@@ -109,6 +121,8 @@ script = ExtResource("1_iukft")
 script = ExtResource("4_2irst")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=326357734]
+
+[node name="UI Brightness" type="CanvasModulate" parent="UI" unique_id=1236707052]
 
 [node name="ShopScreen" parent="UI" unique_id=472434983 instance=ExtResource("6_7lihs")]
 visible = false
@@ -265,6 +279,7 @@ inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+process_mode = 1
 position = Vector2(11.448314, 12.122387)
 scale = Vector2(0.40387118, 1)
 sprite_frames = SubResource("SpriteFrames_7lihs")
@@ -290,6 +305,7 @@ shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Game Over Screen" type="Control" parent="UI" unique_id=1476551975 node_paths=PackedStringArray("restartButton", "quitButton")]
 process_mode = 3
+visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 15
@@ -437,6 +453,11 @@ transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81
 projection = 1
 size = 3.667
 near = 0.001
+
+[node name="Game Brightness" type="WorldEnvironment" parent="." unique_id=681548715]
+environment = SubResource("Environment_dv6u4")
+camera_attributes = SubResource("CameraAttributesPractical_pe01b")
+compositor = SubResource("Compositor_ophl0")
 
 [editable path="UI/Next Wave Button"]
 [editable path="UI/Settings Button"]

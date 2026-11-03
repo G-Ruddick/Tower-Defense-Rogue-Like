@@ -68,7 +68,7 @@ public partial class ProjectileClass : RigidBody3D {
 		Vector3 direction = (target.enemyHitbox.GlobalPosition - this.GlobalPosition).Normalized();
 		this.LinearVelocity = direction * travelTime;
 
-		await ToSignal(GetTree().CreateTimer(2.0f), "timeout");
+		await ToSignal(GetTree().CreateTimer(2.0f, processAlways: false), "timeout");
 		this.Visible = false;
 		this.LinearVelocity = Vector3.Zero;
 	}
@@ -87,7 +87,7 @@ public partial class ProjectileClass : RigidBody3D {
 		}
 		else {
 			// this.LinearVelocity *= 0;
-			await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+			await ToSignal(GetTree().CreateTimer(1.0f, processAlways: false), "timeout");
 		}
 
 		target = null;
@@ -101,10 +101,18 @@ public partial class ProjectileClass : RigidBody3D {
 		projectileSprite.Visible = false;
 		this.LinearVelocity = Vector3.Zero;
 
-		await ToSignal(GetTree().CreateTimer(0.01f), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.01f, processAlways: false), "timeout");
 		this.Visible = false;
 		AOEArea.Visible = false;
 		projectileArea.Visible = true;
 		projectileSprite.Visible = true;
+	}
+
+	public void ChangeAOESize(float value) {
+		CollisionShape3D shape = AOEArea.GetChild(0) as CollisionShape3D;
+		SphereShape3D radius = shape.Shape as SphereShape3D;
+		radius.Radius += value;
+
+		GD.Print(radius.Radius);
 	}
 }

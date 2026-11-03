@@ -1,5 +1,13 @@
 # Change Log
 
+### v 0.08.0 - 11/3/2026
+  * Added:
+    - Added functionality to map display button in shop allowing player to view but not interact  with the game map
+    - Added functionality to brightness slider allowing the player to make the game darker
+    - Added Tower Upgrading Allowing for the player to spend money to upgrade and/or enhance towers
+  * Bug Fix:
+    - Entering settings now pauses the game properly
+
 ### v 0.07.0 - 10/27/2026
   * Added:
     - Added Mortar Tower

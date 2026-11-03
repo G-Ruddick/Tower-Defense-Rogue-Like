@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="6_quu8j"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="7_tnnje"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="8_6pa2k"]
+[ext_resource type="Texture2D" uid="uid://m4f3j20vky3l" path="res://Textures/Tower UI.png" id="9_4u7d1"]
+[ext_resource type="Script" uid="uid://dj12a6hhkstan" path="res://Scripts/Game Scene/Towers/UpgradeNode.cs" id="10_4wsuk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
 height = 0.64
@@ -206,9 +208,40 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1r4k"]
 size = Vector2(56, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh3gu"]
+atlas = ExtResource("9_4u7d1")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc2rl"]
+atlas = ExtResource("9_4u7d1")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkcch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh3gu")
+}],
+"loop": 1,
+"name": &"Owned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc2rl")
+}],
+"loop": 1,
+"name": &"Unowned",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_quu8j"]
+radius = 6.0
+
 [node name="Mage Tower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("attackClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
+process_mode = 1
 script = ExtResource("1_55psy")
-towerName = "Archer Tower"
+towerName = "Mage Tower"
 towerCost = 50
 attackClass = NodePath("Attack Tower Class")
 towerSprite = NodePath("TowerSprite")
@@ -315,10 +348,10 @@ script = ExtResource("6_quu8j")
 
 [node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("7_tnnje")]
 layout_mode = 0
-offset_left = -27.58
-offset_top = 80.675
-offset_right = 27.592001
-offset_bottom = 104.15696
+offset_left = -28.0
+offset_top = 160.0
+offset_right = 27.172
+offset_bottom = 183.48196
 scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouseInsideAnimation = "Selected"
@@ -343,5 +376,97 @@ position = Vector2(27.402298, 10.160919)
 [node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
 position = Vector2(0, 2.3841858e-07)
 shape = SubResource("RectangleShape2D_d1r4k")
+
+[node name="Ring" type="Sprite2D" parent="Tower UI" unique_id=1001968529]
+position = Vector2(0, -75)
+scale = Vector2(6, 6)
+texture = ExtResource("9_4u7d1")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Upgrade Node" type="Sprite2D" parent="Tower UI/Ring" unique_id=696396821 node_paths=PackedStringArray("levels", "mouseArea", "description", "costLabel")]
+position = Vector2(0, -28)
+texture = ExtResource("9_4u7d1")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+script = ExtResource("10_4wsuk")
+upgradeNumber = 1
+cost = 60
+upgradeCostChange = 15
+abilityValueChanged = 1.0
+levels = [NodePath("Level 1"), NodePath("Level 2"), NodePath("Level 3")]
+mouseArea = NodePath("Mouse Area")
+description = NodePath("Description")
+costLabel = NodePath("Description/Cost")
+
+[node name="Level 1" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=2127773026]
+position = Vector2(-5, -9)
+sprite_frames = SubResource("SpriteFrames_pkcch")
+animation = &"Unowned"
+
+[node name="Level 2" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=730706698]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_pkcch")
+animation = &"Unowned"
+
+[node name="Level 3" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=424322212]
+position = Vector2(5, -9)
+sprite_frames = SubResource("SpriteFrames_pkcch")
+animation = &"Unowned"
+
+[node name="Mouse Area" type="Area2D" parent="Tower UI/Ring/Upgrade Node" unique_id=1984626716]
+
+[node name="Shape" type="CollisionShape2D" parent="Tower UI/Ring/Upgrade Node/Mouse Area" unique_id=725127289]
+shape = SubResource("CircleShape2D_quu8j")
+
+[node name="Description" type="Node2D" parent="Tower UI/Ring/Upgrade Node" unique_id=102742537]
+position = Vector2(32.166668, 7.1666665)
+scale = Vector2(1.5, 1.5)
+
+[node name="Text Shape" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=591580249]
+position = Vector2(0, -3.4999998)
+scale = Vector2(1, 0.75)
+texture = ExtResource("9_4u7d1")
+region_enabled = true
+region_rect = Rect2(64, 32, 32, 32)
+
+[node name="Text Shape2" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=1540080910]
+position = Vector2(0, -11.5)
+scale = Vector2(1, 0.25)
+texture = ExtResource("9_4u7d1")
+region_enabled = true
+region_rect = Rect2(64, 32, 32, 32)
+
+[node name="Title" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=1259747540]
+offset_left = -15.5
+offset_top = -15.0
+offset_right = 15.5
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 5
+text = "Faster Spells"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=206577332]
+offset_left = -15.000001
+offset_top = -8.0
+offset_right = 14.999999
+offset_bottom = -1.0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 2
+text = "Mage now casts spells at a greater rate"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Cost" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=1152851430]
+offset_left = -15.0
+offset_top = 2.5000002
+offset_right = 15.0
+offset_bottom = 8.500001
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 0.78092533, 0.49995556, 1)
+theme_override_font_sizes/font_size = 4
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [editable path="Tower UI/Sell Button"]

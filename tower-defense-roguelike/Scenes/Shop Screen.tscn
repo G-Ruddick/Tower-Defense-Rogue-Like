@@ -46,7 +46,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vlva"]
 
-[node name="ShopScreen" type="Control" unique_id=410452383 node_paths=PackedStringArray("leaveButton", "mapButton", "rerollButton")]
+[node name="ShopScreen" type="Control" unique_id=410452383 node_paths=PackedStringArray("shop", "map", "leaveButton", "mapButton", "returnToShopButton", "rerollButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,11 +56,20 @@ grow_vertical = 2
 mouse_filter = 1
 mouse_force_pass_scroll_events = false
 script = ExtResource("1_xwubi")
-leaveButton = NodePath("Leave Shop Button")
-mapButton = NodePath("View Map Button")
-rerollButton = NodePath("Reroll Shop Button")
+shop = NodePath("Shop")
+map = NodePath("Map")
+leaveButton = NodePath("Shop/Leave Shop Button")
+mapButton = NodePath("Shop/View Map Button")
+returnToShopButton = NodePath("Map/Shop Button")
+rerollButton = NodePath("Shop/Reroll Shop Button")
 
-[node name="background" type="Sprite2D" parent="." unique_id=1192749386]
+[node name="Shop" type="Control" parent="." unique_id=1006290439]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="background" type="Sprite2D" parent="Shop" unique_id=1192749386]
 modulate = Color(0, 1.0819027, 1.3220654, 1)
 position = Vector2(574, 418.00003)
 scale = Vector2(19.44, 32.62685)
@@ -68,14 +77,14 @@ texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Tower Shop background" type="Sprite2D" parent="." unique_id=301312601]
+[node name="Tower Shop background" type="Sprite2D" parent="Shop" unique_id=301312601]
 position = Vector2(599.8, 313.2)
 scale = Vector2(10.4, 9.2)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Tower Shop" type="Control" parent="." unique_id=832674955]
+[node name="Tower Shop" type="Control" parent="Shop" unique_id=832674955]
 anchors_preset = 0
 offset_left = 279.0
 offset_top = 176.0
@@ -84,21 +93,21 @@ offset_bottom = 388.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 1
 
-[node name="Ability Shop" type="Sprite2D" parent="." unique_id=239199317]
+[node name="Ability Shop" type="Sprite2D" parent="Shop" unique_id=239199317]
 position = Vector2(599.8, 553.4)
 scale = Vector2(10.4, 9.2)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Perk Shop" type="Sprite2D" parent="." unique_id=1016529843]
+[node name="Perk Shop" type="Sprite2D" parent="Shop" unique_id=1016529843]
 position = Vector2(1046.0001, 400)
 scale = Vector2(3.0399985, 14.6799965)
 texture = ExtResource("2_w0vvm")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 32)
 
-[node name="Leave Shop Button" parent="." unique_id=590249941 instance=ExtResource("1_jffka")]
+[node name="Leave Shop Button" parent="Shop" unique_id=590249941 instance=ExtResource("1_jffka")]
 layout_mode = 0
 offset_left = 1047.0
 offset_top = 595.0
@@ -109,11 +118,11 @@ mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Leave Shop Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Shop/Leave Shop Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_w0vvm")
 animation = &"Disabled"
 
-[node name="Button Text" parent="Leave Shop Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Shop/Leave Shop Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -122,13 +131,13 @@ text = "Leave"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="Leave Shop Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Shop/Leave Shop Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="Leave Shop Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Shop/Leave Shop Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3vlva")
 
-[node name="View Map Button" parent="." unique_id=39449858 instance=ExtResource("1_jffka")]
+[node name="View Map Button" parent="Shop" unique_id=39449858 instance=ExtResource("1_jffka")]
 layout_mode = 0
 offset_left = 119.0
 offset_top = 277.0
@@ -139,11 +148,11 @@ mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="View Map Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Shop/View Map Button" index="0" unique_id=947915153]
 sprite_frames = SubResource("SpriteFrames_w0vvm")
 animation = &"Disabled"
 
-[node name="Button Text" parent="View Map Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Shop/View Map Button" index="1" unique_id=1737478061]
 offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
@@ -152,13 +161,13 @@ text = "Map"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="View Map Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Shop/View Map Button" index="2" unique_id=116881939]
 scale = Vector2(2.8000195, 1.2)
 
-[node name="Area Shape" parent="View Map Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Shop/View Map Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3vlva")
 
-[node name="Reroll Shop Button" parent="." unique_id=1234429503 instance=ExtResource("1_jffka")]
+[node name="Reroll Shop Button" parent="Shop" unique_id=1234429503 instance=ExtResource("1_jffka")]
 layout_mode = 0
 offset_left = 124.0
 offset_top = 182.0
@@ -169,13 +178,13 @@ mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
-[node name="Button Sprite" parent="Reroll Shop Button" index="0" unique_id=947915153]
+[node name="Button Sprite" parent="Shop/Reroll Shop Button" index="0" unique_id=947915153]
 position = Vector2(3.064494, 0)
 scale = Vector2(1.2624321, 1)
 sprite_frames = SubResource("SpriteFrames_w0vvm")
 animation = &"Disabled"
 
-[node name="Button Text" parent="Reroll Shop Button" index="1" unique_id=1737478061]
+[node name="Button Text" parent="Shop/Reroll Shop Button" index="1" unique_id=1737478061]
 offset_left = -29.925926
 offset_top = -12.148149
 offset_right = 26.074074
@@ -184,21 +193,21 @@ theme_override_font_sizes/font_size = 11
 text = "Reroll : 50"
 vertical_alignment = 1
 
-[node name="Button Area" parent="Reroll Shop Button" index="2" unique_id=116881939]
+[node name="Button Area" parent="Shop/Reroll Shop Button" index="2" unique_id=116881939]
 position = Vector2(3.064494, 0)
 scale = Vector2(3.5348344, 1.2)
 
-[node name="Area Shape" parent="Reroll Shop Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="Shop/Reroll Shop Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3vlva")
 
-[node name="Shop Screen Label" type="Label" parent="." unique_id=248055292]
+[node name="Shop Screen Label" type="Label" parent="Shop" unique_id=248055292]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 277.0
+offset_left = 833.0
 offset_top = 90.0
-offset_right = 575.0
+offset_right = 1131.0
 offset_bottom = 159.79169
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 46
@@ -206,6 +215,45 @@ text = "Shop Screen"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[editable path="Leave Shop Button"]
-[editable path="View Map Button"]
-[editable path="Reroll Shop Button"]
+[node name="Map" type="Control" parent="." unique_id=699935620]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="Shop Button" parent="Map" unique_id=580980688 instance=ExtResource("1_jffka")]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 591.0
+offset_right = 1022.0
+offset_bottom = 591.0
+scale = Vector2(3.115, 3.115)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="Map/Shop Button" index="0" unique_id=947915153]
+scale = Vector2(1.4723653, 1.278224)
+sprite_frames = SubResource("SpriteFrames_w0vvm")
+animation = &"Disabled"
+
+[node name="Button Text" parent="Map/Shop Button" index="1" unique_id=1737478061]
+offset_left = -38.523285
+offset_top = -11.878008
+offset_right = 41.476715
+offset_bottom = 12.121992
+theme_override_font_sizes/font_size = 10
+text = "Return to Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Map/Shop Button" index="2" unique_id=116881939]
+scale = Vector2(4.122651, 1.5338688)
+
+[node name="Area Shape" parent="Map/Shop Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3vlva")
+
+[editable path="Shop/Leave Shop Button"]
+[editable path="Shop/View Map Button"]
+[editable path="Shop/Reroll Shop Button"]
+[editable path="Map/Shop Button"]

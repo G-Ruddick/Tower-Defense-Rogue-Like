@@ -43,7 +43,7 @@ public partial class ShopIcon : Node2D {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tower Icons/Shop Icon.tscn");
 		ShopIcon blueprint = (ShopIcon)prefab.Instantiate();
 		blueprint.Name = name + " Blueprint";
-		Shop.instance.GetNode("Tower Shop").AddChild(blueprint);
+		Shop.instance.GetNode("Shop/Tower Shop").AddChild(blueprint);
 
 		// positioning element
 		Vector2 screenPos = new Vector2(90, 100);
