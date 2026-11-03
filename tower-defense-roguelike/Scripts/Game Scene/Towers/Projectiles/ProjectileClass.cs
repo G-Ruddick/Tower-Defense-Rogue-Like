@@ -107,4 +107,12 @@ public partial class ProjectileClass : RigidBody3D {
 		projectileArea.Visible = true;
 		projectileSprite.Visible = true;
 	}
+
+	public void ChangeAOESize(float value) {
+		CollisionShape3D shape = AOEArea.GetChild(0) as CollisionShape3D;
+		SphereShape3D radius = shape.Shape as SphereShape3D;
+		radius.Radius += value;
+
+		GD.Print(radius.Radius);
+	}
 }

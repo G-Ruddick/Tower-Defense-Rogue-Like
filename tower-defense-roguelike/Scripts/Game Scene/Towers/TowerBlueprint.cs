@@ -141,9 +141,6 @@ public partial class TowerBlueprint : Node2D {
 		float textureWidth = blueprint.icon.Texture.GetWidth() / 32;
 		float xValue = TowerStats.TowerDictionary[blueprint.towerName].index % textureWidth;
 		iconLocation.Position = new Vector2(xValue * 32, 0);
-		
-		GD.Print(textureWidth);
-		GD.Print(blueprint.icon.Texture.GetWidth() / 32);
 
 		float y = TowerStats.TowerDictionary[blueprint.towerName].index;
 

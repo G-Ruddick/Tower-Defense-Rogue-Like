@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class TowerClass : Node3D {
@@ -68,7 +69,6 @@ public partial class TowerClass : Node3D {
 			PlayerManager.instance.GetActiveTower().OnPlace();
 		}
 
-
 		return true;
 	}
 
@@ -84,7 +84,6 @@ public partial class TowerClass : Node3D {
 		if (attackClass != null) { attackClass.QueueFree(); }
 		if (generateClass != null) { generateClass.QueueFree(); }
 		if (troopClass != null) { troopClass.QueueFree(); }
-
 	}
 	
 	public void EnableTowerElements() {
