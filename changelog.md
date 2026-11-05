@@ -1,5 +1,13 @@
 # Change Log
 
+### v 0.09.0 - 11/9/2026
+  * Added:
+    - 
+  * Changed:
+    - 
+  * Bug Fix: 
+    - 
+
 ### v 0.08.0 - 11/3/2026
   * Added:
     - Added functionality to map display button in shop allowing player to view but not interact  with the game map
