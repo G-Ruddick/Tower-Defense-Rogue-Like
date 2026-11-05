@@ -6,7 +6,7 @@
   * Changed:
     - 
   * Bug Fix: 
-    - 
+    - Changing game brightness now also decreases tower ui brightness
 
 ### v 0.08.0 - 11/3/2026
   * Added:
