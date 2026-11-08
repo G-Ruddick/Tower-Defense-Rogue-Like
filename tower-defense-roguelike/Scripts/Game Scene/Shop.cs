@@ -56,8 +56,6 @@ public partial class Shop : Control {
 
 				this.Visible = false;
 				shopOpen = false;
-
-				StartTile.instance.GetEnemyList();
 			}
 
 			if (mapButton.GetClickability() || returnToShopButton.GetClickability()) {

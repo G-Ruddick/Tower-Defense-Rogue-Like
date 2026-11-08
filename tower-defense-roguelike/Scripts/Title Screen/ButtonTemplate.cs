@@ -55,6 +55,13 @@ public partial class ButtonTemplate : Control {
 
 	public void ChangeClickability() {
 		buttonArea.Visible = !buttonArea.Visible;
+		
+		if (buttonArea.Visible) {
+			buttonSprite.Play(defaultAnimation);
+		}
+		else {
+			buttonSprite.Play(inactiveAnimation);
+		}
 	}
 
 	public bool GetAreaState() {
