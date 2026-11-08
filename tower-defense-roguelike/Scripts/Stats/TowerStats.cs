@@ -7,7 +7,8 @@ public partial class TowerStats {
 	public static Dictionary<string, (int index, int buyPrice, int usePrice)> TowerDictionary = new Dictionary<string, (int index, int buyPrice, int usePrice)> {
 		{ "Archer Tower", (0, 100, 50) },
 		{ "Mortar Tower", (1, 120, 100) },
-		{ "Mage Tower", (2, 100, 70) }
+		{ "Mage Tower", (2, 100, 70) },
+		{ "Gold Mine Tower", (3, 300, 250) }
 	};
 
 	// resetting all towers to default
@@ -15,7 +16,8 @@ public partial class TowerStats {
 		TowerDictionary = new Dictionary<string, (int index, int buyPrice, int usePrice)> {
 			{ "Archer Tower", (0, 100, 50) },
 			{ "Mortar Tower", (1, 120, 100) },
-			{ "Mage Tower", (2, 100, 70) }
+			{ "Mage Tower", (2, 100, 70) },
+			{ "Gold Mine Tower", (3, 300, 250) }
 		};
 	}
 }
