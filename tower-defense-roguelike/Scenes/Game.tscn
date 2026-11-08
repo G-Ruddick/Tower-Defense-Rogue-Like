@@ -9,7 +9,88 @@
 [ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
 [ext_resource type="Script" uid="uid://bejreh4w4qfip" path="res://Scripts/Game Scene/GameOver.cs" id="9_bf53h"]
+[ext_resource type="Texture2D" uid="uid://bawjj2c4jnm61" path="res://Textures/Next Wave Button.png" id="9_dahhg"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cx6b"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxwew"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acvyw"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alh3a"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q8tf"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3xnh"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r6kd"]
+atlas = ExtResource("9_dahhg")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3so38")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_3cx6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwew")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_3cx6b")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acvyw")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alh3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q8tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3xnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r6kd")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
+size = Vector2(32.00006, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
 atlas = ExtResource("4_b2bpf")
@@ -22,35 +103,6 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
 atlas = ExtResource("4_b2bpf")
 region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igacv")
-}],
-"loop": 1,
-"name": &"Default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_07l45")
-}],
-"loop": 1,
-"name": &"Disabled",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnbs0")
-}],
-"loop": 1,
-"name": &"Mouse Inside",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7lihs"]
 animations = [{
@@ -89,8 +141,9 @@ animations = [{
 
 [node name="Game" type="Node3D" unique_id=1162375626]
 
-[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
+[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("EnemyManager", "shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
 script = ExtResource("1_gl6un")
+EnemyManager = NodePath("../Enemies")
 shopScreen = NodePath("../UI/ShopScreen")
 camera = NodePath("../Camera3D")
 playerHealthLabel = NodePath("../UI/Player Stats/Health")
@@ -231,41 +284,37 @@ theme_override_font_sizes/font_size = 26
 text = "Abilities"
 
 [node name="Next Wave Button" parent="UI" unique_id=555688118 instance=ExtResource("3_kldst")]
-offset_left = 1074.0001
-offset_top = 563.0
-offset_right = 1096.2101
-offset_bottom = 587.14
-scale = Vector2(5.3200016, 5.3200016)
-pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_left = 1050.0
+offset_top = 546.0
+offset_right = 1082.0
+offset_bottom = 578.0
+scale = Vector2(3, 3)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Next Wave Button" index="0" unique_id=947915153]
-position = Vector2(11.120315, 12.112779)
-scale = Vector2(0.39581537, 1)
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_fgofq")
 animation = &"Disabled"
+frame_progress = 0.7236186
 
 [node name="Button Text" parent="UI/Next Wave Button" index="1" unique_id=1737478061]
-offset_left = -16.879684
-offset_top = 0.11277957
-offset_right = 39.120316
-offset_bottom = 24.11278
+offset_right = 1.0
+offset_bottom = 9.0
 theme_override_constants/line_spacing = -2
 theme_override_font_sizes/font_size = 6
-text = "Next 
-wave"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button Area" parent="UI/Next Wave Button" index="2" unique_id=116881939]
-position = Vector2(11.120316, 12.11278)
-scale = Vector2(1.1082907, 1.2)
+position = Vector2(16, 16)
 priority = 100
 
 [node name="Area Shape" parent="UI/Next Wave Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(-0.1204834, -0.11279297)
 shape = SubResource("RectangleShape2D_2irst")
+debug_color = Color(0, 0.60038817, 0.70000815, 0.143)
 
 [node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
 offset_left = 1146.9999
