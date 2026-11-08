@@ -2,10 +2,12 @@
 
 ### v 0.09.0 - 11/10/2026
   * Added:
-    - 
+    - Added new next wave button sprite
   * Changed:
     - Clicking on multiple towers now hides previous towers' UI
     - Tower UI now blocks players mouse from selecting other gameobjects
+    - Player can no longer go to next level until all enemies are killed
+    - Exiting the shop no longer starts next wave
   * Bug Fix: 
     - AOE projectiles no longer deal damage before landing on the ground or target
     - Tower UI now is effected by changing the game brightness in settings
