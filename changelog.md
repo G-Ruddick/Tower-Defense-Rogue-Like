@@ -3,6 +3,10 @@
 ### v 0.09.0 - 11/10/2026
   * Added:
     - Added new next wave button sprite
+    - Added Gold Mine Tower
+    - Created functionality for Generative Tower Class
+      - Added generative types
+      - Made generative tower only active durring active waves
   * Changed:
     - Clicking on multiple towers now hides previous towers' UI
     - Tower UI now blocks players mouse from selecting other gameobjects

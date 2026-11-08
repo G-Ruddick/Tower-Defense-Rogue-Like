@@ -22,4 +22,11 @@ public class TowerUpgrades {
 			GD.Print("Upgraded tower travel time to " + tower.attackClass.travelTime);
 		}
 	}
+	
+	public static void GoldMineTower(TowerClass tower, int upgrade, float valueChanged) {
+		if (upgrade == 1) {
+			tower.generateClass.ChangeGenerationAmmount(valueChanged);
+			GD.Print("Upgraded tower gold production by " + valueChanged);
+		}
+	}
 }

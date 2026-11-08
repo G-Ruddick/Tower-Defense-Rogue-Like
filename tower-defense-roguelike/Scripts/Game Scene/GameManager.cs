@@ -10,7 +10,7 @@ public partial class GameManager: Node {
 	
 	[Export] private TowerClass currentlySelectedTower;
 
-	private bool waveActive = false;
+	public bool waveActive = false;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
