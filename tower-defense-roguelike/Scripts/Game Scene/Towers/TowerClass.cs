@@ -73,7 +73,7 @@ public partial class TowerClass : Node3D {
 	}
 
 	public void UIToggle() {
-		UIElement.Visible = ! UIElement.Visible;
+		UIElement.Visible = !UIElement.Visible;
 		
 		if (attackClass != null) {
 			attackClass.rangeSprite.Visible = !attackClass.rangeSprite.Visible;
@@ -90,7 +90,6 @@ public partial class TowerClass : Node3D {
 		if (attackClass != null) { attackClass.enabled = true; }
 		if (generateClass != null) { generateClass.enabled = true; }
 		if (troopClass != null) { troopClass.enabled = true; }
-
 	}
 
 	public void SetTowerAsCursorObject() {
