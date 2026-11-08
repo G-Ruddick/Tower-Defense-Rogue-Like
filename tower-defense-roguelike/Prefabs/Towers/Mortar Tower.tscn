@@ -188,6 +188,7 @@ debug_color = Color(1, 0, 0, 0.42000002)
 
 [node name="Mortar Shell" type="RigidBody3D" parent="Attack Tower Class/Projectiles" unique_id=29258021 node_paths=PackedStringArray("diagonalCollision", "projectileSprite", "baseCollision", "projectileArea", "AOEArea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89207745, 0)
+visible = false
 collision_layer = 0
 collision_mask = 0
 lock_rotation = true

@@ -15,13 +15,10 @@ public partial class ProjectileClass : RigidBody3D {
 	[Export] protected Area3D AOEArea;
 
 	public override void _Ready() {
-		if (AOEArea != null) {
-			AOEArea.Monitoring = false;
-		}
-
 		projectileArea.AreaEntered += Hit;
 
 		if (AOEArea != null) {
+			AOEArea.Monitoring = false;
 			AOEArea.AreaEntered += AOEHit;
 		}
 	}
@@ -96,11 +93,13 @@ public partial class ProjectileClass : RigidBody3D {
 	
 	private async void AOEDamage(Node3D body) {
 		AOEArea.Monitoring = true;
+
 		projectileArea.Visible = false;
 		projectileSprite.Visible = false;
 		this.LinearVelocity = Vector3.Zero;
 
-		await ToSignal(GetTree().CreateTimer(0.01f, processAlways: false), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.1f, processAlways: false), "timeout");
+
 		this.Visible = false;
 		AOEArea.Monitoring = false;
 		projectileArea.Visible = true;
