@@ -7,6 +7,8 @@ public partial class GameManager: Node {
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
 	private float resetTimer = 0f;
+	
+	[Export] private TowerClass currentlySelectedTower;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
@@ -102,8 +104,6 @@ public partial class GameManager: Node {
 				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 				if (result.Count > 0) {
 					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-					// GD.Print(gameAsset.Name);
-					// GD.Print(gameAsset.Position);
 
 					if (gameAsset.Name.ToString().Contains("Grass")) {
 						// placing tower
@@ -115,7 +115,20 @@ public partial class GameManager: Node {
 						}
 					}
 					else if (gameAsset.Name.ToString().Contains("Tower")) {
-						((TowerClass)gameAsset).UIToggle();
+						// disabling current tower ui
+						if (currentlySelectedTower != null && IsInstanceValid(currentlySelectedTower)) {
+							currentlySelectedTower.UIToggle();
+						}
+
+						// enbling selected tower ui
+						if (currentlySelectedTower != gameAsset as TowerClass) {
+							currentlySelectedTower = gameAsset as TowerClass;
+							currentlySelectedTower.UIToggle();
+							return;
+						}
+
+						// if the tower clicked is the same tower, set null
+						currentlySelectedTower = null;
 					}
 				}
 			}

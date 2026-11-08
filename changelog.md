@@ -1,5 +1,15 @@
 # Change Log
 
+### v 0.09.0 - 11/10/2026
+  * Added:
+    - 
+  * Changed:
+    - Clicking on multiple towers now hides previous towers' UI
+    - Tower UI now blocks players mouse from selecting other gameobjects
+  * Bug Fix: 
+    - AOE projectiles no longer deal damage before landing on the ground or target
+    - Tower UI now is effected by changing the game brightness in settings
+
 ### v 0.08.0 - 11/3/2026
   * Added:
     - Added functionality to map display button in shop allowing player to view but not interact  with the game map

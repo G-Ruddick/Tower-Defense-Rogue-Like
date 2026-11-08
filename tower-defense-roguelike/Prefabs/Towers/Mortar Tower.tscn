@@ -324,6 +324,16 @@ mouseArea = NodePath("Mouse Area")
 description = NodePath("Description")
 costLabel = NodePath("Description/Cost")
 
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring/Upgrade Node" unique_id=353276004]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
 [node name="Level 1" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=1656660905]
 position = Vector2(-2.5, -10)
 sprite_frames = SubResource("SpriteFrames_pe01b")
@@ -388,5 +398,14 @@ theme_override_font_sizes/font_size = 4
 text = "10"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring" unique_id=145820762]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -14.0
+offset_top = 21.0
+offset_right = 14.0
+offset_bottom = 31.0
+mouse_filter = 1
 
 [editable path="Tower UI/Sell Button"]
