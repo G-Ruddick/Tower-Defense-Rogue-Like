@@ -1,0 +1,374 @@
+[gd_scene format=3 uid="uid://hmtnh4hmdymf"]
+
+[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_cxj2j"]
+[ext_resource type="Script" uid="uid://dwgosi48gguxd" path="res://Scripts/Game Scene/Towers/GenerativeTowerClass.cs" id="2_m2vjt"]
+[ext_resource type="Texture2D" uid="uid://dc4uelxtuhuu3" path="res://Textures/Gold Mine Tower.png" id="3_l0api"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
+[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="4_oifrw"]
+[ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_iu15y"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
+[ext_resource type="Texture2D" uid="uid://m4f3j20vky3l" path="res://Textures/Tower UI.png" id="9_l0api"]
+[ext_resource type="Script" uid="uid://dj12a6hhkstan" path="res://Scripts/Game Scene/Towers/UpgradeNode.cs" id="10_o40fn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o40fn"]
+atlas = ExtResource("3_l0api")
+region = Rect2(100, 0, 25, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onmp0"]
+atlas = ExtResource("3_l0api")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jfqf"]
+atlas = ExtResource("3_l0api")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcuxl"]
+atlas = ExtResource("3_l0api")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s6sp"]
+atlas = ExtResource("3_l0api")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8brh"]
+atlas = ExtResource("3_l0api")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t316y"]
+atlas = ExtResource("3_l0api")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ksbr"]
+atlas = ExtResource("3_l0api")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r13qv"]
+atlas = ExtResource("3_l0api")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cu0al"]
+atlas = ExtResource("3_l0api")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88qqq"]
+atlas = ExtResource("3_l0api")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3a42"]
+atlas = ExtResource("3_l0api")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onmp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jfqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcuxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s6sp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8brh")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_t316y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ksbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r13qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cu0al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88qqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3a42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o40fn")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sacsp"]
+size = Vector3(0.32, 0.16, 0.32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("5_oifrw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("5_oifrw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iu15y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1r4k"]
+size = Vector2(56, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh3gu"]
+atlas = ExtResource("9_l0api")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc2rl"]
+atlas = ExtResource("9_l0api")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onmp0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh3gu")
+}],
+"loop": 1,
+"name": &"Owned",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rc2rl")
+}],
+"loop": 1,
+"name": &"Unowned",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0jfqf"]
+radius = 6.0
+
+[node name="GoldMineTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("generateClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
+script = ExtResource("1_cxj2j")
+towerName = "Gold Mine Tower"
+towerCost = 50
+generateClass = NodePath("Generative Tower Class")
+towerSprite = NodePath("TowerSprite")
+towerRadius = NodePath("TowerSize")
+UIElement = NodePath("Tower UI")
+sellButton = NodePath("Tower UI/Sell Button")
+rangeSprite = NodePath("Range Sprite")
+
+[node name="Generative Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("animatedComponent")]
+script = ExtResource("2_m2vjt")
+generateTime = 10.0
+generateAmmount = 20.0
+enabled = true
+animatedComponent = NodePath("Minecart")
+
+[node name="Minecart" type="AnimatedSprite3D" parent="Generative Tower Class" unique_id=1277676840]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.00084543973, 0.16386776)
+offset = Vector2(0, 16)
+alpha_cut = 2
+texture_filter = 0
+render_priority = 5
+sprite_frames = SubResource("SpriteFrames_sacsp")
+
+[node name="Range Sprite" type="Sprite3D" parent="." unique_id=899007697]
+transform = Transform3D(0.468, 0, 0, 0, -2.045693e-08, -0.468, 0, 0.468, -2.045693e-08, 0, 0, 0)
+modulate = Color(1, 1, 1, 0.2)
+render_priority = 4
+texture = ExtResource("5_iu15y")
+
+[node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
+offset = Vector2(0, 32)
+alpha_cut = 2
+texture_filter = 0
+render_priority = 5
+texture = ExtResource("3_l0api")
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 64)
+
+[node name="TowerSize" type="Area3D" parent="." unique_id=1920063769]
+collision_layer = 2
+collision_mask = 0
+collision_priority = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerSize" unique_id=2036799115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_sacsp")
+
+[node name="Tower UI" type="Control" parent="." unique_id=220820527]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("4_oifrw")
+
+[node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("4_b5oln")]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 162.0
+offset_right = 27.172
+offset_bottom = 185.48196
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Tower UI/Sell Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
+sprite_frames = SubResource("SpriteFrames_iu15y")
+
+[node name="Button Text" parent="Tower UI/Sell Button" index="1" unique_id=1737478061]
+offset_left = 1.1494253
+offset_right = 53.149426
+text = "Sell"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Tower UI/Sell Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+
+[node name="Area Shape" parent="Tower UI/Sell Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_d1r4k")
+
+[node name="Ring" type="Sprite2D" parent="Tower UI" unique_id=1768275827]
+position = Vector2(0, -75)
+scale = Vector2(6, 6)
+texture = ExtResource("9_l0api")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="Upgrade Node" type="Sprite2D" parent="Tower UI/Ring" unique_id=633075241 node_paths=PackedStringArray("levels", "mouseArea", "description", "costLabel")]
+position = Vector2(0, -28)
+texture = ExtResource("9_l0api")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+script = ExtResource("10_o40fn")
+upgradeNumber = 1
+cost = 100
+upgradeCostChange = 40
+abilityValueChanged = 10.0
+levels = [NodePath("Level 1"), NodePath("Level 2"), NodePath("Level 3"), NodePath("Level 4")]
+mouseArea = NodePath("Mouse Area")
+description = NodePath("Description")
+costLabel = NodePath("Description/Cost")
+
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring/Upgrade Node" unique_id=1811623010]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="Level 1" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=300386632]
+position = Vector2(-6.5, -6.9999995)
+sprite_frames = SubResource("SpriteFrames_onmp0")
+animation = &"Unowned"
+
+[node name="Level 2" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=1455841567]
+position = Vector2(-2.5, -10)
+sprite_frames = SubResource("SpriteFrames_onmp0")
+animation = &"Unowned"
+
+[node name="Level 3" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=27710682]
+position = Vector2(2.5, -10)
+sprite_frames = SubResource("SpriteFrames_onmp0")
+animation = &"Unowned"
+
+[node name="Level 4" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=673041661]
+position = Vector2(6.5, -7)
+sprite_frames = SubResource("SpriteFrames_onmp0")
+animation = &"Unowned"
+
+[node name="Mouse Area" type="Area2D" parent="Tower UI/Ring/Upgrade Node" unique_id=1525326296]
+
+[node name="Shape" type="CollisionShape2D" parent="Tower UI/Ring/Upgrade Node/Mouse Area" unique_id=582401393]
+shape = SubResource("CircleShape2D_0jfqf")
+
+[node name="Description" type="Node2D" parent="Tower UI/Ring/Upgrade Node" unique_id=767541871]
+position = Vector2(36.000004, 5.833333)
+scale = Vector2(1.5, 1.5)
+
+[node name="Text Shape" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=644623608]
+position = Vector2(4.0237226, -3.4999998)
+scale = Vector2(1.241066, 0.75)
+texture = ExtResource("9_l0api")
+region_enabled = true
+region_rect = Rect2(64, 32, 32, 32)
+
+[node name="Text Shape2" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=726774176]
+position = Vector2(4.023722, -11.5)
+scale = Vector2(1.241066, 0.25)
+texture = ExtResource("9_l0api")
+region_enabled = true
+region_rect = Rect2(64, 32, 32, 32)
+
+[node name="Title" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=453612806]
+offset_left = -15.5
+offset_top = -15.0
+offset_right = 15.5
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 5
+text = "GOLD!!!!"
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=1622622553]
+offset_left = -15.000001
+offset_top = -7.5
+offset_right = 23.166668
+offset_bottom = 3.500002
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 2
+text = "The miners have dug deeper and found richer deposites. The tower now generates more gold."
+autowrap_mode = 2
+
+[node name="Cost" type="Label" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=919453812]
+offset_left = -6.833333
+offset_top = 2.5000002
+offset_right = 23.166668
+offset_bottom = 8.500001
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 0.78092533, 0.49995556, 1)
+theme_override_font_sizes/font_size = 4
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring" unique_id=1514780239]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -14.0
+offset_top = 21.0
+offset_right = 14.0
+offset_bottom = 31.0
+mouse_filter = 1
+
+[editable path="Tower UI/Sell Button"]

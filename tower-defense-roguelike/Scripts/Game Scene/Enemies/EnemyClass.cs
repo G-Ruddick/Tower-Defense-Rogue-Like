@@ -2,6 +2,8 @@ using Godot;
 using System;
 
 public partial class EnemyClass : Node3D {
+	public static int numberOfEnemies = 0;
+
 	[ExportCategory("Attributes")]
 	[Export] private string enemyName;
 	[Export] private float health;
@@ -102,12 +104,14 @@ public partial class EnemyClass : Node3D {
 	// enemy death
 	public void Die() {
 		PlayerManager.instance.ChangeMoney((int)(gold * (float)GD.RandRange(.5f, 1.25f)));
+		EnemyClass.numberOfEnemies--;
 		this.QueueFree();
 	}
 
 	public void LifeSteal() {
 		PlayerManager.instance.ChangeLives(-lifeSteal);
 		// GD.Print("Despawning enemy");
+		EnemyClass.numberOfEnemies--;
 		this.QueueFree();
 	}
 }

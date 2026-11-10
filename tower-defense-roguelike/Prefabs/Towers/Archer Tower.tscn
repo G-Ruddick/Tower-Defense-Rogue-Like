@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://hmtnh4hmdymf"]
+[gd_scene format=3 uid="uid://bredpkrhesm4k"]
 
-[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_cxj2j"]
-[ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_07xen"]
-[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="3_b5oln"]
-[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="4_b5oln"]
-[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/Projectiles/ArcProjectile.cs" id="4_d1r4k"]
-[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="4_oifrw"]
-[ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_iu15y"]
-[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="5_oifrw"]
-[ext_resource type="Texture2D" uid="uid://m4f3j20vky3l" path="res://Textures/Tower UI.png" id="9_l0api"]
-[ext_resource type="Script" uid="uid://dj12a6hhkstan" path="res://Scripts/Game Scene/Towers/UpgradeNode.cs" id="10_o40fn"]
+[ext_resource type="Script" uid="uid://dpipihcajdbj7" path="res://Scripts/Game Scene/Towers/TowerClass.cs" id="1_tdbrp"]
+[ext_resource type="Script" uid="uid://de53lnqmbrsos" path="res://Scripts/Game Scene/Towers/AttackTowerClass.cs" id="2_agwl8"]
+[ext_resource type="Script" uid="uid://bgim74wqlh65k" path="res://Scripts/Game Scene/Towers/Projectiles/ArcProjectile.cs" id="3_xsowh"]
+[ext_resource type="Texture2D" uid="uid://oawnth5xwcg4" path="res://Textures/Archer Tower.png" id="4_kuaep"]
+[ext_resource type="Texture2D" uid="uid://b7yd7e2c00ll4" path="res://Textures/tower range.png" id="5_e8f7j"]
+[ext_resource type="Script" uid="uid://7ff4bwn1an7k" path="res://Scripts/Game Scene/Map Elements/AssetUiScreenFollow.cs" id="6_ema38"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="7_8lm5l"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="8_wlpuu"]
+[ext_resource type="Texture2D" uid="uid://m4f3j20vky3l" path="res://Textures/Tower UI.png" id="9_6d2h0"]
+[ext_resource type="Script" uid="uid://dj12a6hhkstan" path="res://Scripts/Game Scene/Towers/UpgradeNode.cs" id="10_vlv1t"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sacsp"]
 height = 0.64
@@ -19,11 +19,11 @@ radius = 1.5
 size = Vector3(0.01, 0.01, 0.01)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1r4k"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(8, 40, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0api"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(0, 40, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
@@ -49,27 +49,27 @@ animations = [{
 size = Vector3(0.03, 0.03, 0.03)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o40fn"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(24, 56, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onmp0"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(8, 56, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jfqf"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(16, 56, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tcuxl"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(0, 56, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1s6sp"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(8, 48, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8brh"]
-atlas = ExtResource("3_b5oln")
+atlas = ExtResource("4_kuaep")
 region = Rect2(0, 48, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sacsp"]
@@ -121,11 +121,11 @@ animations = [{
 size = Vector3(0.32, 0.16, 0.32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
-atlas = ExtResource("5_oifrw")
+atlas = ExtResource("8_wlpuu")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
-atlas = ExtResource("5_oifrw")
+atlas = ExtResource("8_wlpuu")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iu15y"]
@@ -151,11 +151,11 @@ animations = [{
 size = Vector2(56, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xh3gu"]
-atlas = ExtResource("9_l0api")
+atlas = ExtResource("9_6d2h0")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rc2rl"]
-atlas = ExtResource("9_l0api")
+atlas = ExtResource("9_6d2h0")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_onmp0"]
@@ -181,7 +181,7 @@ animations = [{
 radius = 6.0
 
 [node name="ArcherTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("attackClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
-script = ExtResource("1_cxj2j")
+script = ExtResource("1_tdbrp")
 towerName = "Archer Tower"
 towerCost = 50
 attackClass = NodePath("Attack Tower Class")
@@ -192,7 +192,7 @@ sellButton = NodePath("Tower UI/Sell Button")
 rangeSprite = NodePath("Range Sprite")
 
 [node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "parentProjectile", "projectileStartingPositions", "rangeSprite")]
-script = ExtResource("2_07xen")
+script = ExtResource("2_agwl8")
 numberOfAttacks = 2
 damage = 2
 travelTime = 0.3
@@ -224,7 +224,7 @@ collision_layer = 0
 collision_mask = 0
 input_ray_pickable = false
 lock_rotation = true
-script = ExtResource("4_d1r4k")
+script = ExtResource("3_xsowh")
 diagonalCollision = NodePath("Area/diagonal")
 projectileSprite = NodePath("Sprite")
 baseCollision = NodePath("Area/straight")
@@ -258,7 +258,7 @@ shape = SubResource("BoxShape3D_dv6u4")
 transform = Transform3D(0.468, 0, 0, 0, -2.045693e-08, -0.468, 0, 0.468, -2.045693e-08, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.2)
 render_priority = 4
-texture = ExtResource("5_iu15y")
+texture = ExtResource("5_e8f7j")
 
 [node name="TowerSprite" type="Sprite3D" parent="." unique_id=838273462]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0.16)
@@ -266,7 +266,7 @@ offset = Vector2(0, 32)
 alpha_cut = 2
 texture_filter = 0
 render_priority = 5
-texture = ExtResource("3_b5oln")
+texture = ExtResource("4_kuaep")
 region_enabled = true
 region_rect = Rect2(32, 0, 32, 64)
 
@@ -302,9 +302,9 @@ shape = SubResource("BoxShape3D_sacsp")
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
-script = ExtResource("4_oifrw")
+script = ExtResource("6_ema38")
 
-[node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("4_b5oln")]
+[node name="Sell Button" parent="Tower UI" unique_id=580980688 instance=ExtResource("7_8lm5l")]
 layout_mode = 0
 offset_left = -28.0
 offset_top = 162.0
@@ -338,16 +338,16 @@ shape = SubResource("RectangleShape2D_d1r4k")
 [node name="Ring" type="Sprite2D" parent="Tower UI" unique_id=1768275827]
 position = Vector2(0, -75)
 scale = Vector2(6, 6)
-texture = ExtResource("9_l0api")
+texture = ExtResource("9_6d2h0")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="Upgrade Node" type="Sprite2D" parent="Tower UI/Ring" unique_id=633075241 node_paths=PackedStringArray("levels", "mouseArea", "description", "costLabel")]
 position = Vector2(0, -28)
-texture = ExtResource("9_l0api")
+texture = ExtResource("9_6d2h0")
 region_enabled = true
 region_rect = Rect2(64, 0, 32, 32)
-script = ExtResource("10_o40fn")
+script = ExtResource("10_vlv1t")
 upgradeNumber = 1
 cost = 40
 upgradeCostChange = 10
@@ -356,6 +356,16 @@ levels = [NodePath("Level 1"), NodePath("Level 2"), NodePath("Level 3"), NodePat
 mouseArea = NodePath("Mouse Area")
 description = NodePath("Description")
 costLabel = NodePath("Description/Cost")
+
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring/Upgrade Node" unique_id=1811623010]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
 
 [node name="Level 1" type="AnimatedSprite2D" parent="Tower UI/Ring/Upgrade Node" unique_id=300386632]
 position = Vector2(-9, -5)
@@ -394,14 +404,14 @@ scale = Vector2(1.5, 1.5)
 [node name="Text Shape" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=644623608]
 position = Vector2(4.0237226, -3.4999998)
 scale = Vector2(1.241066, 0.75)
-texture = ExtResource("9_l0api")
+texture = ExtResource("9_6d2h0")
 region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
 
 [node name="Text Shape2" type="Sprite2D" parent="Tower UI/Ring/Upgrade Node/Description" unique_id=726774176]
 position = Vector2(4.023722, -11.5)
 scale = Vector2(1.241066, 0.25)
-texture = ExtResource("9_l0api")
+texture = ExtResource("9_6d2h0")
 region_enabled = true
 region_rect = Rect2(64, 32, 32, 32)
 
@@ -435,5 +445,14 @@ theme_override_font_sizes/font_size = 4
 text = "10"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="Mouse Block Area" type="Control" parent="Tower UI/Ring" unique_id=1514780239]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -14.0
+offset_top = 21.0
+offset_right = 14.0
+offset_bottom = 31.0
+mouse_filter = 1
 
 [editable path="Tower UI/Sell Button"]

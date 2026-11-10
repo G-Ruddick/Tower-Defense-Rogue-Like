@@ -7,10 +7,15 @@ public partial class GameManager: Node {
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
 	private float resetTimer = 0f;
+	
+	[Export] private TowerClass currentlySelectedTower;
+
+	public bool waveActive = false;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
 	[ExportCategory("Scene Components")]
+	[Export] private Node EnemyManager;
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
 	private TowerClass towerIcon;
@@ -38,6 +43,10 @@ public partial class GameManager: Node {
 
 	public override void _Process(double delta) {
 		UpdateStats();
+
+		if (waveActive) {
+			CheckEndOfWaveCondition();
+		}
 
 		// handling quick reset
 		if (Input.IsActionPressed("Reset")) {
@@ -102,8 +111,6 @@ public partial class GameManager: Node {
 				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
 				if (result.Count > 0) {
 					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-					// GD.Print(gameAsset.Name);
-					// GD.Print(gameAsset.Position);
 
 					if (gameAsset.Name.ToString().Contains("Grass")) {
 						// placing tower
@@ -115,7 +122,20 @@ public partial class GameManager: Node {
 						}
 					}
 					else if (gameAsset.Name.ToString().Contains("Tower")) {
-						((TowerClass)gameAsset).UIToggle();
+						// disabling current tower ui
+						if (currentlySelectedTower != null && IsInstanceValid(currentlySelectedTower)) {
+							currentlySelectedTower.UIToggle();
+						}
+
+						// enbling selected tower ui
+						if (currentlySelectedTower != gameAsset as TowerClass) {
+							currentlySelectedTower = gameAsset as TowerClass;
+							currentlySelectedTower.UIToggle();
+							return;
+						}
+
+						// if the tower clicked is the same tower, set null
+						currentlySelectedTower = null;
 					}
 				}
 			}
@@ -159,13 +179,17 @@ public partial class GameManager: Node {
 	}
 
 	private void NextWaveButton() {
+		waveActive = true;
+		waveNumber++;
+		StartTile.instance.GetEnemyList();
+	}
+
+	private void OpenShop() {
 		nextWaveButton.Visible = false;
 		Shop.instance.shopOpen = true;
 		Shop.instance.Visible = true;
 		Shop.instance.rerollCost = 10;
 		Shop.instance.Reroll(false);
-
-		waveNumber++;
 	}
 
 	private void UpdateStats() {
@@ -195,5 +219,22 @@ public partial class GameManager: Node {
 
 			cell.CheckForObjects();
 		}
+	}
+
+	private void CheckEndOfWaveCondition() {
+		if (EnemyClass.numberOfEnemies != 0) {
+			if (nextWaveButton.GetClickability()) {
+				nextWaveButton.ChangeClickability();
+			}
+
+			return;
+		}
+
+		if (!nextWaveButton.GetClickability()) {
+			nextWaveButton.ChangeClickability();
+		}
+
+		waveActive = false;
+		OpenShop();
 	}
 }
