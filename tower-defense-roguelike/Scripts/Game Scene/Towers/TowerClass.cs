@@ -23,6 +23,7 @@ public partial class TowerClass : Node3D {
 	[ExportCategory("UI")]
 	[Export] private ButtonTemplate sellButton;
 	[Export] private Sprite3D rangeSprite;
+	[Export] private Label sellCostLabel;
 
 	public override void _Ready() {
 		UIElement.Visible = false;
@@ -30,6 +31,7 @@ public partial class TowerClass : Node3D {
 		
 		// getting tower stats
 		towerCost = TowerStats.TowerDictionary[towerName].usePrice;
+		UpdateSellValue(0);
 	}
 
 	public override void _Input(InputEvent @event) {
@@ -103,5 +105,11 @@ public partial class TowerClass : Node3D {
 		}
 		
 		towerSprite.Modulate -= new Color(0.2f, 0.2f, 0.2f, 0.02f);
+	}
+
+	public void UpdateSellValue(int value) {
+		towerCost += value;
+		int sellValue = (int)Mathf.Ceil(towerCost * 0.75f);
+		sellCostLabel.Text = "$" + sellValue.ToString();
 	}
 }
