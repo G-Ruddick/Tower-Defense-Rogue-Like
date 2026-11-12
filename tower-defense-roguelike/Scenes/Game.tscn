@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bejreh4w4qfip" path="res://Scripts/Game Scene/GameOver.cs" id="9_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bawjj2c4jnm61" path="res://Textures/Next Wave Button.png" id="9_dahhg"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
+[ext_resource type="Script" uid="uid://bc58lj4p6c7oo" path="res://Scripts/Game Scene/WinGame.cs" id="12_3so38"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
 atlas = ExtResource("9_dahhg")
@@ -183,9 +184,10 @@ size = Vector2(56.01, 24.475)
 
 [node name="Game" type="Node3D" unique_id=1162375626]
 
-[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("EnemyManager", "shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
+[node name="GameManager" type="Node" parent="." unique_id=1592454453 node_paths=PackedStringArray("EnemyManager", "winGameManager", "shopScreen", "camera", "playerHealthLabel", "playerMoneyLabel", "waveNumberLabel", "settingsButton", "nextWaveButton")]
 script = ExtResource("1_gl6un")
 EnemyManager = NodePath("../Enemies")
+winGameManager = NodePath("../UI/Win Game Screen")
 shopScreen = NodePath("../UI/ShopScreen")
 camera = NodePath("../Camera3D")
 playerHealthLabel = NodePath("../UI/Player Stats/Health")
@@ -396,6 +398,7 @@ shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Game Over Screen" type="Control" parent="UI" unique_id=1476551975 node_paths=PackedStringArray("restartButton", "quitButton")]
 process_mode = 3
+visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 15
@@ -500,6 +503,122 @@ scale = Vector2(1.423707, 1.447634)
 [node name="Area Shape" parent="UI/Game Over Screen/Quit Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3cx6b")
 
+[node name="Win Game Screen" type="Control" parent="UI" unique_id=461585384 node_paths=PackedStringArray("endlessModeButton", "returnToMenuButton")]
+process_mode = 3
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+script = ExtResource("12_3so38")
+endlessModeButton = NodePath("Endless Mode Button")
+returnToMenuButton = NodePath("Quit Button")
+
+[node name="BackBoard" type="Sprite2D" parent="UI/Win Game Screen" unique_id=1146948600]
+process_mode = 3
+modulate = Color(1.3088592, 1.331864, 1.0558058, 1)
+position = Vector2(576, 324)
+scale = Vector2(17.999998, 25.92)
+texture = ExtResource("7_fgofq")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 25)
+
+[node name="Button Text" type="Label" parent="UI/Win Game Screen" unique_id=695006856]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.5
+offset_top = -267.0
+offset_right = 271.5
+offset_bottom = -127.41667
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Endless Mode Button" parent="UI/Win Game Screen" unique_id=1553000551 instance=ExtResource("3_kldst")]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 406.0
+offset_right = 601.0
+offset_bottom = 406.0
+scale = Vector2(3.576, 3.576)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Win Game Screen/Endless Mode Button" index="0" unique_id=947915153]
+scale = Vector2(3.3029013, 1.447634)
+sprite_frames = SubResource("SpriteFrames_3so38")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Win Game Screen/Endless Mode Button" index="1" unique_id=1737478061]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Endless Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Win Game Screen/Endless Mode Button" index="2" unique_id=116881939]
+scale = Vector2(3.3029013, 1.447634)
+
+[node name="Area Shape" parent="UI/Win Game Screen/Endless Mode Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3cx6b")
+
+[node name="Quit Button" parent="UI/Win Game Screen" unique_id=1354283999 instance=ExtResource("3_kldst")]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 558.0
+offset_right = 601.0
+offset_bottom = 558.0
+scale = Vector2(3.576, 3.576)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Win Game Screen/Quit Button" index="0" unique_id=947915153]
+scale = Vector2(3.3029013, 1.447634)
+sprite_frames = SubResource("SpriteFrames_3so38")
+animation = &"Disabled"
+
+[node name="Button Text" parent="UI/Win Game Screen/Quit Button" index="1" unique_id=1737478061]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "Return to main menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="UI/Win Game Screen/Quit Button" index="2" unique_id=116881939]
+scale = Vector2(3.3029013, 1.447634)
+
+[node name="Area Shape" parent="UI/Win Game Screen/Quit Button/Button Area" index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_3cx6b")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 2.985, 4.358, 7.816241)
 projection = 1
@@ -515,3 +634,5 @@ compositor = SubResource("Compositor_ophl0")
 [editable path="UI/Settings Button"]
 [editable path="UI/Game Over Screen/Restart Button"]
 [editable path="UI/Game Over Screen/Quit Button"]
+[editable path="UI/Win Game Screen/Endless Mode Button"]
+[editable path="UI/Win Game Screen/Quit Button"]
