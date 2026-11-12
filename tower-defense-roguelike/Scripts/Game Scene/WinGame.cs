@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public partial class WinGame : Control {
-	private int winConditionWaveNumber = 3;
+	private int winConditionWaveNumber = 20;
 	
 	[Export] private ButtonTemplate endlessModeButton;
 	[Export] private ButtonTemplate returnToMenuButton;
