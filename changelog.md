@@ -2,11 +2,11 @@
 
 ### v 0.10.0 - 11/17/2026
   * Added:
-    - 
+    - Added win game screen and win condition at level 20
   * Changed:
     - 
   * Bug Fix: 
-    - 
+    - Killing all currently spawned enemies no longer counts as completing a wave
 
 ### v 0.09.0 - 11/10/2026
   * Added:
