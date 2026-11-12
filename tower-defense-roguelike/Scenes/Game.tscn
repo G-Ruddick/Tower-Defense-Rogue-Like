@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bawjj2c4jnm61" path="res://Textures/Next Wave Button.png" id="9_dahhg"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
 [ext_resource type="Script" uid="uid://bc58lj4p6c7oo" path="res://Scripts/Game Scene/WinGame.cs" id="12_3so38"]
+[ext_resource type="PackedScene" uid="uid://dgsamtklcdqn2" path="res://Prefabs/UI Value Change Indicator.tscn" id="13_3cx6b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
 atlas = ExtResource("9_dahhg")
@@ -246,7 +247,7 @@ offset_top = 3.4699998
 offset_right = 92.0
 offset_bottom = 39.76167
 theme_override_font_sizes/font_size = 26
-text = "Health"
+text = "Health 20"
 
 [node name="Gold" type="Label" parent="UI/Player Stats" unique_id=313544983]
 layout_mode = 0
@@ -255,7 +256,7 @@ offset_top = 44.47
 offset_right = 68.0
 offset_bottom = 80.76167
 theme_override_font_sizes/font_size = 26
-text = "Gold"
+text = "Gold 100"
 
 [node name="Round" type="Label" parent="UI/Player Stats" unique_id=954464956]
 layout_mode = 0
@@ -505,6 +506,7 @@ shape = SubResource("RectangleShape2D_3cx6b")
 
 [node name="Win Game Screen" type="Control" parent="UI" unique_id=461585384 node_paths=PackedStringArray("endlessModeButton", "returnToMenuButton")]
 process_mode = 3
+visible = false
 top_level = true
 layout_mode = 3
 anchors_preset = 15
@@ -618,6 +620,14 @@ scale = Vector2(3.3029013, 1.447634)
 
 [node name="Area Shape" parent="UI/Win Game Screen/Quit Button/Button Area" index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_3cx6b")
+
+[node name="UiValueChangeIndicator" parent="UI" unique_id=1096598134 instance=ExtResource("13_3cx6b")]
+visible = false
+offset_left = 105.0
+offset_top = 11.0
+offset_right = 150.00003
+offset_bottom = 47.29167
+text = "+0"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 2.985, 4.358, 7.816241)

@@ -4,6 +4,7 @@
   * Added:
     - Added win game screen and win condition at level 20
     - Added sell value display to tower ui
+    - Added ui effect when gaining or loosing health and gold
   * Changed:
     - Buying tower upgrades now increase tower sell value
   * Bug Fix: 
