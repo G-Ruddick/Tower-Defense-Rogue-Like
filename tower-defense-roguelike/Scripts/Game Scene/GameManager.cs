@@ -7,15 +7,15 @@ public partial class GameManager: Node {
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
 	private float resetTimer = 0f;
+	public bool waveActive = false;
 	
 	[Export] private TowerClass currentlySelectedTower;
-
-	public bool waveActive = false;
 
 	public List<GridTile> gridCells = new List<GridTile>();
 
 	[ExportCategory("Scene Components")]
 	[Export] private Node EnemyManager;
+	[Export] private WinGame winGameManager;
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
 	private TowerClass towerIcon;
@@ -37,7 +37,7 @@ public partial class GameManager: Node {
 
 	public override void _Ready() {
 		gameManager = this;	
-		waveNumber = 1;
+		waveNumber = 0;
 		movingScreen = false;
 	}
 
@@ -235,6 +235,7 @@ public partial class GameManager: Node {
 		}
 
 		waveActive = false;
+		winGameManager.CheckWinCondition(waveNumber);
 		OpenShop();
 	}
 }
