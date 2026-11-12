@@ -3,8 +3,9 @@
 ### v 0.10.0 - 11/17/2026
   * Added:
     - Added win game screen and win condition at level 20
+    - Added sell value display to tower ui
   * Changed:
-    - 
+    - Buying tower upgrades now increase tower sell value
   * Bug Fix: 
     - Killing all currently spawned enemies no longer counts as completing a wave
 
