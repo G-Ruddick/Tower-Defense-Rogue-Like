@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dgsamtklcdqn2"]
+
+[ext_resource type="Script" uid="uid://ucrrx564tw7b" path="res://Scripts/Game Scene/UIValueChangeIndicator.cs" id="1_tx57v"]
+
+[node name="UiValueChangeIndicator" type="Label" unique_id=1096598134]
+modulate = Color(0, 1, 0, 0.5)
+theme_override_font_sizes/font_size = 26
+text = "+10"
+script = ExtResource("1_tx57v")

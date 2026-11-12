@@ -40,6 +40,7 @@ public partial class PlayerManager : Node {
 	}
 	public void ChangeMoney(int value) {
 		money += value;
+		UIValueChangeIndicator.CreateLabel(value, new Vector2(81, 52));
 	}
 
 	// Live functions
@@ -51,6 +52,7 @@ public partial class PlayerManager : Node {
 	}
 	public void ChangeLives(int value) {
 		lives += value;
+		UIValueChangeIndicator.CreateLabel(value, new Vector2(105, 11));
 	}
 
 	// adding towers to the players inventory
