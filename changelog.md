@@ -5,8 +5,12 @@
     - Added win game screen and win condition at level 20
     - Added sell value display to tower ui
     - Added ui effect when gaining or loosing health and gold
+    - Added Player Abilities
+      - Added Lightning Ability
+      - Added Ability Blueprints to the shop
   * Changed:
     - Buying tower upgrades now increase tower sell value
+    - Refactored Blueprints to be abstract class that both ability and tower derives from
   * Bug Fix: 
     - Killing all currently spawned enemies no longer counts as completing a wave
 
