@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://cig2wgt0tcdx7"]
+
+[ext_resource type="Script" uid="uid://ct5pt0gk13cuu" path="res://Scripts/Game Scene/Abilities/AbilityClass.cs" id="1_eslfi"]
+[ext_resource type="Texture2D" uid="uid://bw25a63rrbp4x" path="res://Textures/Lighting Strike Ability.png" id="2_wlhh8"]
+[ext_resource type="Texture2D" uid="uid://yl04tu31dblp" path="res://Textures/Ability Cursor UI.png" id="3_jqs0d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y1br"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(416, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mwlc"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(352, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arlfk"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(288, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oe2d"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aegm"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rnaq"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb3hh"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bg2j"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(384, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dj1o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y1br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mwlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arlfk")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_0oe2d")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_2aegm")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_0rnaq")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_yb3hh")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_0oe2d")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_arlfk")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_8mwlc")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1y1br")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0bg2j")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8r2p"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubbgr"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4m3q"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac53t"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a4qm"]
+atlas = ExtResource("2_wlhh8")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8r2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubbgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4m3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac53t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a4qm")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dskxs"]
+atlas = ExtResource("3_jqs0d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nur3j"]
+atlas = ExtResource("3_jqs0d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnvti"]
+atlas = ExtResource("3_jqs0d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qggha"]
+atlas = ExtResource("3_jqs0d")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pe01b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dskxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nur3j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnvti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qggha")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dv6u4"]
+radius = 0.13665779
+
+[node name="Lightning Strike" type="Node3D" unique_id=988135294 node_paths=PackedStringArray("hitbox", "abilitySprite", "afterEffectSprite", "cursor")]
+script = ExtResource("1_eslfi")
+abilityName = "Lightning Strike"
+damage = 20
+hitbox = NodePath("Hitbox")
+abilitySprite = NodePath("Ability")
+afterEffectSprite = NodePath("Ground Effect")
+afterEffectPlayOnFrame = 6
+cursor = NodePath("Cursor")
+
+[node name="Ability" type="AnimatedSprite3D" parent="." unique_id=1074343359]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+offset = Vector2(0, 32)
+texture_filter = 0
+render_priority = 50
+sprite_frames = SubResource("SpriteFrames_3dj1o")
+frame = 11
+frame_progress = 1.0
+
+[node name="Ground Effect" type="AnimatedSprite3D" parent="." unique_id=887740601]
+transform = Transform3D(2, 0, 0, 0, -8.742278e-08, -2, 0, 2, -8.742278e-08, 0, 0.05, 0)
+texture_filter = 0
+render_priority = 50
+sprite_frames = SubResource("SpriteFrames_dv6u4")
+frame = 4
+frame_progress = 1.0
+
+[node name="Cursor" type="AnimatedSprite3D" parent="." unique_id=513147632]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.05, 0)
+modulate = Color(1, 1, 1, 0.75000006)
+texture_filter = 0
+render_priority = 50
+sprite_frames = SubResource("SpriteFrames_pe01b")
+autoplay = "default"
+frame_progress = 0.36662927
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=889849624]
+collision_layer = 8
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1159445058]
+transform = Transform3D(1.1562719, 0, 0, 0, 1.1562719, 0, 0, 0, 1.1562719, 0, 0, 0)
+shape = SubResource("SphereShape3D_dv6u4")

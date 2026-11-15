@@ -161,7 +161,7 @@ public partial class GameManager: Node {
 			IBlueprint blueprint = PlayerManager.instance.activeBlueprint;
 
 			if (blueprint is AbilityBlueprint) {
-				(towerIcon as AbilityClass).UseAbility();
+				AbilityClass.UseAbility(towerIcon.Position, ((AbilityBlueprint)blueprint).GetBlueprintName());
 			}
 			else {
 				PlaceTower(gameAsset, blueprint as TowerBlueprint);
@@ -211,7 +211,7 @@ public partial class GameManager: Node {
 	}
 
 	private void CreateAbilityCursor() {
-		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Abilities/Lighting Strike Ability.tscn");
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Abilities/Lightning Strike.tscn");
 		towerIcon = (Node3D)prefab.Instantiate();
 		towerIcon.Name = "cursor icon";
 		PlayerManager.instance.AddChild(towerIcon);

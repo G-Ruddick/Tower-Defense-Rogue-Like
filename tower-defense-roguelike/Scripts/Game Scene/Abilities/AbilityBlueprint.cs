@@ -13,6 +13,13 @@ public partial class AbilityBlueprint : IBlueprint {
 		enabled = true;
 	}
 
+	public void UseAbility() {
+		onCoolDown = true;
+		PlayerManager.instance.activeBlueprint = null;
+		OnPlace();
+		AbilityCooldown();
+	}
+
 	public override void PositionBlueprint(int index) {
 		float x = 110f, x1 = 119f, x2 = 64f;
 		Vector2 position = new Vector2(0, 575);
@@ -40,12 +47,12 @@ public partial class AbilityBlueprint : IBlueprint {
 	}
 
 	private async void AbilityCooldown() {
-		if (onCoolDown) {
+		if (!onCoolDown) {
 			return;
 		}
 
 		await ToSignal(GetTree().CreateTimer(cooldownTime, processAlways: false), "timeout");
-		onCoolDown = true;
+		onCoolDown = false;
 	}
 
 	public static AbilityBlueprint CreateBlueprint(string name) {
@@ -56,6 +63,7 @@ public partial class AbilityBlueprint : IBlueprint {
 		blueprint.nameLabel.Text = name;
 		blueprint.blueprintName = name;
 		blueprint.icon.RegionRect = GetSprite(blueprint);
+		blueprint.cooldownTime = AbilityStats.AbilityDictionary[name].cooldown;
 
 		return blueprint;
 	}

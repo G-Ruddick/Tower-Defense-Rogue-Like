@@ -38,7 +38,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vngns"]
 size = Vector2(56, 24)
 
-[node name="Blueprint" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "sellButton", "costLabel", "nameLabel")]
+[node name="Blueprint" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "sellButton", "nameLabel")]
 scale = Vector2(3, 3)
 script = ExtResource("1_8t1s6")
 enabled = true
@@ -47,7 +47,6 @@ icon = NodePath("Sprite")
 button = NodePath("Clickable Area")
 clickableArea = NodePath("Clickable Area/CollisionShape2D")
 sellButton = NodePath("Sell Button")
-costLabel = NodePath("")
 nameLabel = NodePath("Name")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1133058594]
