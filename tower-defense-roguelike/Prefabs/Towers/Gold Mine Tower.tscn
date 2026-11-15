@@ -168,7 +168,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_0jfqf"]
 radius = 6.0
 
-[node name="GoldMineTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("generateClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite")]
+[node name="GoldMineTower" type="Node3D" unique_id=912634388 node_paths=PackedStringArray("generateClass", "towerSprite", "towerRadius", "UIElement", "sellButton", "rangeSprite", "sellCostLabel")]
 script = ExtResource("1_cxj2j")
 towerName = "Gold Mine Tower"
 towerCost = 50
@@ -178,6 +178,7 @@ towerRadius = NodePath("TowerSize")
 UIElement = NodePath("Tower UI")
 sellButton = NodePath("Tower UI/Sell Button")
 rangeSprite = NodePath("Range Sprite")
+sellCostLabel = NodePath("Tower UI/Ring/Sell Value Label")
 
 [node name="Generative Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("animatedComponent")]
 script = ExtResource("2_m2vjt")
@@ -370,5 +371,16 @@ offset_top = 21.0
 offset_right = 14.0
 offset_bottom = 31.0
 mouse_filter = 1
+
+[node name="Sell Value Label" type="Label" parent="Tower UI/Ring" unique_id=244148718]
+offset_left = -12.000001
+offset_top = 23.000002
+offset_right = 11.999999
+offset_bottom = 29.000002
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 5
+text = "$20000"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [editable path="Tower UI/Sell Button"]

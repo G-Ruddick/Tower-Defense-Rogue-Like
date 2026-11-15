@@ -12,7 +12,8 @@ public partial class ShopIcon : Node2D {
 	[Export] public Label useCostLabel;
 
 	public override void _Process(double delta) {
-		if (PlayerManager.instance.GetMoney() < TowerStats.TowerDictionary[towerName].buyPrice) {
+		var price = this is AbilityShopIcon ? AbilityStats.AbilityDictionary[towerName].buyPrice : TowerStats.TowerDictionary[towerName].buyPrice;
+		if (PlayerManager.instance.GetMoney() < price) {
 			if (costButton.GetAreaState()) {
 				costButton.ChangeClickability();
 				icon.Modulate = new Color(0.4f, 0.4f, 0.4f, 1);
@@ -74,7 +75,7 @@ public partial class ShopIcon : Node2D {
 		return iconLocation;
 	}
 
-	private void PurchaseBlueprint() {
+	protected virtual void PurchaseBlueprint() {
 		PlayerManager.instance.towers.Add(towerName);
 		PlayerManager.instance.UpdateTowers();
 		PlayerManager.instance.ChangeMoney(-TowerStats.TowerDictionary[towerName].buyPrice);

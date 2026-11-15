@@ -13,6 +13,7 @@ public partial class StartTile : Node3D {
 
 	public async void GetEnemyList() {
 		List<string> enemyList = EnemyWaveSpawner.instance.ExportList();
+		EnemyClass.numberOfEnemies = enemyList.Count;
 
 		foreach (string enemy in enemyList) {
 			SpawnEnemies(enemy);
@@ -28,7 +29,6 @@ public partial class StartTile : Node3D {
 
 		enemy.Position = this.Position + new Vector3((float)GD.RandRange(-0.11f, 0.11f), 0.01f, (float)GD.RandRange(-0.11f, 0.11f));
 		enemy.walkLocation = enemy.Position;
-		EnemyClass.numberOfEnemies++;
 	}
   
   public void SpawnEnemies(string name, float x, float z) {
@@ -38,6 +38,5 @@ public partial class StartTile : Node3D {
 
 		enemy.Position = this.Position + new Vector3(x, 0.01f, z);
 		enemy.walkLocation = enemy.Position;
-		EnemyClass.numberOfEnemies++;
 	}
 }

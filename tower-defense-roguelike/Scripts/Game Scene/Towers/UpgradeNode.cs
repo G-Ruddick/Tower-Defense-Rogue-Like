@@ -82,6 +82,8 @@ public partial class UpgradeNode : Node2D {
 		Type type = Type.GetType("TowerUpgrades");
 		MethodInfo method = type.GetMethod(name);
 		method.Invoke(null, new object[] {tower, upgradeNumber, abilityValueChanged});
+
+		tower.UpdateSellValue(cost - upgradeCostChange);
 	}
 
 	public int GetCost() {

@@ -1,5 +1,27 @@
 # Change Log
 
+### v 0.10.0 - 11/17/2026
+  * Added:
+    - Added win game screen and win condition at level 20
+    - Added sell value display to tower ui
+    - Added ui effect when gaining or loosing health and gold
+    - Added Player Abilities
+      - Added Lightning Ability
+      - Added Ability Blueprints to the shop
+  * Changed:
+    - Buying tower upgrades now increase tower sell value
+    - Refactored Blueprints to be abstract class that both ability and tower derives from
+    - Archer Tower:
+      - Increased damage
+      - Decreased travel time
+    - Mortar Tower:
+      - Decreased Damage
+      - Increased Cost
+    - Wizard Tower:
+      - Increased Damage
+  * Bug Fix: 
+    - Killing all currently spawned enemies no longer counts as completing a wave
+
 ### v 0.09.0 - 11/10/2026
   * Added:
     - Added new next wave button sprite
