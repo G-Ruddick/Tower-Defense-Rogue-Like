@@ -6,11 +6,15 @@ public partial class PlayerManager : Node {
 	[ExportCategory("Player Stats")]
 	[Export] private int money;
 	[Export] private int lives; 
-	[Export] private int maxNumberOfTowers; 
+	[Export] private int maxNumberOfTowers = 5;
+	[Export] private int maxNumberOfAbilities = 2;
 
 	public List<string> towers = new List<string>();
-	public List<Node2D> abilities = new List<Node2D>();
+	public List<string> abilities = new List<string>();
 	[Export] public Node playerTowersNode;
+	[Export] public Node playerAbilitiesNode;
+
+	public IBlueprint activeBlueprint;
 
 	// singleton
 	public static PlayerManager instance {
@@ -29,6 +33,9 @@ public partial class PlayerManager : Node {
 		towers.Add("Mortar Tower");
 		towers.Add("Mage Tower");
 		UpdateTowers();
+
+		abilities.Add("Lightning Strike");
+		UpdateAbilities();
 	}
 	
 	// Money Functions
@@ -63,9 +70,21 @@ public partial class PlayerManager : Node {
 		}
 
 		for(int i = 0; i < towers.Count; i++) {
-			TowerBlueprint blueprint = TowerBlueprint.CreateBlueprint(towers[i]);
+			IBlueprint blueprint = TowerBlueprint.CreateBlueprint(towers[i]);
+			blueprint.PositionBlueprint(i);
+		}
+	}
 
-			blueprint.Position = PositionBlueprint(i);
+	// adding abilities to the players inventory
+	public void UpdateAbilities() {
+		// resetting towers
+		foreach (AbilityBlueprint ability in playerAbilitiesNode.GetChildren()) {
+			ability.QueueFree();
+		}
+
+		for(int i = 0; i < abilities.Count; i++) {
+			AbilityBlueprint blueprint = AbilityBlueprint.CreateBlueprint(abilities[i]);
+			blueprint.PositionBlueprint(i);
 		}
 	}
 
@@ -95,21 +114,37 @@ public partial class PlayerManager : Node {
 
 		return position;
 	}
+	
+	public void SetBlueprintsInactive(IBlueprint blueprint = null) {
+		activeBlueprint = null;
 
-	public TowerBlueprint GetActiveTower() {
-		foreach(TowerBlueprint tower in playerTowersNode.GetChildren()) {
-			if (tower.GetPlaceable()) {
-				return tower;
-			}
+		if (blueprint is TowerBlueprint) {
+			SetTowersInactive(blueprint as TowerBlueprint);
+		}
+		else {
+			SetTowersInactive();
 		}
 
-		return null;
+		if (blueprint is AbilityBlueprint) {
+			SetAbilitiesInactive(blueprint as AbilityBlueprint);
+		}
+		else {
+			SetAbilitiesInactive();
+		}
 	}
-	
+
 	public void SetTowersInactive(TowerBlueprint blueprint = null) {
 		foreach(TowerBlueprint tower in playerTowersNode.GetChildren()) {
 			if (tower.GetPlaceable() && tower != blueprint) {
 				tower.ChangePlaceable();
+			}
+		}
+	}
+	
+	public void SetAbilitiesInactive(AbilityBlueprint blueprint = null) {
+		foreach(AbilityBlueprint ability in playerAbilitiesNode.GetChildren()) {
+			if (ability.GetPlaceable() && ability != blueprint) {
+				ability.ChangePlaceable();
 			}
 		}
 	}
