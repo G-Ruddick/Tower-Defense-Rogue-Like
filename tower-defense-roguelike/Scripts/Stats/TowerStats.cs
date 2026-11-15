@@ -6,7 +6,7 @@ public partial class TowerStats {
 	// usePrice is the cost to place the tower on the map.
 	public static Dictionary<string, (int index, int buyPrice, int usePrice)> TowerDictionary = new Dictionary<string, (int index, int buyPrice, int usePrice)> {
 		{ "Archer Tower", (0, 100, 50) },
-		{ "Mortar Tower", (1, 120, 100) },
+		{ "Mortar Tower", (1, 180, 150) },
 		{ "Mage Tower", (2, 100, 70) },
 		{ "Gold Mine Tower", (3, 300, 250) }
 	};
@@ -15,7 +15,7 @@ public partial class TowerStats {
 	public static void ResetStats() {
 		TowerDictionary = new Dictionary<string, (int index, int buyPrice, int usePrice)> {
 			{ "Archer Tower", (0, 100, 50) },
-			{ "Mortar Tower", (1, 120, 100) },
+			{ "Mortar Tower", (1, 180, 150) },
 			{ "Mage Tower", (2, 100, 70) },
 			{ "Gold Mine Tower", (3, 300, 250) }
 		};

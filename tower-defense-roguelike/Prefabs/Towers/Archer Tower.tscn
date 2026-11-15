@@ -195,8 +195,8 @@ sellCostLabel = NodePath("Tower UI/Ring/Sell Value Label")
 [node name="Attack Tower Class" type="Node3D" parent="." unique_id=2005567759 node_paths=PackedStringArray("attackArea", "attackRange", "projectile", "parentProjectile", "projectileStartingPositions", "rangeSprite")]
 script = ExtResource("2_agwl8")
 numberOfAttacks = 2
-damage = 2
-travelTime = 0.3
+damage = 5
+travelTime = 0.2
 reloadTime = 0.75
 projectilePoolSize = 5
 attackArea = NodePath("Attack Range")

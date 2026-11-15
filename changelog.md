@@ -11,6 +11,14 @@
   * Changed:
     - Buying tower upgrades now increase tower sell value
     - Refactored Blueprints to be abstract class that both ability and tower derives from
+    - Archer Tower:
+      - Increased damage
+      - Decreased travel time
+    - Mortar Tower:
+      - Decreased Damage
+      - Increased Cost
+    - Wizard Tower:
+      - Increased Damage
   * Bug Fix: 
     - Killing all currently spawned enemies no longer counts as completing a wave
 
