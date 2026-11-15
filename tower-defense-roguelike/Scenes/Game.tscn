@@ -197,9 +197,10 @@ waveNumberLabel = NodePath("../UI/Player Stats/Round")
 settingsButton = NodePath("../UI/Settings Button")
 nextWaveButton = NodePath("../UI/Next Wave Button")
 
-[node name="Player Manager" type="Node" parent="." unique_id=520578689 node_paths=PackedStringArray("playerTowersNode")]
+[node name="Player Manager" type="Node" parent="." unique_id=520578689 node_paths=PackedStringArray("playerTowersNode", "playerAbilitiesNode")]
 script = ExtResource("2_b2bpf")
 playerTowersNode = NodePath("../UI/Towers/Player Towers")
+playerAbilitiesNode = NodePath("../UI/Abilities/Player Abilities")
 
 [node name="Brightness Manager" type="Node" parent="." unique_id=1236359525 node_paths=PackedStringArray("brightnessController2D", "brightnessController3D")]
 script = ExtResource("10_71axn")
@@ -310,23 +311,26 @@ offset_left = 4.0
 offset_top = 520.0
 offset_right = 244.0
 offset_bottom = 645.0
+mouse_filter = 1
 
 [node name="Backboard" type="Sprite2D" parent="UI/Abilities" unique_id=575405481]
-position = Vector2(120.00001, 45.00006)
+position = Vector2(119, 25)
 rotation = -3.1415925
-scale = Vector2(5, 5.0117283)
+scale = Vector2(5, 6.2117276)
 texture = ExtResource("7_fgofq")
 region_enabled = true
 region_rect = Rect2(0, 32, 48, 32)
 
 [node name="Header" type="Label" parent="UI/Abilities" unique_id=970566332]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 103.0
-offset_bottom = 39.291687
+offset_left = 5.0
+offset_top = -27.0
+offset_right = 106.0
+offset_bottom = 9.291687
 theme_override_font_sizes/font_size = 26
 text = "Abilities"
+
+[node name="Player Abilities" type="Node" parent="UI/Abilities" unique_id=105887369]
 
 [node name="Next Wave Button" parent="UI" unique_id=555688118 instance=ExtResource("3_kldst")]
 offset_left = 1050.0

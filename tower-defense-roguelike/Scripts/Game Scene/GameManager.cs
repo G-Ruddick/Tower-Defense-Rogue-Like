@@ -18,7 +18,7 @@ public partial class GameManager: Node {
 	[Export] private WinGame winGameManager;
 	[Export] private Control shopScreen;
 	[Export] private Camera3D camera;
-	private TowerClass towerIcon;
+	private Node3D towerIcon;
 
 	[ExportCategory("Labels")]
 	[Export] private Label playerHealthLabel;
@@ -59,26 +59,36 @@ public partial class GameManager: Node {
 		if (Input.IsActionJustReleased("Reset")) {
 			resetTimer = 0;
 		}
-				
+
 		// checking for tower placement
-		if (PlayerManager.instance.GetActiveTower() != null) {
+		if (PlayerManager.instance.activeBlueprint != null) {
 			SetGridVisibility(true);
 
 			// creating tower icon
-			if (towerIcon == null || towerIcon.towerName != PlayerManager.instance.GetActiveTower().GetTowerName()) {
+			if (ConditionCheck()) {
 				if (towerIcon != null) { 
 					towerIcon.QueueFree(); 
 				}
 
-				CreateTowerCursor();
+				if (PlayerManager.instance.activeBlueprint is AbilityBlueprint) {
+					CreateAbilityCursor();
+				}
+				else if (PlayerManager.instance.activeBlueprint is TowerBlueprint) {
+					CreateTowerCursor();
+				}
 			}
 
 			var query = GetQuery();
-			
 			var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
+			
 			if (result.Count > 0) {
-				Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-				towerIcon.Position = gameAsset.Position;
+				if (PlayerManager.instance.activeBlueprint is TowerBlueprint) {
+					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
+					towerIcon.Position = gameAsset.Position;
+				}
+				else if (PlayerManager.instance.activeBlueprint is AbilityBlueprint) {
+					towerIcon.Position = (Vector3)result["position"];
+				}
 			}
 		}
 		else {
@@ -105,39 +115,7 @@ public partial class GameManager: Node {
 
 			// map interactions
 			if (GetViewport().GuiGetHoveredControl() == null) {
-				// getting mouse screen position;
-				var query = GetQuery();
-				
-				var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
-				if (result.Count > 0) {
-					Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
-
-					if (gameAsset.Name.ToString().Contains("Grass")) {
-						// placing tower
-						TowerBlueprint tower = PlayerManager.instance.GetActiveTower();
-						if (tower != null) {
-							if (!TowerClass.BuyTower(gameAsset.Position, tower.GetTowerName())) {
-								tower.DisableIcon();
-							}
-						}
-					}
-					else if (gameAsset.Name.ToString().Contains("Tower")) {
-						// disabling current tower ui
-						if (currentlySelectedTower != null && IsInstanceValid(currentlySelectedTower)) {
-							currentlySelectedTower.UIToggle();
-						}
-
-						// enbling selected tower ui
-						if (currentlySelectedTower != gameAsset as TowerClass) {
-							currentlySelectedTower = gameAsset as TowerClass;
-							currentlySelectedTower.UIToggle();
-							return;
-						}
-
-						// if the tower clicked is the same tower, set null
-						currentlySelectedTower = null;
-					}
-				}
+				MapIntereaction();
 			}
 		}
 
@@ -164,18 +142,79 @@ public partial class GameManager: Node {
 		}
 	}
 
+	private bool ConditionCheck() {
+		bool conditionA = towerIcon == null;
+		bool conditionB = towerIcon is AbilityClass && (towerIcon as AbilityClass).GetAbilityName() != PlayerManager.instance.activeBlueprint.GetBlueprintName();
+		bool conditionC = towerIcon is TowerClass && (towerIcon as TowerClass).towerName != PlayerManager.instance.activeBlueprint.GetBlueprintName();
+
+		return conditionA || conditionB || conditionC;
+	}
+
+	private void MapIntereaction() {
+		// getting mouse screen position;
+		var query = GetQuery();
+		
+		var result = camera.GetWorld3D().DirectSpaceState.IntersectRay(query);
+		if (result.Count > 0) {
+			Node3D gameAsset = (result["collider"].AsGodotObject() as Area3D).GetParent<Node3D>();
+
+			IBlueprint blueprint = PlayerManager.instance.activeBlueprint;
+
+			if (blueprint is AbilityBlueprint) {
+				AbilityClass.UseAbility(towerIcon.Position, ((AbilityBlueprint)blueprint).GetBlueprintName());
+			}
+			else {
+				PlaceTower(gameAsset, blueprint as TowerBlueprint);
+			}
+		}
+	}
+
+	private void PlaceTower(Node3D gameAsset, TowerBlueprint tower) {
+		if (gameAsset.Name.ToString().Contains("Grass")) {
+			// placing tower
+			if (tower != null) {
+				if (!TowerClass.BuyTower(gameAsset.Position, tower.GetBlueprintName())) {
+					tower.DisableIcon();
+				}
+			}
+		}
+		else if (gameAsset.Name.ToString().Contains("Tower")) {
+			// disabling current tower ui
+			if (currentlySelectedTower != null && IsInstanceValid(currentlySelectedTower)) {
+				currentlySelectedTower.UIToggle();
+			}
+
+			// enbling selected tower ui
+			if (currentlySelectedTower != gameAsset as TowerClass) {
+				currentlySelectedTower = gameAsset as TowerClass;
+				currentlySelectedTower.UIToggle();
+				return;
+			}
+
+			// if the tower clicked is the same tower, set null
+			currentlySelectedTower = null;
+		}
+	}
+
 	private void QuickReset() {
 		GD.Print("Reloading Game Scene");
 		GetTree().ReloadCurrentScene();
 	}
 
 	private void CreateTowerCursor(){
-		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.GetActiveTower().GetTowerName() + ".tscn");
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Towers/" + PlayerManager.instance.activeBlueprint.GetBlueprintName() + ".tscn");
 		towerIcon = (TowerClass)prefab.Instantiate();
 		towerIcon.Name = "cursor icon";
 		PlayerManager.instance.AddChild(towerIcon);
 		
-		towerIcon.SetTowerAsCursorObject();
+		(towerIcon as TowerClass).SetTowerAsCursorObject();
+	}
+
+	private void CreateAbilityCursor() {
+		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Abilities/Lightning Strike.tscn");
+		towerIcon = (Node3D)prefab.Instantiate();
+		towerIcon.Name = "cursor icon";
+		PlayerManager.instance.AddChild(towerIcon);
 	}
 
 	private void NextWaveButton() {

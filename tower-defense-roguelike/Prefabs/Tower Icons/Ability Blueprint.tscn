@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://8j000jc8rhgh"]
+
+[ext_resource type="Script" uid="uid://b80gnxkj1glfj" path="res://Scripts/Game Scene/Abilities/AbilityBlueprint.cs" id="1_8t1s6"]
+[ext_resource type="Texture2D" uid="uid://bxiq5v03msg5g" path="res://Textures/Ability Icons.png" id="2_8t1s6"]
+[ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="3_rncl8"]
+[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_liwl2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t1s6"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh1rt"]
+atlas = ExtResource("4_liwl2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv8x0"]
+atlas = ExtResource("4_liwl2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fgofq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh1rt")
+}],
+"loop": 1,
+"name": &"Selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv8x0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vngns"]
+size = Vector2(56, 24)
+
+[node name="Blueprint" type="Node2D" unique_id=2069920983 node_paths=PackedStringArray("icon", "button", "clickableArea", "sellButton", "nameLabel")]
+scale = Vector2(3, 3)
+script = ExtResource("1_8t1s6")
+enabled = true
+clickable = true
+icon = NodePath("Sprite")
+button = NodePath("Clickable Area")
+clickableArea = NodePath("Clickable Area/CollisionShape2D")
+sellButton = NodePath("Sell Button")
+nameLabel = NodePath("Name")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1133058594]
+texture = ExtResource("2_8t1s6")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Clickable Area" type="Area2D" parent="." unique_id=1547096196]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable Area" unique_id=1899067625]
+shape = SubResource("RectangleShape2D_8t1s6")
+
+[node name="Name" type="Label" parent="." unique_id=671419792]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = -7.229167
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -3
+theme_override_font_sizes/font_size = 6
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Sell Button" parent="." unique_id=590249941 instance=ExtResource("3_rncl8")]
+offset_left = -8.0
+offset_top = 16.666664
+offset_right = 47.172
+offset_bottom = 40.148666
+scale = Vector2(0.29, 0.29)
+mouseInsideAnimation = "Selected"
+inactiveAnimation = "Selected"
+defaultAnimation = "default"
+
+[node name="Button Sprite" parent="Sell Button" index="0" unique_id=947915153]
+modulate = Color(0.8314931, 1.1364014, 0.83657485, 1)
+position = Vector2(27.402298, 10.160919)
+sprite_frames = SubResource("SpriteFrames_fgofq")
+
+[node name="Button Text" parent="Sell Button" index="1" unique_id=1737478061]
+offset_left = 1.1494253
+offset_right = 53.149426
+text = "Sell"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button Area" parent="Sell Button" index="2" unique_id=116881939]
+position = Vector2(27.402298, 10.160919)
+
+[node name="Area Shape" parent="Sell Button/Button Area" index="0" unique_id=465698970]
+position = Vector2(0, 2.3841858e-07)
+shape = SubResource("RectangleShape2D_vngns")
+
+[editable path="Sell Button"]

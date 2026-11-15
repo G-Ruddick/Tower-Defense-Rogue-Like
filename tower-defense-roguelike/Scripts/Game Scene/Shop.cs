@@ -73,6 +73,9 @@ public partial class Shop : Control {
 		foreach (ShopIcon blueprint in GetNode("Shop/Tower Shop").GetChildren()) {
 			blueprint.QueueFree();
 		}
+		foreach (ShopIcon blueprint in GetNode("Shop/Ability Shop").GetChildren()) {
+			blueprint.QueueFree();
+		}
 
 		// removing players money;
 		if (costMoney) {
@@ -80,8 +83,15 @@ public partial class Shop : Control {
 			rerollCost += 15;
 		}
 
-		List<string> availableTowers = TowerStats.TowerDictionary.Keys.ToList();
+		TowersRoll();
+		AbilitiesRoll();
 
+		GD.Print("Rerolling Shop");
+	}
+
+	private void TowersRoll() {
+		List<string> availableTowers = TowerStats.TowerDictionary.Keys.ToList();
+		
 		for (int i = 0; i < 4; i++) {
 			string name = "";
 			while (name == "") {
@@ -106,8 +116,35 @@ public partial class Shop : Control {
 
 			if (availableTowers.Count == 0) { break; }
 		}
-		
-		GD.Print("Rerolling Shop");
+	}
+
+	private void AbilitiesRoll() {
+		List<string> availableAbilities = AbilityStats.AbilityDictionary.Keys.ToList();
+
+		for (int i = 0; i < 4; i++) {
+			string name = "";
+			while (name == "") {
+				int index  = (int)GD.RandRange(0, availableAbilities.Count - 1);
+				name = availableAbilities[index];
+
+				for (int j = 0; j < PlayerManager.instance.abilities.Count; j++) {
+					if (name == PlayerManager.instance.abilities[j]) {
+						name = "";
+						availableAbilities.Remove(availableAbilities[index]);
+						break;
+					}
+				}
+
+				if (availableAbilities.Count == 0) { break; }
+			}
+			
+			if (availableAbilities.Count == 0) { break; }
+
+			AbilityShopIcon.CreateAbilityShopIcon(name, i);
+			availableAbilities.Remove(name);
+
+			if (availableAbilities.Count == 0) { break; }
+		}
 	}
 
 	private void ViewMap() {
