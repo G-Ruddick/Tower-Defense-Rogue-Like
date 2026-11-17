@@ -1,6 +1,8 @@
 # Change Log
 
-### v 0.10.0 - 11/17/2026
+### v 0.1.10 - 11/17/2026
+  * Important Update:
+    - Added game alpha to steam
   * Added:
     - Added win game screen and win condition at level 20
     - Added sell value display to tower ui
@@ -22,7 +24,7 @@
   * Bug Fix: 
     - Killing all currently spawned enemies no longer counts as completing a wave
 
-### v 0.09.0 - 11/10/2026
+### v 0.0.09 - 11/10/2026
   * Added:
     - Added new next wave button sprite
     - Added Gold Mine Tower
@@ -38,7 +40,7 @@
     - AOE projectiles no longer deal damage before landing on the ground or target
     - Tower UI now is effected by changing the game brightness in settings
 
-### v 0.08.0 - 11/3/2026
+### v 0.0.08 - 11/3/2026
   * Added:
     - Added functionality to map display button in shop allowing player to view but not interact  with the game map
     - Added functionality to brightness slider allowing the player to make the game darker
@@ -46,7 +48,7 @@
   * Bug Fix:
     - Entering settings now pauses the game properly
 
-### v 0.07.0 - 10/27/2026
+### v 0.0.07 - 10/27/2026
   * Added:
     - Added Mortar Tower
       - Added AOE projectile that can ether explode on conact or only on the ground
@@ -63,7 +65,7 @@
     - Shop icon now shows correct tower icon
     - Grid no longer appears on game load and reset
 
-### v 0.06.0 - 10/20/2026
+### v 0.0.06 - 10/20/2026
   * Added:
     - Added Change Log
     - Added walking animation to enemies
@@ -72,13 +74,13 @@
   * Bug Fix:
     - Menu no longer shows quit button in game scene and instead shows return button which takes player back to title screen
 
-### v 0.05.0 - 10/13/2026
+### v 0.0.05 - 10/13/2026
   * Added:
     - Added wave difficulty scaling
     - Added Mage and Dark Knight enemies
     - Added enemy wave cost calculation
 
-### v 0.04.0 - 10/6/2026
+### v 0.0.04 - 10/6/2026
   * Added:
     - Added Projectile class that travels using physics engine and hurts enemies
       - Towers no longer damage enemies just for being in range
@@ -87,14 +89,14 @@
     - Added Spawning positions to enemies
     - Added wave difficulty scaling
 
-### v 0.03.0 - 9/29/2026
+### v 0.0.03 - 9/29/2026
   * Added:
     - Added Tower Blueprints available to be purchased from shop if tower is not owned by player
     - Added tower range sprites
     - Added tower damaging enemies within range
     - Added tower cursor display when placing towers
 
-### v 0.02.0 - 9/22/2026
+### v 0.0.02 - 9/22/2026
   * Added:
     - Added Map Generation and creation
     - Added Map Tiles
@@ -107,7 +109,7 @@
     - Added Goblin enemy
     - Added Enemy Spawning
 
-### v 0.01.0 - 9/15/2026
+### v 0.0.01 - 9/15/2026
   * Added:
     - Added title screen
     - Added Settings menu
