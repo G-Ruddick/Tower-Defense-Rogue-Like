@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
 [ext_resource type="Script" uid="uid://bc58lj4p6c7oo" path="res://Scripts/Game Scene/WinGame.cs" id="12_3so38"]
 [ext_resource type="PackedScene" uid="uid://dgsamtklcdqn2" path="res://Prefabs/UI Value Change Indicator.tscn" id="13_3cx6b"]
+[ext_resource type="Script" uid="uid://bf5oqbhkvs4xq" path="res://Scripts/Game Scene/CameraMovever.cs" id="14_wxwew"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
 atlas = ExtResource("9_dahhg")
@@ -638,6 +639,7 @@ transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81
 projection = 1
 size = 3.667
 near = 0.001
+script = ExtResource("14_wxwew")
 
 [node name="Game Brightness" type="WorldEnvironment" parent="." unique_id=681548715]
 environment = SubResource("Environment_dv6u4")

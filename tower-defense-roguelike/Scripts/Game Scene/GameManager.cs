@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public partial class GameManager: Node {
 	public int waveNumber;
-	private bool movingScreen;
 	public static int waveCostStart = 50;
 	public static int waveCostMultiplier = 3;
 	private float resetTimer = 0f;
@@ -38,7 +37,6 @@ public partial class GameManager: Node {
 	public override void _Ready() {
 		gameManager = this;	
 		waveNumber = 0;
-		movingScreen = false;
 	}
 
 	public override void _Process(double delta) {
@@ -117,28 +115,6 @@ public partial class GameManager: Node {
 			if (GetViewport().GuiGetHoveredControl() == null) {
 				MapIntereaction();
 			}
-		}
-
-		// moving the screen
-		if (@event.IsActionPressed("Move")) {
-			movingScreen = true;
-		}
-		if (@event.IsActionReleased("Move")) {
-			movingScreen = false;
-		}
-		
-		if (@event is InputEventMouseMotion mouseMotion && movingScreen) {
-			Vector3 position = new Vector3(-mouseMotion.Relative.X, 0, -mouseMotion.Relative.Y) / 200 + camera.GlobalPosition;
-			camera.GlobalPosition = position;
-			// GD.Print("Moving screen");
-		}
-
-		// zoom
-		if (@event.IsActionPressed("Scroll Down")) {
-			camera.Size += 0.1f;
-		}
-		if (@event.IsActionPressed("Scroll Up")) {
-			camera.Size -= 0.1f;
 		}
 	}
 
