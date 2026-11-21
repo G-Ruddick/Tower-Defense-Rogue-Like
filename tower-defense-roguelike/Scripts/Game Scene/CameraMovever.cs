@@ -6,6 +6,8 @@ public partial class CameraMovever : Camera3D {
 	[Export] private float moveSpeed = 200.0f;
 	private bool movingScreen;
 
+	[Export] private MapCreation mapCreator;
+	
 	public override void _Ready() {
 		movingScreen = false;
 	}
@@ -20,11 +22,7 @@ public partial class CameraMovever : Camera3D {
 		}
 		
 		if (@event is InputEventMouseMotion mouseMotion && movingScreen) {
-			Vector3 position = new Vector3(-mouseMotion.Relative.X, 0, -mouseMotion.Relative.Y) / moveSpeed + this.GlobalPosition;
-			
-			if (CheckIfInsideGameMap(position)) { 
-				this.GlobalPosition = position;
-			}
+			MoveCamera(mouseMotion);
 		}
 
 		// zoom
@@ -36,11 +34,17 @@ public partial class CameraMovever : Camera3D {
 		}
 	}
 
-	private bool CheckIfInsideGameMap(Vector3 position) {
-		if (position.X <= 0 || position.Z <= 6.5) {
-			return false;
+	private void MoveCamera(InputEventMouseMotion mouseMotion) {
+		Vector3 position = new Vector3(-mouseMotion.Relative.X, 0, -mouseMotion.Relative.Y) / moveSpeed + this.GlobalPosition;
+
+		if (position.X <= 0 || position.X >= (mapCreator.mapLength - 1) * 0.32f) {
+			position.X = this.GlobalPosition.X;
 		}
 
-		return true;
+		if (position.Z <= 6.5f || position.Z >= mapCreator.mapHeight * 0.32f + 5.5) {
+			position.Z = this.GlobalPosition.Z;
+		}
+
+		this.GlobalPosition = position;
 	}
 }

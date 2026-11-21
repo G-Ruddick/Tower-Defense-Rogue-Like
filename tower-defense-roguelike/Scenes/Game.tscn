@@ -634,12 +634,13 @@ offset_right = 150.00003
 offset_bottom = 47.29167
 text = "+0"
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=17834192]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=17834192 node_paths=PackedStringArray("mapCreator")]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 2.985, 4.358, 7.816241)
 projection = 1
 size = 3.667
 near = 0.001
 script = ExtResource("14_wxwew")
+mapCreator = NodePath("../MapCreator")
 
 [node name="Game Brightness" type="WorldEnvironment" parent="." unique_id=681548715]
 environment = SubResource("Environment_dv6u4")

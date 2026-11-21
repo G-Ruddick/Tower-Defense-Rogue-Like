@@ -4,7 +4,7 @@
   * Added:
     - 
   * Changed:
-    - 
+    - Camera is now locked to the game map
   * Bug Fix: 
     - 
 ### v 0.0.10 - 11/17/2026
