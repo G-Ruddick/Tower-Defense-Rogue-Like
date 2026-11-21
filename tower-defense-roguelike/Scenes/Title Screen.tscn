@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://buk4ahlqd4m8s" path="res://Scripts/Title Screen/SceneManager.cs" id="1_po227"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="2_qyra1"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="3_lyuk6"]
+[ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="3_x2sej"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="4_lyuk6"]
+[ext_resource type="Texture2D" uid="uid://dn3qgbf6p708g" path="res://Textures/Title Screen.png" id="5_xdkfq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
 atlas = ExtResource("3_lyuk6")
@@ -92,20 +94,28 @@ anchor_mode = 0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1502953611]
 
+[node name="Backboard" type="Sprite2D" parent="UI" unique_id=1894233796]
+modulate = Color(0.38205, 0.32940003, 0.54, 1)
+position = Vector2(581, 15.000008)
+scale = Vector2(11, 11)
+texture = ExtResource("3_x2sej")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 32)
+
 [node name="Title" type="Label" parent="UI" unique_id=362102511]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -563.0
-offset_top = 28.0
-offset_right = 579.0
-offset_bottom = 125.708336
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 111.666664
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_font_sizes/font_size = 70
-text = "GAME TITLE"
+theme_override_colors/font_color = Color(1, 0.56266665, 0.36, 1)
+theme_override_colors/font_outline_color = Color(0.0729, 0.19444498, 0.27, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 80
+text = "Turritemarus"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("2_qyra1")]
 offset_left = 1068.0
@@ -199,6 +209,19 @@ scale = Vector2(2.8000195, 1.2)
 shape = SubResource("RectangleShape2D_hhp2p")
 
 [node name="Game Brightness" type="CanvasModulate" parent="UI" unique_id=1956664219]
+
+[node name="Control" type="Control" parent="." unique_id=137450884]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreen" type="Sprite2D" parent="Control" unique_id=1629894481]
+scale = Vector2(7.2, 7.2)
+texture = ExtResource("5_xdkfq")
+centered = false
 
 [editable path="UI/Settings Button"]
 [editable path="UI/Quit Button"]
