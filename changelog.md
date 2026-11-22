@@ -2,7 +2,7 @@
 
 ### v 0.0.11 - 11/24/2026
   * Added:
-    - 
+    - Added title screen art
   * Changed:
     - Camera is now locked to the game map
   * Bug Fix: 
