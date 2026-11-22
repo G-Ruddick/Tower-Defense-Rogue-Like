@@ -5,8 +5,11 @@
     - Added title screen art
   * Changed:
     - Camera is now locked to the game map
+    - Changed Title screen buttons' art
+    - Changed Game scene UI art
   * Bug Fix: 
     - 
+
 ### v 0.0.10 - 11/17/2026
   * Added:
     - Added win game screen and win condition at level 20

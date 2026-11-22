@@ -7,13 +7,53 @@
 [ext_resource type="Script" uid="uid://d6a0ya7anb20" path="res://Scripts/Game Scene/Enemies/EnemyWaveSpawner.cs" id="4_2irst"]
 [ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="4_b2bpf"]
 [ext_resource type="PackedScene" uid="uid://dg5drqj4u714f" path="res://Scenes/Shop Screen.tscn" id="6_7lihs"]
+[ext_resource type="Texture2D" uid="uid://cpmh2338lxrbm" path="res://Textures/Game Screen ui.png" id="7_alh3a"]
 [ext_resource type="Texture2D" uid="uid://dpjctq5gx4whd" path="res://Textures/Backboard.png" id="7_fgofq"]
+[ext_resource type="Texture2D" uid="uid://1sjn7hh38f4q" path="res://Textures/Title Screen Buttons.png" id="9_acvyw"]
 [ext_resource type="Script" uid="uid://bejreh4w4qfip" path="res://Scripts/Game Scene/GameOver.cs" id="9_bf53h"]
 [ext_resource type="Texture2D" uid="uid://bawjj2c4jnm61" path="res://Textures/Next Wave Button.png" id="9_dahhg"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="10_71axn"]
 [ext_resource type="Script" uid="uid://bc58lj4p6c7oo" path="res://Scripts/Game Scene/WinGame.cs" id="12_3so38"]
 [ext_resource type="PackedScene" uid="uid://dgsamtklcdqn2" path="res://Prefabs/UI Value Change Indicator.tscn" id="13_3cx6b"]
 [ext_resource type="Script" uid="uid://bf5oqbhkvs4xq" path="res://Scripts/Game Scene/CameraMovever.cs" id="14_wxwew"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pqua"]
+atlas = ExtResource("9_acvyw")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhp2p"]
+atlas = ExtResource("9_acvyw")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_alh3a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pqua")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pqua")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhp2p")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4q8tf"]
+size = Vector2(14, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3so38"]
 atlas = ExtResource("9_dahhg")
@@ -94,47 +134,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2irst"]
 size = Vector2(32.00006, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
-atlas = ExtResource("4_b2bpf")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
-atlas = ExtResource("4_b2bpf")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
-atlas = ExtResource("4_b2bpf")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7lihs"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igacv")
-}],
-"loop": 1,
-"name": &"Default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_07l45")
-}],
-"loop": 1,
-"name": &"Disabled",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnbs0")
-}],
-"loop": 1,
-"name": &"Mouse Inside",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgofq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dahhg"]
 atlas = ExtResource("4_b2bpf")
@@ -236,36 +235,38 @@ offset_right = 247.03
 offset_bottom = 89.44
 
 [node name="Backboard" type="Sprite2D" parent="UI/Player Stats" unique_id=2014873934]
-position = Vector2(120, 52.47)
-scale = Vector2(5, 3.2799993)
-texture = ExtResource("7_fgofq")
+position = Vector2(138, 50)
+scale = Vector2(8, 8)
+texture = ExtResource("7_alh3a")
 region_enabled = true
-region_rect = Rect2(0, 32, 48, 32)
+region_rect = Rect2(0, 32, 48, 16)
 
 [node name="Health" type="Label" parent="UI/Player Stats" unique_id=1340879312]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 3.4699998
-offset_right = 92.0
-offset_bottom = 39.76167
+offset_left = 12.0
+offset_top = 13.469999
+offset_right = 168.7
+offset_bottom = 49.761665
+theme_override_colors/font_color = Color(1.0061977, 0, 0.38060284, 1)
 theme_override_font_sizes/font_size = 26
 text = "Health 20"
 
 [node name="Gold" type="Label" parent="UI/Player Stats" unique_id=313544983]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 44.47
-offset_right = 68.0
-offset_bottom = 80.76167
+offset_left = 12.0
+offset_top = 54.47
+offset_right = 168.7
+offset_bottom = 90.76167
+theme_override_colors/font_color = Color(1, 0.823, 0.41000003, 1)
 theme_override_font_sizes/font_size = 26
 text = "Gold 100"
 
 [node name="Round" type="Label" parent="UI/Player Stats" unique_id=954464956]
 layout_mode = 0
-offset_left = 165.0
-offset_top = 3.4699998
-offset_right = 234.0
-offset_bottom = 79.05334
+offset_left = 178.0
+offset_top = 12.469999
+offset_right = 257.335
+offset_bottom = 88.053
 theme_override_font_sizes/font_size = 22
 text = "Wave
 0"
@@ -282,28 +283,54 @@ offset_bottom = 155.44
 mouse_filter = 1
 
 [node name="Backboard" type="Sprite2D" parent="UI/Towers" unique_id=953144540]
-position = Vector2(270.06006, 94.735)
-scale = Vector2(8.4400015, 5.9200006)
-texture = ExtResource("7_fgofq")
+position = Vector2(270.06, 97.735)
+scale = Vector2(8, 8)
+texture = ExtResource("7_alh3a")
 region_enabled = true
-region_rect = Rect2(0, 0, 64, 32)
+region_rect = Rect2(0, 0, 80, 32)
 
 [node name="Header" type="Label" parent="UI/Towers" unique_id=1988017925]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -49.054993
-offset_top = 0.73500013
-offset_right = 55.945007
-offset_bottom = 42.61
+offset_left = -64.05499
+offset_top = 1.7350006
+offset_right = 63.945007
+offset_bottom = 48.735
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0)
 theme_override_font_sizes/font_size = 30
 text = "Towers"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player Towers" type="Node" parent="UI/Towers" unique_id=1658257320]
+
+[node name="Settings Button" parent="UI" unique_id=580980688 instance=ExtResource("3_kldst")]
+offset_left = 1087.0
+offset_top = 64.0
+offset_right = 1087.0
+offset_bottom = 64.0
+scale = Vector2(7.2, 7.2)
+mouseInsideAnimation = "Mouse Inside"
+inactiveAnimation = "Disabled"
+defaultAnimation = "Default"
+
+[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
+sprite_frames = SubResource("SpriteFrames_alh3a")
+animation = &"Default"
+
+[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
+offset_right = 1.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 9
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area Shape" parent="UI/Settings Button/Button Area" parent_id_path=PackedInt32Array(580980688, 116881939) index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_4q8tf")
+debug_color = Color(0, 0.5950001, 0.7, 0)
 
 [node name="Abilities" type="Control" parent="UI" unique_id=1101927646]
 layout_mode = 3
@@ -315,21 +342,22 @@ offset_bottom = 645.0
 mouse_filter = 1
 
 [node name="Backboard" type="Sprite2D" parent="UI/Abilities" unique_id=575405481]
-position = Vector2(119, 25)
-rotation = -3.1415925
-scale = Vector2(5, 6.2117276)
-texture = ExtResource("7_fgofq")
+position = Vector2(155, 32)
+scale = Vector2(8, 8)
+texture = ExtResource("7_alh3a")
 region_enabled = true
-region_rect = Rect2(0, 32, 48, 32)
+region_rect = Rect2(0, 48, 48, 32)
 
 [node name="Header" type="Label" parent="UI/Abilities" unique_id=970566332]
 layout_mode = 0
-offset_left = 5.0
-offset_top = -27.0
-offset_right = 106.0
-offset_bottom = 9.291687
+offset_left = 11.0
+offset_top = -42.0
+offset_right = 130.0
+offset_bottom = -5.708332
 theme_override_font_sizes/font_size = 26
 text = "Abilities"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player Abilities" type="Node" parent="UI/Abilities" unique_id=105887369]
 
@@ -365,42 +393,6 @@ priority = 100
 position = Vector2(-0.1204834, -0.11279297)
 shape = SubResource("RectangleShape2D_2irst")
 debug_color = Color(0, 0.60038817, 0.70000815, 0.143)
-
-[node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("3_kldst")]
-offset_left = 1146.9999
-offset_top = 5.0
-offset_right = 1169.7499
-offset_bottom = 29.17
-rotation = 1.5707964
-scale = Vector2(3.105, 3.105)
-mouseInsideAnimation = "Mouse Inside"
-inactiveAnimation = "Disabled"
-defaultAnimation = "Default"
-
-[node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
-process_mode = 1
-position = Vector2(11.448314, 12.122387)
-scale = Vector2(0.40387118, 1)
-sprite_frames = SubResource("SpriteFrames_7lihs")
-animation = &"Disabled"
-
-[node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
-offset_left = -16.74718
-offset_top = 0.09230423
-offset_right = 39.25282
-offset_bottom = 24.092304
-scale = Vector2(1.0035818, 1)
-theme_override_font_sizes/font_size = 9
-text = "|||"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
-position = Vector2(11.448314, 12.122387)
-scale = Vector2(1.1308471, 1.2)
-
-[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
-shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Game Over Screen" type="Control" parent="UI" unique_id=1476551975 node_paths=PackedStringArray("restartButton", "quitButton")]
 process_mode = 3
@@ -447,7 +439,7 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Restart Button" parent="UI/Game Over Screen" unique_id=580980688 instance=ExtResource("3_kldst")]
+[node name="Restart Button" parent="UI/Game Over Screen" unique_id=1125192282 instance=ExtResource("3_kldst")]
 layout_mode = 0
 offset_left = 601.0
 offset_top = 365.0
@@ -647,8 +639,8 @@ environment = SubResource("Environment_dv6u4")
 camera_attributes = SubResource("CameraAttributesPractical_pe01b")
 compositor = SubResource("Compositor_ophl0")
 
-[editable path="UI/Next Wave Button"]
 [editable path="UI/Settings Button"]
+[editable path="UI/Next Wave Button"]
 [editable path="UI/Game Over Screen/Restart Button"]
 [editable path="UI/Game Over Screen/Quit Button"]
 [editable path="UI/Win Game Screen/Endless Mode Button"]
