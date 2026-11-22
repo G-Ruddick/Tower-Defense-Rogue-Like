@@ -16,7 +16,7 @@ public partial class TowerBlueprint : IBlueprint {
 
 	public override void PositionBlueprint(int index) {
 		float x = 102f, x1 = 380f, x2 = 788f;
-		Vector2 position = new Vector2(0, 96);
+		Vector2 position = new Vector2(0, 122);
 
 		if (PlayerManager.instance.towers.Count % 2 == 1) {
 			position.X = (x2 + x1) / 2;
