@@ -3,8 +3,12 @@
 ### v 0.0.11 - 11/24/2026
   * Added:
     - Added title screen art
+    - Added background to game scene
+      - Made temporary background design that will later be made dynamic to the start of each run
   * Changed:
     - Camera is now locked to the game map
+      - Camera can no longer go away from map
+      - Camera can no longer zoom to far in or out
     - Changed Title screen buttons' art
     - Changed Game scene UI art
   * Bug Fix: 
