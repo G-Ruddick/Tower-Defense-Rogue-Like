@@ -5,6 +5,7 @@
     - Added title screen art
     - Added background to game scene
       - Made temporary background design that will later be made dynamic to the start of each run
+    - Added Flag asset to the starting and ending times to distingish each location
   * Changed:
     - Camera is now locked to the game map
       - Camera can no longer go away from map
