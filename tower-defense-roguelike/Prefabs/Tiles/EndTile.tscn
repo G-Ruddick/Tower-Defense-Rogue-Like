@@ -1,9 +1,46 @@
 [gd_scene format=3 uid="uid://g14u16prah2h"]
 
 [ext_resource type="Script" uid="uid://didvaamvmro4r" path="res://Scripts/Game Scene/Tiles/EndTile.cs" id="1_tp21s"]
+[ext_resource type="Texture2D" uid="uid://nwdfbe1qy6ao" path="res://Textures/Flags.png" id="2_y5r6m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tl7g3"]
 size = Vector3(0.32, 0.16, 0.32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2cnj"]
+atlas = ExtResource("2_y5r6m")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n2v7"]
+atlas = ExtResource("2_y5r6m")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo8am"]
+atlas = ExtResource("2_y5r6m")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvibd"]
+atlas = ExtResource("2_y5r6m")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tk1u6"]
+animations = [{
+"frames": [{
+"duration": 100.0,
+"texture": SubResource("AtlasTexture_j2cnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n2v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xo8am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvibd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="EndTile" type="Node3D" unique_id=135346494 node_paths=PackedStringArray("despawnArea")]
 script = ExtResource("1_tp21s")
@@ -15,3 +52,21 @@ collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=222221806]
 shape = SubResource("BoxShape3D_tl7g3")
+
+[node name="Flag" type="AnimatedSprite3D" parent="." unique_id=1024118950]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.16, 0, -6.993822e-09)
+offset = Vector2(0, 8)
+billboard = 1
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_tk1u6")
+autoplay = "default"
+
+[node name="Flag2" type="AnimatedSprite3D" parent="." unique_id=1471691586]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 0.16, 0, 6.993822e-09)
+offset = Vector2(0, 8)
+billboard = 1
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_tk1u6")
+autoplay = "default"

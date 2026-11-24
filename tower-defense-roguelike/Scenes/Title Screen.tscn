@@ -2,26 +2,23 @@
 
 [ext_resource type="Script" uid="uid://buk4ahlqd4m8s" path="res://Scripts/Title Screen/SceneManager.cs" id="1_po227"]
 [ext_resource type="PackedScene" uid="uid://b1yysw0f8xy0k" path="res://Prefabs/Button.tscn" id="2_qyra1"]
-[ext_resource type="Texture2D" uid="uid://525oyyfqne1d" path="res://Textures/Settings Buttons.png" id="3_lyuk6"]
 [ext_resource type="Script" uid="uid://dqay2fvnub2t0" path="res://Scripts/Title Screen/GameBrightness.cs" id="4_lyuk6"]
+[ext_resource type="Texture2D" uid="uid://1sjn7hh38f4q" path="res://Textures/Title Screen Buttons.png" id="5_x2sej"]
+[ext_resource type="Texture2D" uid="uid://dn3qgbf6p708g" path="res://Textures/Title Screen.png" id="5_xdkfq"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_igacv"]
-atlas = ExtResource("3_lyuk6")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pqua"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(0, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_07l45"]
-atlas = ExtResource("3_lyuk6")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhp2p"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(16, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dnbs0"]
-atlas = ExtResource("3_lyuk6")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xdkfq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_pe01b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_igacv")
+"texture": SubResource("AtlasTexture_6pqua")
 }],
 "loop": 1,
 "name": &"Default",
@@ -29,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_07l45")
+"texture": SubResource("AtlasTexture_6pqua")
 }],
 "loop": 1,
 "name": &"Disabled",
@@ -37,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dnbs0")
+"texture": SubResource("AtlasTexture_hhp2p")
 }],
 "loop": 1,
 "name": &"Mouse Inside",
@@ -45,12 +42,21 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2sej"]
+size = Vector2(14, 14)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6pqua"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcif5"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gr1ek"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv6u4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_igacv")
+"texture": SubResource("AtlasTexture_rcif5")
 }],
 "loop": 1,
 "name": &"Default",
@@ -58,7 +64,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_07l45")
+"texture": SubResource("AtlasTexture_rcif5")
 }],
 "loop": 1,
 "name": &"Disabled",
@@ -66,7 +72,45 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dnbs0")
+"texture": SubResource("AtlasTexture_gr1ek")
+}],
+"loop": 1,
+"name": &"Mouse Inside",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ophl0"]
+size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggnsx"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(32, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfhqe"]
+atlas = ExtResource("5_x2sej")
+region = Rect2(32, 32, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6pqua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggnsx")
+}],
+"loop": 1,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggnsx")
+}],
+"loop": 1,
+"name": &"Disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfhqe")
 }],
 "loop": 1,
 "name": &"Mouse Inside",
@@ -74,6 +118,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hhp2p"]
+size = Vector2(48, 24)
 
 [node name="TitleScreen" type="Node2D" unique_id=586948953]
 
@@ -92,66 +137,73 @@ anchor_mode = 0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1502953611]
 
+[node name="Control" type="Control" parent="UI" unique_id=137450884]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TitleScreen" type="Sprite2D" parent="UI/Control" unique_id=1629894481]
+position = Vector2(-64, 0)
+scale = Vector2(7.2, 7.2)
+texture = ExtResource("5_xdkfq")
+centered = false
+
 [node name="Title" type="Label" parent="UI" unique_id=362102511]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -563.0
-offset_top = 28.0
-offset_right = 579.0
-offset_bottom = 125.708336
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 111.666664
 grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_font_sizes/font_size = 70
-text = "GAME TITLE"
+theme_override_colors/font_color = Color(0.73, 0.3873867, 0.2628, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 13
+theme_override_font_sizes/font_size = 80
+text = "Turritemarus"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Settings Button" parent="UI" unique_id=590249941 instance=ExtResource("2_qyra1")]
-offset_left = 1068.0
-offset_top = 70.00001
-offset_right = 1068.0
-offset_bottom = 70.00001
-rotation = 1.5707964
-scale = Vector2(5.3200016, 5.3200016)
+offset_left = 1087.0
+offset_top = 64.0
+offset_right = 1087.0
+offset_bottom = 64.0
+scale = Vector2(7.2, 7.2)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Settings Button" index="0" unique_id=947915153]
-scale = Vector2(0.40387118, 1)
-sprite_frames = SubResource("SpriteFrames_xdkfq")
-animation = &"Disabled"
+sprite_frames = SubResource("SpriteFrames_pe01b")
+animation = &"Default"
 
 [node name="Button Text" parent="UI/Settings Button" index="1" unique_id=1737478061]
-offset_left = -28.195496
-offset_top = -12.030083
-offset_right = 27.804504
-offset_bottom = 11.969917
-scale = Vector2(1.0035818, 1)
+offset_right = 1.0
+offset_bottom = 13.0
 theme_override_font_sizes/font_size = 9
-text = "|||"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="UI/Settings Button" index="2" unique_id=116881939]
-scale = Vector2(1.1308471, 1.2)
-
-[node name="Area Shape" parent="UI/Settings Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="UI/Settings Button/Button Area" parent_id_path=PackedInt32Array(590249941, 116881939) index="0" unique_id=465698970]
 shape = SubResource("RectangleShape2D_x2sej")
+debug_color = Color(0, 0.5950001, 0.7, 0)
 
 [node name="Quit Button" parent="UI" unique_id=1611576700 instance=ExtResource("2_qyra1")]
-offset_left = 1046.0
-offset_top = 595.0
-offset_right = 1046.0
-offset_bottom = 595.0
-scale = Vector2(3.358055, 3.358055)
+offset_left = 1030.0
+offset_top = 583.0
+offset_right = 1030.0
+offset_bottom = 583.0
+scale = Vector2(7.2, 7.2)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
 
 [node name="Button Sprite" parent="UI/Quit Button" index="0" unique_id=947915153]
-sprite_frames = SubResource("SpriteFrames_6pqua")
+sprite_frames = SubResource("SpriteFrames_dv6u4")
 animation = &"Mouse Inside"
 
 [node name="Button Text" parent="UI/Quit Button" index="1" unique_id=1737478061]
@@ -159,22 +211,21 @@ offset_left = -28.0
 offset_top = -12.0
 offset_right = 28.0
 offset_bottom = 12.0
+theme_override_font_sizes/font_size = 9
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="UI/Quit Button" index="2" unique_id=116881939]
-scale = Vector2(2.8000195, 1.2)
-
-[node name="Area Shape" parent="UI/Quit Button/Button Area" index="0" unique_id=465698970]
-shape = SubResource("RectangleShape2D_hhp2p")
+[node name="Area Shape" parent="UI/Quit Button/Button Area" parent_id_path=PackedInt32Array(1611576700, 116881939) index="0" unique_id=465698970]
+shape = SubResource("RectangleShape2D_ophl0")
+debug_color = Color(0, 0.5950001, 0.7, 0)
 
 [node name="Play Button" parent="UI" unique_id=1694775071 instance=ExtResource("2_qyra1")]
-offset_left = 246.00002
-offset_top = 533.0
-offset_right = 246.00002
-offset_bottom = 533.0
-scale = Vector2(8.052582, 8.052582)
+offset_left = 180.00002
+offset_top = 554.0
+offset_right = 180.00002
+offset_bottom = 554.0
+scale = Vector2(7.2, 7.2)
 mouseInsideAnimation = "Mouse Inside"
 inactiveAnimation = "Disabled"
 defaultAnimation = "Default"
@@ -192,11 +243,10 @@ text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button Area" parent="UI/Play Button" index="2" unique_id=116881939]
-scale = Vector2(2.8000195, 1.2)
-
-[node name="Area Shape" parent="UI/Play Button/Button Area" index="0" unique_id=465698970]
+[node name="Area Shape" parent="UI/Play Button/Button Area" parent_id_path=PackedInt32Array(1694775071, 116881939) index="0" unique_id=465698970]
+scale = Vector2(1, 0.9999998)
 shape = SubResource("RectangleShape2D_hhp2p")
+debug_color = Color(0, 0.5950001, 0.7, 0)
 
 [node name="Game Brightness" type="CanvasModulate" parent="UI" unique_id=1956664219]
 

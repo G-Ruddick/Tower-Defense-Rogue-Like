@@ -1,8 +1,20 @@
 # Change Log
 
-### v 0.1.10 - 11/17/2026
-  * Important Update:
-    - Added game alpha to steam
+### v 0.0.11 - 11/24/2026
+  * Added:
+    - Added title screen art
+    - Added game icon art
+    - Added background to game scene
+      - Made temporary background design that will later be made dynamic to the start of each run
+    - Added Flag asset to the starting and ending times to distingish each location
+  * Changed:
+    - Camera is now locked to the game map
+      - Camera can no longer go away from map
+      - Camera can no longer zoom to far in or out
+    - Changed Title screen buttons' art
+    - Changed Game scene UI art
+
+### v 0.0.10 - 11/17/2026
   * Added:
     - Added win game screen and win condition at level 20
     - Added sell value display to tower ui
