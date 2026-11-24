@@ -211,6 +211,8 @@ public partial class MapCreation : Node {
 		tile.Name = tileLocation;
 		GetChild(2).AddChild(tile);
 		tile.Position = new Vector3(column, 0, row) * 0.32f;
+
+		SetRotation(tile, row, column);
 	}
 	private void SpawnTile(string path, string name, int row, int column) {
 		PackedScene prefab = GD.Load<PackedScene>("res://Prefabs/Tiles/" + path + "/" + name + ".tscn");
@@ -228,22 +230,26 @@ public partial class MapCreation : Node {
 		GetChild(1).AddChild(pathTile);
 		pathTile.Position = new Vector3(column, 0, row) * 0.32f;
 
-		// setting rotation
+		SetRotation(pathTile, row, column);
+	}
+
+	private void SetRotation(Node3D tile, int row, int column) {
 		if (mapGrid[row, column] == TileTypes.North) {
-			pathTile.RotationDegrees = new Vector3(0f, 180f, 0f);
+			tile.RotationDegrees = new Vector3(0f, 180f, 0f);
+			return;
 		}
 
-		else if (mapGrid[row, column] == TileTypes.South) {
-			pathTile.RotationDegrees = new Vector3(0f, 0f, 0f);
+		if (mapGrid[row, column] == TileTypes.South) {
+			tile.RotationDegrees = new Vector3(0f, 0f, 0f);
+			return;
 		}
 
-		else if (mapGrid[row, column] == TileTypes.West) {
-			pathTile.RotationDegrees = new Vector3(0f, -90f, 0f);
+		if (mapGrid[row, column] == TileTypes.West) {
+			tile.RotationDegrees = new Vector3(0f, -90f, 0f);
+			return;
 		}
 
-		else if (mapGrid[row, column] == TileTypes.East) {
-			pathTile.RotationDegrees = new Vector3(0f, 90f, 0f);
-		}
+		tile.RotationDegrees = new Vector3(0f, 90f, 0f);
 	}
 
 	private void SpawnGrid(int row, int column) {
