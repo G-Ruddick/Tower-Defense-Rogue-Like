@@ -3,6 +3,7 @@
 ### v 0.0.11 - 11/24/2026
   * Added:
     - Added title screen art
+    - Added game icon art
     - Added background to game scene
       - Made temporary background design that will later be made dynamic to the start of each run
     - Added Flag asset to the starting and ending times to distingish each location
@@ -12,8 +13,6 @@
       - Camera can no longer zoom to far in or out
     - Changed Title screen buttons' art
     - Changed Game scene UI art
-  * Bug Fix: 
-    - 
 
 ### v 0.0.10 - 11/17/2026
   * Added:

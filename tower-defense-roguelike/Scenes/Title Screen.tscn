@@ -147,6 +147,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="TitleScreen" type="Sprite2D" parent="UI/Control" unique_id=1629894481]
+position = Vector2(-64, 0)
 scale = Vector2(7.2, 7.2)
 texture = ExtResource("5_xdkfq")
 centered = false
