@@ -27,7 +27,7 @@ public partial class CameraMovever : Camera3D {
 
 		// zoom
 		if (@event.IsActionPressed("Scroll Down")) {
-			if (this.Size < mapCreator.mapHeight * mapCreator.mapLength / 60) {
+			if (CheckIfAtMaxZoom()) {
 				this.Size += zoomSpeed;
 			}
 		}
@@ -50,5 +50,9 @@ public partial class CameraMovever : Camera3D {
 		}
 
 		this.GlobalPosition = position;
+	}
+
+	private bool CheckIfAtMaxZoom() {
+		return this.Size < mapCreator.mapHeight * mapCreator.mapLength / 60;
 	}
 }
